@@ -47,7 +47,7 @@ const SignUp = () => {
                 <hr className={styles.divider} />
                 <ul className={styles.formLinks}>
                   <li>
-                    <Link className={styles.link} to="/">
+                    <Link className={styles.link} to="/login">
                       Already have an account? Log In
                     </Link>
                   </li>
