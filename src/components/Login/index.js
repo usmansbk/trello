@@ -16,10 +16,23 @@ const Login = () => {
               <TextInput placeholder="Enter password" type="password" />
               <Button type="submit" value="Log in" />
             </form>
-            <div className={styles.separator}>OR</div>
+            <div className={styles.orSeparator}>OR</div>
             <div>
               <SocialButton text="Continue with Google" />
             </div>
+            <hr className={styles.divider} />
+            <ul className={styles.formLinks}>
+              <li>
+                <a className={styles.link} href="/forgot">
+                  Can't log in?
+                </a>
+              </li>
+              <li className={styles.dot}>
+                <a className={styles.link} href="/signup">
+                  Sign up for an account
+                </a>
+              </li>
+            </ul>
           </div>
         </section>
       </div>

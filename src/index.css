@@ -4,6 +4,12 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #505f79;
   line-height: 1.44em;
+  font-size: 14px;
+}
+
+ul,
+ol {
+  list-style-type: none;
 }
 
 ::selection {
