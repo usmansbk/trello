@@ -1,6 +1,6 @@
 import Logo from "../common/Logo";
 import TextInput from "../common/TextInput";
-import Button from "../common/Button";
+import Button, { SocialButton } from "../common/Button";
 import styles from "./index.module.css";
 
 const Login = () => {
@@ -17,6 +17,9 @@ const Login = () => {
               <Button type="submit" value="Log in" />
             </form>
             <div className={styles.separator}>OR</div>
+            <div>
+              <SocialButton text="Continue with Google" />
+            </div>
           </div>
         </section>
       </div>
