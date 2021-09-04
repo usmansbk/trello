@@ -37,7 +37,6 @@ const Header = () => {
         <Logo loading />
       </div>
       <div className={clsx(styles.menuButtons, styles.justifyEnd)}>
-        <IconButton name="fa-plus" />
         <IconButton name="fa-bell" />
         <IconButton name="fa-sign-out-alt" />
       </div>
