@@ -2,9 +2,17 @@ import Logo from "../common/Logo";
 
 const Login = () => {
   return (
-    <section>
+    <div>
       <Logo />
-    </section>
+      <section>
+        <h1>Log in to Trello</h1>
+        <form>
+          <input placeholder="Enter email" type="email" />
+          <input placeholder="Enter password" type="password" />
+          <input type="button" value="Log in" />
+        </form>
+      </section>
+    </div>
   );
 };
 
