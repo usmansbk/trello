@@ -27,34 +27,6 @@
   opacity: 0.8;
 }
 
-.menuButton {
-  border: none;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.3);
-  box-shadow: none;
-  color: white;
-  font-weight: bold;
-  height: 32px;
-  width: 32px;
-  line-height: 32px;
-  margin: 0 4px 0 0;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-.menuButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  outline: none;
-  cursor: pointer;
-}
-
-.icon {
-  color: inherit;
-}
-
 .menuButtons {
   display: flex;
   width: 10%;

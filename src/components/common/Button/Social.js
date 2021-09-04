@@ -1,4 +1,4 @@
-import styles from "./social.module.css";
+import styles from "./Social.module.css";
 import google from "./google.svg";
 
 const Button = ({ text }) => {
