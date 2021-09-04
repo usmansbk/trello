@@ -16,7 +16,7 @@
   margin: 0 auto;
 }
 
-.form {
+.wrapper {
   background-color: white;
   margin: 0 auto;
   padding: 25px 40px;
@@ -36,6 +36,5 @@
 .separator {
   text-align: center;
   font-size: 12px;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
