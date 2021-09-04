@@ -11,6 +11,10 @@
   transition: border-color 0.2s ease-in-out 0s, border-color 0.2s ease-in-out;
   font-size: 14px;
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .button:hover {
@@ -21,4 +25,9 @@
 .button:active {
   background: #eee;
   border: 2px solid #cdd2d4;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
 }
