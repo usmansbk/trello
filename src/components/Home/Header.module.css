@@ -8,6 +8,12 @@
   width: 100%;
 }
 
+.content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
 .loading {
   width: 80px;
   height: 16px;
@@ -17,4 +23,30 @@
 
 .loading:hover {
   opacity: 0.8;
+}
+
+.menuButton {
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+  color: white;
+  font-weight: bold;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 4px 0 0;
+  white-space: nowrap;
+}
+
+.menuButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: none;
+  cursor: pointer;
+}
+
+.icon {
+  width: 32px;
+  color: inherit;
 }
