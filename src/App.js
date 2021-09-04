@@ -1,6 +1,7 @@
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+import Forgot from "./components/Forgot";
 import "./App.css";
 
 const routes = [
@@ -11,6 +12,10 @@ const routes = [
   {
     path: "/signup",
     component: SignUp,
+  },
+  {
+    path: "/forgot",
+    component: Forgot,
   },
 ];
 
