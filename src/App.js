@@ -1,11 +1,10 @@
-import './App.css';
-import logo from './logo.svg';
+import "./App.css";
+import Logo from "./components/common/Logo";
 
 function App() {
   return (
     <div className="App">
-      <img src={logo} className="App-logo" alt="" />
-      <h1>Trello</h1>
+      <Logo />
     </div>
   );
 }
