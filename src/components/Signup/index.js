@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 import Logo from "../common/Logo";
 import TextInput from "../common/TextInput";
 import Button, { SocialButton } from "../common/Button";
@@ -14,11 +15,16 @@ const SignUp = () => {
             <form>
               <h1 className={styles.title}>Sign up for your account</h1>
               <TextInput placeholder="Enter email" type="email" />
-              <TextInput placeholder="Enter password" type="password" />
+              <TextInput placeholder="Enter full name" type="text" />
               <p className={styles.tos}>
                 By signin up, you confirm that you've read and accepted our{" "}
-                <a href="/legal">Terms of Service</a> and{" "}
-                <a href="/privacy">Privacy Policy</a>
+                <a className={clsx(styles.link, styles.quiet)} href="/legal">
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a className={clsx(styles.link, styles.quiet)} href="/privacy">
+                  Privacy Policy
+                </a>
               </p>
               <Button type="submit" value="Log in" />
             </form>
