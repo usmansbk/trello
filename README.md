@@ -1,19 +1,10 @@
-# Trello School
+# Trello
 
-> A Board designed for schools
+> Trello app clone
 
 ![screenshot](./app_screenshot.png)
 
-Trello School is a tool designed to make it easier for students and teachers to collaborate.
-
-## Entities
-
-- User: Student or Teacher
-- Board: Each user has a single board
-- Timetable: Users can create or pin schedules on their boards
-- Notification: User gets notified when a schedule is updated
-- Chat: Each event has a chat section
-- Reminder: User gets a reminder before an event
+Trello is a collaborative work management app designed to track team projects, highlight tasks underway, show who they are assigned to, and detail progress towards completion.
 
 ## Built With
 
@@ -36,14 +27,14 @@ To get a local copy up and running follow these simple example steps.
 ### Setup
 
 ```bash
-git clone https://github.com/usmansbk/trello-school.git
-cd ./trello-school
+git clone https://github.com/usmansbk/trello.git
+cd ./trello
 ```
 
 ### Install
 
 ```bash
-yarn 
+yarn
 ```
 
 ### Usage
