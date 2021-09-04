@@ -9,7 +9,7 @@ Trello School is a variant of trello board designed to make it easier for studen
 ## Features
 
 - Users: Students and Teachers
-- Board: Users can create boards and invite teammates to collaborate
+- Board: User can create boards and invite teammates to collaborate
 - List: User can create lists or pin other users' lists on their board
 - Notification: List members get notified whenever a pinned list is updated
 - Chat: Each list item has a chat section
