@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../common/Logo";
 import TextInput from "../common/TextInput";
 import Button, { SocialButton } from "../common/Button";
@@ -14,7 +15,7 @@ const SignUp = () => {
               <h1 className={styles.title}>Sign up for your account</h1>
               <TextInput placeholder="Enter email" type="email" />
               <TextInput placeholder="Enter password" type="password" />
-              <p>
+              <p className={styles.tos}>
                 By signin up, you confirm that you've read and accepted our{" "}
                 <a href="/legal">Terms of Service</a> and{" "}
                 <a href="/privacy">Privacy Policy</a>
@@ -28,9 +29,9 @@ const SignUp = () => {
             <hr className={styles.divider} />
             <ul className={styles.formLinks}>
               <li>
-                <a className={styles.link} href="/forgot">
+                <Link className={styles.link} to="/">
                   Already have an account? Log In
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
