@@ -6,13 +6,14 @@
 
 Trello School is a variant of trello board designed to make it easier for students and teachers to collaborate.
 
-## Features
+## Entities
 
-- Users: Students and Teachers
+- User: Student and Teacher
 - Board: User can create boards and invite teammates to collaborate
-- List: User can create lists or pin other users' lists on their board
-- Notification: List members get notified whenever a pinned list is updated
-- Chat: Each list item has a chat section
+- List: User can create lists or pin other users' lists on his/her board
+- Notification: User gets notified when a pinned list or group board is updated
+- Chat: Each list item (event, to-do, etc) has a chat section
+- Reminder: User gets a reminder notification before a scheduled event
 
 ## Built With
 
