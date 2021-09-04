@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Trello School
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Trello Board designed for schools
 
-## Available Scripts
+![screenshot](./app_screenshot.png)
 
-In the project directory, you can run:
+Trello School is a variant of trello board designed to make it easier for students and teachers to collaborate.
 
-### `yarn start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Users: Students and Teachers
+- Board: Each user has a single board
+- List: User can create lists or pin other users' lists on their board
+- Notification: List members get notified whenever a pinned list is updated
+- Chat: Each list item has a chat section
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Built With
 
-### `yarn test`
+- React
+- Redux
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Live Demo
 
-### `yarn build`
+[Live Demo Link](https://sleepy-bose-508e6f.netlify.app/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To get a local copy up and running follow these simple example steps.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `yarn eject`
+- NodeJS - [v16.x](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Setup
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/usmansbk/trello-school.git
+cd ./trello-school
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Install
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+yarn 
+```
 
-## Learn More
+### Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+yarn start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Build
 
-### Code Splitting
+```bash
+yarn build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Run tests
 
-### Analyzing the Bundle Size
+```bash
+yarn test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Authors
 
-### Making a Progressive Web App
+👤 **Babakolo Usman Suleiman**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- GitHub: [@usmansbk](https://github.com/usmansbk)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/usmansbk/)
 
-### Advanced Configuration
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Contributions, issues, and feature requests are welcome!
 
-### Deployment
+Feel free to check the [issues page](../../issues/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Show your support
 
-### `yarn build` fails to minify
+Give a ⭐️ if you like this project!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgments
+
+- Trello
