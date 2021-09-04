@@ -1,11 +1,6 @@
 .App {
-  background-color: antiquewhite;
+  background-color: whitesmoke;
   height: 100%;
   display: flex;
   flex-grow: 1;
-}
-
-.App-logo {
-  width: 48px;
-  height: 48px;
 }
