@@ -1,19 +1,19 @@
 # Trello School
 
-> Trello Board designed for schools
+> A Board designed for schools
 
 ![screenshot](./app_screenshot.png)
 
-Trello School is a variant of trello board designed to make it easier for students and teachers to collaborate.
+Trello School is a tool designed to make it easier for students and teachers to collaborate.
 
 ## Entities
 
 - User: Student or Teacher
-- Board: User can create boards and invite teammates to collaborate
-- List: User can create lists or pin other users' lists on his/her board
-- Notification: User gets notified when a pinned list or group board is updated
-- Chat: Each list item (event, to-do, etc) has a chat section
-- Reminder: User gets a reminder notification before a scheduled event
+- Board: Each user has a single board
+- Timetable: Users can create or pin schedules on their boards
+- Notification: User gets notified when a schedule is updated
+- Chat: Each event has a chat section
+- Reminder: User gets a reminder before an event
 
 ## Built With
 
