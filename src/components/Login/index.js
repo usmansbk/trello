@@ -1,4 +1,5 @@
 import Logo from "../common/Logo";
+import TextInput from "../common/TextInput";
 
 const Login = () => {
   return (
@@ -7,8 +8,8 @@ const Login = () => {
       <section>
         <h1>Log in to Trello</h1>
         <form>
-          <input placeholder="Enter email" type="email" />
-          <input placeholder="Enter password" type="password" />
+          <TextInput placeholder="Enter email" type="email" />
+          <TextInput placeholder="Enter password" type="password" />
           <input type="button" value="Log in" />
         </form>
       </section>
