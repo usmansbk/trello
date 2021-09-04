@@ -11,17 +11,27 @@ const Logo = ({ loading }) => (
   </Link>
 );
 
-const IconButton = ({ name }) => (
-  <button className={styles.menuButton}>
-    <Icon name={name} className={styles.icon} />
-  </button>
-);
+const IconButton = ({ name, link, to }) => {
+  if (link) {
+    return (
+      <Link className={styles.menuButton} to={to}>
+        <Icon name={name} className={styles.icon} />
+      </Link>
+    );
+  }
+
+  return (
+    <button className={styles.menuButton}>
+      <Icon name={name} className={styles.icon} />
+    </button>
+  );
+};
 
 const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.menuButtons}>
-        <IconButton name="fa-home" />
+        <IconButton name="fa-home" link to="/" />
       </div>
       <div className={styles.content}>
         <Logo loading />
