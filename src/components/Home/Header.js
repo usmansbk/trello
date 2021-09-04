@@ -15,14 +15,14 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.menuButtons}>
-        <MenuIconButton name="fa-home" link to="/" />
+        <MenuIconButton name="fa-home" to="/" />
       </div>
       <div className={styles.content}>
         <Logo loading />
       </div>
       <div className={clsx(styles.menuButtons, styles.justifyEnd)}>
         <MenuIconButton name="fa-bell" />
-        <MenuIconButton name="fa-sign-out-alt" />
+        <MenuIconButton name="fa-sign-out-alt" to="/login" />
       </div>
     </header>
   );
