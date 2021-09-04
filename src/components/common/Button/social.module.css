@@ -1,6 +1,7 @@
 .button {
   background-color: white;
-  color: rgba(0, 0, 0, 0.54);
+  font-weight: bold;
+  line-height: 32px;
   box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px 0;
   border: none;
   width: 99%;
