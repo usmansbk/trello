@@ -3,6 +3,7 @@ import styles from "./Header.module.css";
 import loadingLogo from "./imgs/loading.gif";
 import logo from "./imgs/header-logo.gif";
 import Icon from "../common/Icon";
+import clsx from "clsx";
 
 const Logo = ({ loading }) => (
   <Link to="/">
@@ -19,11 +20,16 @@ const IconButton = ({ name }) => (
 const Header = () => {
   return (
     <header className={styles.header}>
-      <IconButton name="fa-home" />
+      <div className={styles.menuButtons}>
+        <IconButton name="fa-home" />
+      </div>
       <div className={styles.content}>
         <Logo loading />
       </div>
-      <IconButton name="fa-plus" />
+      <div className={clsx(styles.menuButtons, styles.justifyEnd)}>
+        <IconButton name="fa-plus" />
+        <IconButton name="fa-sign-out-alt" />
+      </div>
     </header>
   );
 };

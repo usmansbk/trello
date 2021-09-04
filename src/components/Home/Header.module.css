@@ -50,3 +50,12 @@
   width: 32px;
   color: inherit;
 }
+
+.menuButtons {
+  display: flex;
+  width: 10%;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
