@@ -1,0 +1,37 @@
+.header {
+  background-color: #026aa7;
+  box-sizing: border-box;
+  display: flex;
+  max-height: 40px;
+  min-height: 40px;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.loading {
+  width: 80px;
+  height: 16px;
+  margin: 7px 0;
+  opacity: 0.5;
+}
+
+.loading:hover {
+  opacity: 0.8;
+}
+
+.menuButtons {
+  display: flex;
+  width: 10%;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}

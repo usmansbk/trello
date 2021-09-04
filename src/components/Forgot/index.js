@@ -30,7 +30,7 @@ const Forgot = () => {
             <hr className={styles.divider} />
             <ul className={styles.formLinks}>
               <li>
-                <Link className={styles.link} to="/">
+                <Link className={styles.link} to="/login">
                   Return to log in
                 </Link>
               </li>
