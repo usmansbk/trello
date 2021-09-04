@@ -12,4 +12,10 @@
   width: 100%;
   padding: 0.5em;
   margin-bottom: 1.2em;
+  transition: background-color 0.2s ease-in-out 0s,
+    border-color 0.2s ease-in-out 0s;
+}
+
+.input:hover {
+  border-color: #b6bbbf;
 }
