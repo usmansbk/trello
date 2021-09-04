@@ -3,6 +3,12 @@
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #505f79;
+  line-height: 1.44em;
+}
+
+::selection {
+  background-color: hsl(202, 92%, 85%);
+  text-shadow: none;
 }
 
 body {

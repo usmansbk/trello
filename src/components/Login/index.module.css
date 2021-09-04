@@ -32,3 +32,10 @@
   margin-top: 10px;
   margin-bottom: 25px;
 }
+
+.separator {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}

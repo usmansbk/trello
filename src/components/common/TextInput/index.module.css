@@ -24,8 +24,3 @@
   outline: none;
   border: 2px solid #5ba4cf;
 }
-
-.input::selection {
-  background-color: hsl(202, 92%, 85%);
-  text-shadow: none;
-}
