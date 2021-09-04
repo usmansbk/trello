@@ -22,7 +22,7 @@ const routes = [
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           {routes.map(({ path, component }) => (
             <Route key={path} exact path={path} component={component} />
