@@ -1,5 +1,11 @@
+import styles from "./social.module.css";
+
 const Button = ({ text }) => {
-  return <button>{text}</button>;
+  return (
+    <button type="button" className={styles.button}>
+      {text}
+    </button>
+  );
 };
 
 export default Button;
