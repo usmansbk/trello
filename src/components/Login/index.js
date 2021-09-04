@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../common/Logo";
 import TextInput from "../common/TextInput";
 import Button, { SocialButton } from "../common/Button";
@@ -23,14 +24,14 @@ const Login = () => {
             <hr className={styles.divider} />
             <ul className={styles.formLinks}>
               <li>
-                <a className={styles.link} href="/forgot">
+                <Link className={styles.link} to="/forgot">
                   Can't log in?
-                </a>
+                </Link>
               </li>
               <li className={styles.dot}>
-                <a className={styles.link} href="/signup">
+                <Link className={styles.link} to="/signup">
                   Sign up for an account
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
