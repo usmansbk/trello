@@ -3,9 +3,9 @@ import styles from "./index.module.css";
 
 const Logo = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <img src={logo} className={styles.logo} alt="" />
-      <h1>Trello</h1>
+      <h1 className={styles.text}>Trello</h1>
     </div>
   );
 };

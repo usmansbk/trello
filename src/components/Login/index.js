@@ -1,9 +1,11 @@
-const Login = () => {
-    return (
-        <section>
+import Logo from "../common/Logo";
 
-        </section>
-    )
+const Login = () => {
+  return (
+    <section>
+      <Logo />
+    </section>
+  );
 };
 
 export default Login;
