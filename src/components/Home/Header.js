@@ -3,16 +3,16 @@ import styles from "./Header.module.css";
 import loadingLogo from "./imgs/loading.gif";
 import logo from "./imgs/header-logo.gif";
 
-const Header = ({ loading }) => {
+const Logo = ({ loading }) => (
+  <Link to="/">
+    <img src={loading ? loadingLogo : logo} alt="" className={styles.loading} />
+  </Link>
+);
+
+const Header = () => {
   return (
     <header className={styles.header}>
-      <Link to="/">
-        <img
-          src={loading ? loadingLogo : logo}
-          alt=""
-          className={styles.loading}
-        />
-      </Link>
+      <Logo loading />
     </header>
   );
 };
