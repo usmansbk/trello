@@ -91,3 +91,36 @@
   line-height: 24px;
   color: #172b4d;
 }
+
+.footer {
+  width: 100%;
+  display: flex;
+}
+
+.footerButton {
+  border: none;
+  border-radius: 3px;
+  flex: 1 0 auto;
+  margin: 2px 8px 8px 8px;
+  padding: 4px 8px;
+  user-select: none;
+  color: #5e6c84;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 4px;
+}
+
+.footerButton:hover {
+  cursor: pointer;
+  background-color: #091e4214;
+  color: #172b4d;
+}
+
+.footerButton:active {
+  background-color: #091e4221;
+}
+
+.footerButtonText {
+  color: inherit;
+}
