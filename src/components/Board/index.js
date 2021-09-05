@@ -34,7 +34,7 @@ const ColumnHeader = ({ title }) => {
         <textarea
           ref={ref}
           style={{
-            height: ref.current?.scrollHeight,
+            height: ref.current?.scrollHeight || 28,
           }}
           spellCheck={false}
           maxLength="512"
