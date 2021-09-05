@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import IconButton from "../common/Button/IconButton";
@@ -62,11 +63,34 @@ const CardList = ({ title }) => {
   );
 };
 
-const HeaderButton = ({ text }) => {
-  return (
-    <div className={styles.headerButton}>
-      <h1 className={styles.buttonText}>{text}</h1>
-    </div>
+const BoardTitle = ({ title }) => {
+  const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState(title);
+
+  const toggleEdit = () => setEdit(!edit);
+
+  return edit ? (
+    <form onSubmit={toggleEdit}>
+      <input
+        autoFocus
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={toggleEdit}
+        className={clsx(
+          styles.headerButton,
+          styles.boardTitle,
+          styles.editTitle
+        )}
+      />
+    </form>
+  ) : (
+    <h1
+      className={clsx(styles.headerButton, styles.boardTitle)}
+      onClick={toggleEdit}
+    >
+      {value}
+    </h1>
   );
 };
 
@@ -75,7 +99,7 @@ const Board = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <header className={styles.header}>
-          <HeaderButton text="Board Name" />
+          <BoardTitle title="Board Name" />
         </header>
         <div className={styles.board}>
           <ul className={styles.columns}>

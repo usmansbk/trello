@@ -18,10 +18,12 @@
 .headerButton {
   background-color: #ffffff3d;
   height: 32px;
+  border: none;
   border-radius: 3px;
   margin: 4px 0;
   padding: 0 12px;
   width: fit-content;
+  box-sizing: border-box;
 }
 
 .headerButton:hover {
@@ -29,12 +31,24 @@
   cursor: pointer;
 }
 
-.buttonText {
+.boardTitle {
   font-size: 18px;
   font-weight: 700;
   line-height: 32px;
   text-overflow: ellipsis;
   color: white;
+}
+
+.editTitle {
+  background-color: white;
+  line-height: 20px;
+  box-shadow: inset 0 0 0 2px #dfe1e6;
+  outline: none;
+  color: #172b4d;
+}
+
+.editTitle:hover {
+  cursor: auto;
 }
 
 .board {
