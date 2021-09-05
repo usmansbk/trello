@@ -45,7 +45,7 @@ const ColumnFooter = () => {
 
   return (
     <div className={styles.footer}>
-      {showComposer && <AddCard />}
+      {showComposer && <AddCard onCancel={toggleComposer} />}
       {!showComposer && <FooterButton onClick={toggleComposer} />}
     </div>
   );
