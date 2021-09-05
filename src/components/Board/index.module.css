@@ -54,9 +54,10 @@
   flex: 0 0 auto;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
-.columnName {
+.columnTitle {
   display: flex;
   flex-grow: 1;
   font-weight: 600;

@@ -5,31 +5,31 @@ import styles from "./index.module.css";
 const COLUMNS = [
   {
     id: nanoid(),
-    name: "Todo",
+    title: "Todo",
   },
   {
     id: nanoid(),
-    name: "In progress",
+    title: "In progress",
   },
   {
     id: nanoid(),
-    name: "Done",
+    title: "Done",
   },
 ];
 
-const ColumnHeader = ({ name }) => {
+const ColumnHeader = ({ title }) => {
   return (
     <div className={styles.columnHeader}>
-      <h2 className={styles.columnName}>{name}</h2>
+      <h2 className={styles.columnTitle}>{title}</h2>
       <IconButton name="fa-ellipsis-h" />
     </div>
   );
 };
 
-const CardList = ({ name }) => {
+const CardList = ({ title }) => {
   return (
     <div className={styles.cardList}>
-      <ColumnHeader name={name} />
+      <ColumnHeader title={title} />
     </div>
   );
 };
@@ -40,9 +40,9 @@ const Board = () => {
       <div className={styles.content}>
         <div className={styles.board}>
           <ul className={styles.columns}>
-            {COLUMNS.map(({ name, id }) => (
+            {COLUMNS.map(({ title, id }) => (
               <li key={id} className={styles.column}>
-                <CardList name={name} />
+                <CardList title={title} />
               </li>
             ))}
           </ul>
