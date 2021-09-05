@@ -21,7 +21,6 @@ const Header = () => {
         <Logo loading />
       </div>
       <div className={clsx(styles.menuButtons, styles.justifyEnd)}>
-        <MenuIconButton name="fa-bell" />
         <MenuIconButton name="fa-sign-out-alt" to="/login" />
       </div>
     </header>

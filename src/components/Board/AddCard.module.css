@@ -1,0 +1,64 @@
+.form {
+  padding-bottom: 8px;
+}
+
+.button {
+  border: none;
+  background-color: #0079bf;
+  box-shadow: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: white;
+  font-weight: 400;
+  padding: 6px 12px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition-duration: 85ms;
+  transition-property: background-color, border-color, box-shadow;
+  transition-timing-function: ease;
+}
+
+.button:hover {
+  background-color: #026aa7;
+}
+
+.button:active {
+  background-color: #055a8c;
+}
+
+.textarea {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  resize: none;
+  background: none;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 4px;
+  max-height: 162px;
+  min-height: 54px;
+  width: 100%;
+  color: #172b4d;
+  line-height: 20px;
+  font-weight: 400;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 #091e4240;
+  margin-bottom: 8px;
+  max-width: 300px;
+  min-height: 20px;
+  padding: 6px 8px 2px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
