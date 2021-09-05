@@ -3,7 +3,7 @@ import styles from "./AddCard.module.css";
 
 const AddCard = ({ onCancel }) => {
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={onCancel}>
       <div className={styles.card}>
         <textarea
           autoFocus
@@ -13,7 +13,9 @@ const AddCard = ({ onCancel }) => {
         ></textarea>
       </div>
       <div className={styles.actions}>
-        <button className={styles.button}>Add card</button>
+        <button type="submit" className={styles.button}>
+          Add card
+        </button>
         <IconButton name="fa-times" onClick={onCancel} />
       </div>
     </form>
