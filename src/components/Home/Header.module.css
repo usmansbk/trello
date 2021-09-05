@@ -29,7 +29,7 @@
 
 .menuButtons {
   display: flex;
-  width: 10%;
+  min-width: 10%;
 }
 
 .justifyEnd {
