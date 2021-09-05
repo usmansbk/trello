@@ -11,14 +11,19 @@ const routes = [
 ];
 
 const Home = () => {
-  const { path: routePath } = useRouteMatch();
+  const { path: parentPath } = useRouteMatch();
 
   return (
     <div className={styles.container}>
       <Header />
       <Switch>
         {routes.map(({ path, component }) => (
-          <Route key={path} exact path={`${routePath}`} component={component} />
+          <Route
+            key={path}
+            exact
+            path={`${parentPath}${path}`}
+            component={component}
+          />
         ))}
       </Switch>
     </div>
