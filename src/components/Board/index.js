@@ -32,6 +32,7 @@ const ColumnHeader = ({ title }) => {
       {edit ? (
         <textarea
           rows={1}
+          maxLength="512"
           autoFocus
           className={styles.columnTitle}
           onBlur={toggleEdit}
