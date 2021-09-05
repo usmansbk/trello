@@ -25,4 +25,7 @@ body {
 #root {
   min-width: 100%;
   min-height: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-grow: 1;
 }
