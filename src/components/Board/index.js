@@ -34,10 +34,21 @@ const CardList = ({ title }) => {
   );
 };
 
+const HeaderButton = ({ text }) => {
+  return (
+    <div className={styles.headerButton}>
+      <h1 className={styles.buttonText}>{text}</h1>
+    </div>
+  );
+};
+
 const Board = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
+        <header className={styles.header}>
+          <HeaderButton text="Board Name" />
+        </header>
         <div className={styles.board}>
           <ul className={styles.columns}>
             {COLUMNS.map(({ title, id }) => (

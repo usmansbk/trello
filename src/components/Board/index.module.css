@@ -7,7 +7,34 @@
 .content {
   display: flex;
   flex-grow: 1;
+  flex-direction: column;
   position: relative;
+}
+
+.header {
+  padding: 8px 4px 4px 8px;
+}
+
+.headerButton {
+  background-color: #ffffff3d;
+  height: 32px;
+  border-radius: 3px;
+  margin: 4px 0;
+  padding: 0 12px;
+  width: fit-content;
+}
+
+.headerButton:hover {
+  background-color: #ffffff52;
+  cursor: pointer;
+}
+
+.buttonText {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 32px;
+  text-overflow: ellipsis;
+  color: white;
 }
 
 .board {
@@ -18,7 +45,7 @@
   user-select: none;
   margin-bottom: 8px;
   padding-bottom: 8px;
-  padding-top: 8px;
+  padding-top: 4px;
 }
 
 .columns {
