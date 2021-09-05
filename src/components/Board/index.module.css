@@ -99,17 +99,18 @@
 .columnHeader {
   display: flex;
   align-items: center;
-  height: 28px;
   padding: 10px 8px;
   cursor: pointer;
   gap: 4px;
 }
 
+.moreButton {
+  align-self: flex-start;
+}
+
 .columnTitle {
-  display: flex;
-  flex-grow: 1;
   width: 100%;
-  height: auto;
+  word-wrap: break-word;
   font-weight: 600;
   line-height: 20px;
   color: #172b4d;
@@ -117,7 +118,8 @@
   box-sizing: border-box;
   min-height: 20px;
   max-height: 256px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   border: none;
   outline: none;
   background-color: transparent;

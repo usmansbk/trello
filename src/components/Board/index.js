@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
@@ -24,22 +24,32 @@ const COLUMNS = [
 const ColumnHeader = ({ title }) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(title);
+  const ref = useRef(null);
 
   const toggleEdit = () => setEdit(!edit);
 
   return (
     <div className={styles.columnHeader}>
-      <textarea
-        rows={1}
-        spellCheck={false}
-        maxLength="512"
-        className={styles.columnTitle}
-        onFocus={toggleEdit}
-        onBlur={toggleEdit}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      ></textarea>
-      <IconButton name="fa-ellipsis-h" />
+      {edit ? (
+        <textarea
+          ref={ref}
+          style={{
+            height: ref.current?.scrollHeight,
+          }}
+          spellCheck={false}
+          maxLength="512"
+          className={styles.columnTitle}
+          autoFocus
+          onBlur={toggleEdit}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        ></textarea>
+      ) : (
+        <h2 onClick={toggleEdit} className={styles.columnTitle}>
+          {value}
+        </h2>
+      )}
+      <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
     </div>
   );
 };
