@@ -49,9 +49,10 @@
 
 .columnHeader {
   min-height: 20px;
-  padding: 4px 8px;
+  padding: 8px 12px;
   flex: 0 0 auto;
   display: flex;
+  align-items: center;
 }
 
 .columnName {
@@ -59,7 +60,5 @@
   flex-grow: 1;
   font-weight: 600;
   line-height: 24px;
-  margin: 0 0 8px;
-  padding: 4px 8px;
   color: #172b4d;
 }
