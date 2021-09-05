@@ -13,11 +13,11 @@ const DATA = [
   },
   {
     id: nanoid(),
-    name: "Microverse Capstone project",
+    name: "React Capstone project",
   },
   {
     id: nanoid(),
-    name: "Microverse Capstone project",
+    name: "React Group project",
   },
 ];
 
