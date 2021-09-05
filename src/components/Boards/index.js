@@ -15,6 +15,10 @@ const DATA = [
     id: nanoid(),
     name: "Microverse Capstone project",
   },
+  {
+    id: nanoid(),
+    name: "Microverse Capstone project",
+  },
 ];
 
 const Card = ({ name }) => {

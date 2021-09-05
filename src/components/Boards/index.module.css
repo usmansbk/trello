@@ -23,10 +23,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  gap: 2%;
 }
 
 .boardItem {
-  margin: 0 2% 2% 0;
   transform: translate(0);
   width: 23.5%;
   box-sizing: border-box;
