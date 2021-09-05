@@ -30,13 +30,14 @@ const ColumnHeader = ({ title }) => {
   return (
     <div className={styles.columnHeader}>
       {edit ? (
-        <input
+        <textarea
+          rows={1}
           autoFocus
           className={styles.columnTitle}
           onBlur={toggleEdit}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-        />
+        ></textarea>
       ) : (
         <h2 className={styles.columnTitle} onClick={toggleEdit}>
           {value}
