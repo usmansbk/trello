@@ -98,6 +98,7 @@
 }
 
 .footerButton {
+  background-color: transparent;
   border: none;
   border-radius: 3px;
   flex: 1 0 auto;
