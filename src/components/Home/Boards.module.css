@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-.boards {
+.content {
   margin: 40px 16px 0;
   max-width: 825px;
   min-width: 288px;
@@ -19,25 +19,25 @@
   margin: 20px 0;
 }
 
-.boardList {
+.list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 2%;
 }
 
-.boardItem {
+.item {
   transform: translate(0);
   width: 23.5%;
   box-sizing: border-box;
   cursor: pointer;
 }
 
-.boardItem:hover {
+.item:hover {
   background-color: #00000040;
 }
 
-.boardTile {
+.tile {
   background-color: rgb(0, 121, 191);
   border-radius: 3px;
   display: block;
@@ -47,18 +47,18 @@
   text-decoration: none;
 }
 
-.boardTile:hover {
+.tile:hover {
   opacity: 0.8;
 }
 
-.boardTileDetails {
+.details {
   display: flex;
   flex-direction: column;
   height: 80px;
   justify-content: space-between;
 }
 
-.boardName {
+.name {
   text-overflow: ellipsis;
   font-size: 16px;
   font-weight: 700;

@@ -1,5 +1,5 @@
 import { Route, Switch, useRouteMatch } from "react-router";
-import Boards from "../Boards";
+import Boards from "./Boards";
 import Header from "./Header";
 import styles from "./index.module.css";
 

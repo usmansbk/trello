@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
-import styles from "./index.module.css";
+import styles from "./Boards.module.css";
 
 const DATA = [
   {
@@ -21,21 +21,21 @@ const DATA = [
   },
 ];
 
-const Card = ({ name }) => {
+const Tile = ({ name }) => {
   return (
-    <div className={styles.boardTileDetails}>
-      <h3 className={styles.boardName}>{name}</h3>
+    <div className={styles.details}>
+      <h3 className={styles.name}>{name}</h3>
     </div>
   );
 };
 
 const List = ({ data = [] }) => {
   return (
-    <ul className={styles.boardList}>
+    <ul className={styles.list}>
       {data.map(({ id, name }) => (
-        <li key={id} className={styles.boardItem}>
-          <Link to={`/${id}`} className={styles.boardTile}>
-            <Card id={id} name={name} />
+        <li key={id} className={styles.item}>
+          <Link to={`/${id}`} className={styles.tile}>
+            <Tile id={id} name={name} />
           </Link>
         </li>
       ))}
@@ -46,7 +46,7 @@ const List = ({ data = [] }) => {
 const Boards = () => {
   return (
     <div className={styles.container}>
-      <section className={styles.boards}>
+      <section className={styles.content}>
         <h1 className={styles.title}>YOUR BOARDS</h1>
         <List data={DATA} />
       </section>
