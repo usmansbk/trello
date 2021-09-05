@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
+import AddCard from "./AddCard";
 import styles from "./index.module.css";
 
 const COLUMNS = [
@@ -39,6 +40,7 @@ const FooterButton = () => {
 const ColumnFooter = () => {
   return (
     <div className={styles.footer}>
+      <AddCard />
       <FooterButton />
     </div>
   );
@@ -48,7 +50,9 @@ const CardList = ({ title }) => {
   return (
     <div className={styles.cardList}>
       <ColumnHeader title={title} />
-      <ColumnFooter />
+      <div className={styles.cardBody}>
+        <ColumnFooter />
+      </div>
     </div>
   );
 };
