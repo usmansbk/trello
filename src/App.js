@@ -28,7 +28,7 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         {routes.map(({ path, component }) => (
-          <Route key={path} exact path={path} component={component} />
+          <Route key={path} path={path} component={component} />
         ))}
       </Switch>
     </Router>
