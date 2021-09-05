@@ -3,8 +3,13 @@ import styles from "./AddCard.module.css";
 
 const AddCard = () => {
   return (
-    <form>
-      <textarea placeholder="Enter a title for this card..."></textarea>
+    <form className={styles.form}>
+      <div className={styles.card}>
+        <textarea
+          className={styles.textarea}
+          placeholder="Enter a title for this card..."
+        ></textarea>
+      </div>
       <div>
         <button className={styles.button}>Add card</button>
         <IconButton name="fa-times" />

@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import { useState } from "react";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
@@ -28,9 +29,9 @@ const ColumnHeader = ({ title }) => {
   );
 };
 
-const FooterButton = () => {
+const FooterButton = ({ onClick }) => {
   return (
-    <button className={styles.footerButton}>
+    <button className={styles.footerButton} onClick={onClick}>
       <Icon name="fa-plus" />
       <span className={styles.footerButtonText}>Add a card</span>
     </button>
@@ -38,10 +39,14 @@ const FooterButton = () => {
 };
 
 const ColumnFooter = () => {
+  const [showComposer, setComposerVisible] = useState(false);
+
+  const toggleComposer = () => setComposerVisible(!showComposer);
+
   return (
     <div className={styles.footer}>
-      <AddCard />
-      <FooterButton />
+      {showComposer && <AddCard />}
+      {!showComposer && <FooterButton onClick={toggleComposer} />}
     </div>
   );
 };
