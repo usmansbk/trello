@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.boards {
+  margin: 40px 16px 0;
+  max-width: 825px;
+  min-width: 288px;
+  width: 100%;
+}
+
+.title {
+  font-weight: 700;
+  line-height: 24px;
+  text-overflow: ellipsis;
+  font-size: 16px;
+}
