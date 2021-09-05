@@ -17,12 +17,11 @@
 
 .headerButton {
   background-color: #ffffff3d;
-  height: 32px;
+  min-height: 32px;
   border: none;
   border-radius: 3px;
   margin: 4px 0;
   padding: 0 12px;
-  width: fit-content;
   box-sizing: border-box;
 }
 
@@ -37,6 +36,7 @@
   line-height: 32px;
   text-overflow: ellipsis;
   color: white;
+  width: fit-content;
 }
 
 .editTitle {
@@ -106,9 +106,10 @@
 }
 
 .columnTitle {
-  height: 28px;
   display: flex;
   flex-grow: 1;
+  width: 100%;
+  height: auto;
   font-weight: 600;
   line-height: 20px;
   color: #172b4d;
@@ -117,14 +118,15 @@
   min-height: 20px;
   max-height: 256px;
   overflow: hidden;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+  border-radius: 3px;
 }
 
 .columnTitle:focus {
-  border-radius: 3px;
-  border: none;
-  outline: none;
   box-shadow: inset 0 0 0 2px #0079bf;
-  resize: none;
   background-color: white;
 }
 

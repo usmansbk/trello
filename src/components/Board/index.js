@@ -29,21 +29,16 @@ const ColumnHeader = ({ title }) => {
 
   return (
     <div className={styles.columnHeader}>
-      {edit ? (
-        <textarea
-          rows={1}
-          maxLength="512"
-          autoFocus
-          className={styles.columnTitle}
-          onBlur={toggleEdit}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        ></textarea>
-      ) : (
-        <h2 className={styles.columnTitle} onClick={toggleEdit}>
-          {value}
-        </h2>
-      )}
+      <textarea
+        rows={1}
+        spellCheck={false}
+        maxLength="512"
+        className={styles.columnTitle}
+        onFocus={toggleEdit}
+        onBlur={toggleEdit}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      ></textarea>
       <IconButton name="fa-ellipsis-h" />
     </div>
   );
@@ -88,22 +83,20 @@ const BoardTitle = ({ title }) => {
 
   const toggleEdit = () => setEdit(!edit);
 
-  return edit ? (
+  return (
     <input
-      autoFocus
       type="text"
       value={value}
+      spellCheck={false}
       onChange={(e) => setValue(e.target.value)}
+      onFocus={toggleEdit}
       onBlur={toggleEdit}
-      className={clsx(styles.headerButton, styles.boardTitle, styles.editTitle)}
+      className={clsx(
+        styles.headerButton,
+        styles.boardTitle,
+        edit && styles.editTitle
+      )}
     />
-  ) : (
-    <h1
-      className={clsx(styles.headerButton, styles.boardTitle)}
-      onClick={toggleEdit}
-    >
-      {value}
-    </h1>
   );
 };
 
