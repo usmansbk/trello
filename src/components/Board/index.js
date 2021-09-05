@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import IconButton from "../common/Button/IconButton";
 import styles from "./index.module.css";
 
 const COLUMNS = [
@@ -16,8 +17,21 @@ const COLUMNS = [
   },
 ];
 
-const Column = ({ name }) => {
-  return <div>{name}</div>;
+const ColumnHeader = ({ name }) => {
+  return (
+    <div className={styles.columnHeader}>
+      <h2 className={styles.columnName}>{name}</h2>
+      <IconButton name="fa-ellipsis-h" />
+    </div>
+  );
+};
+
+const CardList = ({ name }) => {
+  return (
+    <div className={styles.cardList}>
+      <ColumnHeader name={name} />
+    </div>
+  );
 };
 
 const Board = () => {
@@ -28,7 +42,7 @@ const Board = () => {
           <ul className={styles.columns}>
             {COLUMNS.map(({ name, id }) => (
               <li key={id} className={styles.column}>
-                <Column name={name} />
+                <CardList name={name} />
               </li>
             ))}
           </ul>

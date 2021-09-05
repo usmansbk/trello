@@ -18,6 +18,7 @@
   user-select: none;
   margin-bottom: 8px;
   padding-bottom: 8px;
+  padding-top: 8px;
 }
 
 .columns {
@@ -34,4 +35,31 @@
   width: 272px;
   vertical-align: top;
   white-space: nowrap;
+}
+
+.cardList {
+  background-color: #ebecf0;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  white-space: normal;
+}
+
+.columnHeader {
+  min-height: 20px;
+  padding: 4px 8px;
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.columnName {
+  display: flex;
+  flex-grow: 1;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0 0 8px;
+  padding: 4px 8px;
+  color: #172b4d;
 }
