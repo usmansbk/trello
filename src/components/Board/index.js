@@ -87,20 +87,14 @@ const BoardTitle = ({ title }) => {
   const toggleEdit = () => setEdit(!edit);
 
   return edit ? (
-    <form onSubmit={toggleEdit}>
-      <input
-        autoFocus
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={toggleEdit}
-        className={clsx(
-          styles.headerButton,
-          styles.boardTitle,
-          styles.editTitle
-        )}
-      />
-    </form>
+    <input
+      autoFocus
+      type="text"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      onBlur={toggleEdit}
+      className={clsx(styles.headerButton, styles.boardTitle, styles.editTitle)}
+    />
   ) : (
     <h1
       className={clsx(styles.headerButton, styles.boardTitle)}
