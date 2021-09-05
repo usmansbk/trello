@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
 import styles from "./Boards.module.css";
@@ -35,10 +36,16 @@ const List = ({ data = [] }) => {
       {data.map(({ id, name }) => (
         <li key={id} className={styles.item}>
           <Link to={`/${id}`} className={styles.tile}>
+            <span className={styles.fade} />
             <Tile id={id} name={name} />
           </Link>
         </li>
       ))}
+      <li className={styles.item}>
+        <div className={clsx(styles.tile, styles.add)}>
+          <p className={styles.label}>Create new board</p>
+        </div>
+      </li>
     </ul>
   );
 };

@@ -31,10 +31,8 @@
   width: 23.5%;
   box-sizing: border-box;
   cursor: pointer;
-}
-
-.item:hover {
-  background-color: #00000040;
+  margin-bottom: 2%;
+  position: relative;
 }
 
 .tile {
@@ -45,10 +43,7 @@
   background-size: cover;
   padding: 8px;
   text-decoration: none;
-}
-
-.tile:hover {
-  opacity: 0.8;
+  position: relative;
 }
 
 .details {
@@ -65,4 +60,39 @@
   color: white;
   line-height: 20px;
   word-wrap: break-word;
+}
+
+.add {
+  background-color: #091e420a;
+  display: table-cell;
+  transition-duration: 85ms;
+  transition-property: background-color, border-color, box-shadow;
+  transition-timing-function: ease;
+  width: inherit;
+  height: 80px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.add:hover {
+  background-color: #091e4214;
+  box-shadow: none;
+}
+
+.label {
+  font-weight: 400;
+  color: #172b4d;
+  line-height: 20px;
+}
+
+.fade {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  position: absolute;
+}
+
+.fade:hover {
+  background-color: #00000026;
 }
