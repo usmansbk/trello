@@ -22,9 +22,26 @@ const COLUMNS = [
 ];
 
 const ColumnHeader = ({ title }) => {
+  const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState(title);
+
+  const toggleEdit = () => setEdit(!edit);
+
   return (
     <div className={styles.columnHeader}>
-      <h2 className={styles.columnTitle}>{title}</h2>
+      {edit ? (
+        <input
+          autoFocus
+          className={styles.columnTitle}
+          onBlur={toggleEdit}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      ) : (
+        <h2 className={styles.columnTitle} onClick={toggleEdit}>
+          {value}
+        </h2>
+      )}
       <IconButton name="fa-ellipsis-h" />
     </div>
   );
