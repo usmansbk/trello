@@ -128,10 +128,8 @@ const List = ({ title, data }) => {
   return (
     <div className={styles.cardList}>
       <ColumnHeader title={title} />
-      <div className={styles.cardBody}>
-        <Cards data={data} />
-        <ColumnFooter />
-      </div>
+      <Cards data={data} />
+      <ColumnFooter />
     </div>
   );
 };
