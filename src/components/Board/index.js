@@ -90,17 +90,18 @@ const BoardTitle = ({ title }) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(title);
 
-  const toggleEdit = () => setEdit(!edit);
+  const showEdit = () => setEdit(true);
+  const hideEdit = () => setEdit(false);
 
   return (
-    <div onClick={toggleEdit} className={styles.headerButton}>
+    <div onClick={showEdit} className={styles.headerButton}>
       {edit ? (
         <AutosizeInput
           autoFocus
           value={value}
           spellCheck={false}
           onChange={(e) => setValue(e.target.value)}
-          onBlur={toggleEdit}
+          onBlur={hideEdit}
           inputClassName={clsx(styles.boardTitle, styles.editTitle)}
         />
       ) : (
