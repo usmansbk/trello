@@ -5,12 +5,11 @@ import AutosizeInput from "react-input-autosize";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
-import Cards from "./Cards";
 import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
 import MenuButton from "../common/Button/MenuButton";
 import COLUMNS from "../initialData";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const ColumnHeader = ({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -64,11 +63,32 @@ const ColumnFooter = () => {
   );
 };
 
-const List = ({ title, data }) => {
+const Card = ({ title }) => (
+  <div className={styles.card}>
+    <p className={styles.details}>{title}</p>
+  </div>
+);
+
+const List = ({ id, title, data }) => {
   return (
     <div className={styles.cardList}>
       <ColumnHeader title={title} />
-      <Cards data={data} />
+      <Droppable droppableId={id}>
+        {(provided) => (
+          <ul
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className={styles.list}
+          >
+            {data.map(({ id, title }, index) => (
+              <li key={id}>
+                <Card id={id} title={title} index={index} />
+              </li>
+            ))}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
       <ColumnFooter />
     </div>
   );
