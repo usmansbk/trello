@@ -11,7 +11,6 @@
   display: flex;
   height: 100%;
   overflow-x: auto;
-  padding-top: 52px;
 }
 
 .header {
@@ -22,8 +21,6 @@
   width: 100%;
   max-width: calc(100vw - 24px);
   overflow: hidden;
-  position: fixed;
-  z-index: 998;
   background-color: #0079bf;
 }
 
@@ -116,7 +113,6 @@
   margin: 0 4px;
   padding: 0 4px;
   overflow: hidden;
-  z-index: 1;
 }
 
 .columnHeader {
