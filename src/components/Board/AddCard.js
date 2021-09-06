@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import IconButton from "../common/Button/IconButton";
+import CardButton from "../common/Button/CardButton";
 import styles from "./AddCard.module.css";
 
 const AddCard = ({ onCancel }) => {
@@ -19,9 +20,7 @@ const AddCard = ({ onCancel }) => {
         />
       </div>
       <div className={styles.actions}>
-        <button type="submit" className={styles.button}>
-          Add card
-        </button>
+        <CardButton text="Add card" onClick={onCancel} />
         <IconButton name="fa-times" onClick={onCancel} />
       </div>
     </form>

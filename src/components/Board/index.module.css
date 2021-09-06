@@ -13,12 +13,15 @@
 .header {
   padding: 8px 4px 4px 8px;
   display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: calc(100vw - 12px);
 }
 
 .headerButton {
   display: flex;
   overflow: hidden;
-  max-width: calc(100vw - 24px);
   background-color: #ffffff3d;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -110,7 +113,7 @@
 .columnHeader {
   display: flex;
   align-items: center;
-  padding: 10px 8px;
+  padding: 5px 8px;
   cursor: pointer;
   gap: 4px;
 }
