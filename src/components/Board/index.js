@@ -7,6 +7,7 @@ import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./index.module.css";
+import AddColumn from "./AddColumn";
 
 const COLUMNS = [
   {
@@ -125,6 +126,9 @@ const Board = () => {
                 <CardList title={title} />
               </li>
             ))}
+            <li className={styles.column}>
+              <AddColumn />
+            </li>
           </ul>
         </div>
       </div>

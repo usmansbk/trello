@@ -1,0 +1,32 @@
+.button {
+  width: 100%;
+  border: none;
+  background-color: #ffffff3d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.button:hover {
+  background-color: #ffffff52;
+}
+
+.button:active {
+  background-color: #fff6;
+}
+
+.buttonText {
+  color: white;
+  padding: 6px 8px;
+  transition: color 85ms ease-in;
+}
+
+.container {
+  white-space: nowrap;
+  border-radius: 3px;
+  height: auto;
+  min-height: 32px;
+  padding: 4px;
+  transition: background 85ms ease-in, opacity 40ms ease-in,
+    border-color 85ms ease-in;
+}
