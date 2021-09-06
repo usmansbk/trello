@@ -78,27 +78,29 @@ const Card = ({ title, id, index }) => (
   </Draggable>
 );
 
-const List = ({ id, title, data }) => {
+const Column = ({ id, title, data }) => {
   return (
-    <div className={styles.cardList}>
-      <ColumnHeader title={title} />
-      <Droppable droppableId={id}>
-        {(provided) => (
-          <ul
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className={styles.list}
-          >
-            {data.map(({ id, title }, index) => (
-              <li key={id}>
-                <Card id={id} title={title} index={index} />
-              </li>
-            ))}
-            {provided.placeholder}
-          </ul>
-        )}
-      </Droppable>
-      <ColumnFooter />
+    <div className={styles.column}>
+      <div className={styles.cardList}>
+        <ColumnHeader title={title} />
+        <Droppable droppableId={id}>
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className={styles.list}
+            >
+              {data.map(({ id, title }, index) => (
+                <div key={id}>
+                  <Card id={id} title={title} index={index} />
+                </div>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+        <ColumnFooter />
+      </div>
     </div>
   );
 };
@@ -140,18 +142,16 @@ const Board = () => {
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
-        <ul className={styles.board}>
+        <div className={styles.board}>
           <DragDropContext onDragEnd={onDragEnd}>
             {state.map(({ title, id, tasks }) => (
-              <li key={id} className={styles.column}>
-                <List id={id} title={title} data={tasks} />
-              </li>
+              <Column key={id} id={id} title={title} data={tasks} />
             ))}
           </DragDropContext>
-          <li className={styles.column}>
+          <div className={styles.column}>
             <AddColumn />
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
