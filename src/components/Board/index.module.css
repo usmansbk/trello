@@ -26,11 +26,14 @@
   right: 0;
   top: 0;
   display: flex;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .columns {
   display: flex;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .header {
