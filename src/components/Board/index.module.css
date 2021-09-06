@@ -110,7 +110,7 @@
 .columnHeader {
   display: flex;
   align-items: center;
-  padding: 10px 8px;
+  padding: 5px 8px;
   cursor: pointer;
   gap: 4px;
 }
