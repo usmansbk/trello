@@ -115,12 +115,6 @@
   white-space: normal;
 }
 
-.cardBody {
-  margin: 0 4px;
-  padding: 0 4px;
-  overflow: hidden;
-}
-
 .columnHeader {
   display: flex;
   align-items: center;
@@ -168,7 +162,7 @@
   border: none;
   border-radius: 3px;
   flex: 1 0 auto;
-  margin: 2px 0 8px 0;
+  margin: 8px;
   padding: 4px 8px;
   user-select: none;
   color: #5e6c84;
