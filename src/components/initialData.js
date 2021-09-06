@@ -1,37 +1,5 @@
 import { nanoid } from "nanoid";
 
-const data = {
-  boards: {
-    "board-1": {
-      id: "board-1",
-      title: "Board 1",
-      columns: ["col-1", "col-2", "col-3"],
-    },
-  },
-  columns: {
-    "col-1": {
-      id: "col-1",
-      title: "Todo",
-      tasks: ["task-1"],
-    },
-    "col-2": {
-      id: "col-2",
-      title: "In Progress",
-      tasks: [],
-    },
-    "col-3": {
-      id: "col-3",
-      title: "Done",
-      tasks: [],
-    },
-  },
-  tasks: {
-    "task-1": {
-      title: "User should drag",
-    },
-  },
-};
-
 const COLUMNS = [
   {
     id: nanoid(),
@@ -86,10 +54,12 @@ const COLUMNS = [
   {
     id: nanoid(),
     title: "In progress",
+    tasks: [],
   },
   {
     id: nanoid(),
     title: "Done",
+    tasks: [],
   },
 ];
 

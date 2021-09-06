@@ -99,6 +99,8 @@ const BoardTitle = ({ title }) => {
 };
 
 const Board = () => {
+  const [state] = useState(COLUMNS);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -107,7 +109,7 @@ const Board = () => {
       </header>
       <div className={styles.content}>
         <ul className={styles.board}>
-          {COLUMNS.map(({ title, id, tasks }) => (
+          {state.map(({ title, id, tasks }) => (
             <li key={id} className={styles.column}>
               <List title={title} data={tasks} />
             </li>
