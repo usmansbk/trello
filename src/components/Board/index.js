@@ -6,6 +6,7 @@ import AutosizeInput from "react-input-autosize";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
+import Cards from "./Cards";
 import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
 import MenuButton from "../common/Button/MenuButton";
@@ -14,6 +15,16 @@ const COLUMNS = [
   {
     id: nanoid(),
     title: "Todo",
+    tasks: [
+      {
+        id: nanoid(),
+        title: "User should be able to input target image",
+      },
+      {
+        id: nanoid(),
+        title: "User should be able to input target image",
+      },
+    ],
   },
   {
     id: nanoid(),
@@ -77,10 +88,11 @@ const ColumnFooter = () => {
   );
 };
 
-const CardList = ({ title }) => {
+const List = ({ title, data }) => {
   return (
     <div className={styles.cardList}>
       <ColumnHeader title={title} />
+      <Cards data={data} />
       <div className={styles.cardBody}>
         <ColumnFooter />
       </div>
@@ -123,9 +135,9 @@ const Board = () => {
       <div className={styles.content}>
         <div className={styles.board}>
           <ul className={styles.columns}>
-            {COLUMNS.map(({ title, id }) => (
+            {COLUMNS.map(({ title, id, tasks }) => (
               <li key={id} className={styles.column}>
-                <CardList title={title} />
+                <List title={title} data={tasks} />
               </li>
             ))}
             <li className={styles.column}>
