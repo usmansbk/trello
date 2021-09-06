@@ -3,11 +3,14 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .content {
   display: flex;
   height: 100%;
+  overflow-x: auto;
+  padding-top: 52px;
 }
 
 .header {
@@ -15,8 +18,9 @@
   display: flex;
   gap: 4px;
   align-items: center;
-  justify-content: space-between;
-  max-width: calc(100vw - 12px);
+  max-width: calc(100vw - 24px);
+  overflow: hidden;
+  position: fixed;
 }
 
 .headerButton {
@@ -79,6 +83,7 @@
 
 .columns {
   display: flex;
+  overflow-x: auto;
 }
 
 .column:first-child {
