@@ -169,18 +169,16 @@ const Board = () => {
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
-        <div className={styles.board}>
-          <ul className={styles.columns}>
-            {COLUMNS.map(({ title, id, tasks }) => (
-              <li key={id} className={styles.column}>
-                <List title={title} data={tasks} />
-              </li>
-            ))}
-            <li className={styles.column}>
-              <AddColumn />
+        <ul className={styles.board}>
+          {COLUMNS.map(({ title, id, tasks }) => (
+            <li key={id} className={styles.column}>
+              <List title={title} data={tasks} />
             </li>
-          </ul>
-        </div>
+          ))}
+          <li className={styles.column}>
+            <AddColumn />
+          </li>
+        </ul>
       </div>
     </div>
   );
