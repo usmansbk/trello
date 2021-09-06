@@ -20,6 +20,7 @@ ol {
 body {
   display: flex;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 #root {
@@ -28,4 +29,5 @@ body {
   background-color: whitesmoke;
   display: flex;
   flex-grow: 1;
+  overflow: hidden;
 }

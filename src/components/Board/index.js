@@ -18,11 +18,47 @@ const COLUMNS = [
     tasks: [
       {
         id: nanoid(),
-        title: "User should be able to input target image",
+        title: `When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"`,
       },
       {
         id: nanoid(),
-        title: "User should be able to input target image",
+        title: `Each column has a "+" button. The user can click this button to create a task card in any column`,
+      },
+      {
+        id: nanoid(),
+        title: `Task cards clearly display the title of the contained task`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can move tasks between columns using drag-and-drop`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can delete a task.`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can expand a task card to see its description`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can move tasks between columns using the "Move" button in the context menu`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can edit column titles`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can create columns`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can change the order of columns using drag-and-drop`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can delete columns (you will have to decide what happens to a column's cards in this case)`,
       },
     ],
   },
@@ -129,7 +165,7 @@ const Board = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <BoardTitle title="Board Name" />
+        <BoardTitle title="Trello Clone WIP" />
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
