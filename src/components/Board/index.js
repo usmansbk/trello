@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { nanoid } from "nanoid";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import TextareaAutosize from "react-textarea-autosize";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
@@ -24,33 +25,28 @@ const COLUMNS = [
 const ColumnHeader = ({ title }) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(title);
-  const ref = useRef(null);
 
   const toggleEdit = () => {
     setEdit(!edit);
   };
 
-  const style = { height: 28 };
-  if (edit && ref.current) {
-    style.height = ref.current.scrollHeight;
-  }
-
   return (
     <div className={styles.columnHeader}>
-      <textarea
-        ref={ref}
-        style={style}
-        spellCheck={false}
-        maxLength="512"
-        className={styles.columnTitle}
-        autoFocus
-        onBlur={toggleEdit}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      ></textarea>
-      <h2 onClick={toggleEdit} className={styles.columnTitle}>
-        {value}
-      </h2>
+      {edit ? (
+        <TextareaAutosize
+          spellCheck={false}
+          maxLength="512"
+          className={styles.columnTitle}
+          autoFocus
+          onBlur={toggleEdit}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      ) : (
+        <h2 onClick={toggleEdit} className={styles.columnTitle}>
+          {value}
+        </h2>
+      )}
       <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
     </div>
   );
