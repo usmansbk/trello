@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { nanoid } from "nanoid";
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import AutosizeInput from "react-input-autosize";
