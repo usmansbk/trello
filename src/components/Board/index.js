@@ -131,9 +131,22 @@ const BoardTitle = ({ title }) => {
 };
 
 const Board = () => {
-  const [state] = useState(COLUMNS);
+  const [state, setState] = useState(COLUMNS);
 
-  const onDragEnd = () => console.log("Dragged");
+  const onDragEnd = (result) => {
+    const { source, destination, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+  };
 
   return (
     <div className={styles.container}>
