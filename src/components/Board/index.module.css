@@ -18,7 +18,7 @@
 .headerButton {
   display: flex;
   overflow: hidden;
-  width: calc(100vw - 24px);
+  max-width: calc(100vw - 24px);
   background-color: #ffffff3d;
   text-overflow: ellipsis;
   white-space: nowrap;
