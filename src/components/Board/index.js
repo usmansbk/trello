@@ -113,10 +113,10 @@ const BoardTitle = ({ title }) => {
 const Board = () => {
   return (
     <div className={styles.container}>
+      <header className={styles.header}>
+        <BoardTitle title="Board Name" />
+      </header>
       <div className={styles.content}>
-        <header className={styles.header}>
-          <BoardTitle title="Board Name" />
-        </header>
         <div className={styles.board}>
           <ul className={styles.columns}>
             {COLUMNS.map(({ title, id }) => (
