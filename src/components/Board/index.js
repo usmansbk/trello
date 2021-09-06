@@ -9,7 +9,7 @@ import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
 import MenuButton from "../common/Button/MenuButton";
 import COLUMNS from "../initialData";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const ColumnHeader = ({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -63,10 +63,19 @@ const ColumnFooter = () => {
   );
 };
 
-const Card = ({ title }) => (
-  <div className={styles.card}>
-    <p className={styles.details}>{title}</p>
-  </div>
+const Card = ({ title, id, index }) => (
+  <Draggable draggableId={id} index={index}>
+    {(provided) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        className={styles.card}
+      >
+        <p className={styles.details}>{title}</p>
+      </div>
+    )}
+  </Draggable>
 );
 
 const List = ({ id, title, data }) => {
@@ -135,7 +144,7 @@ const Board = () => {
           <DragDropContext onDragEnd={onDragEnd}>
             {state.map(({ title, id, tasks }) => (
               <li key={id} className={styles.column}>
-                <List title={title} data={tasks} />
+                <List id={id} title={title} data={tasks} />
               </li>
             ))}
           </DragDropContext>
