@@ -7,7 +7,7 @@ import styles from "./AddColumn.module.css";
 
 const Input = ({ onCancel }) => {
   return (
-    <form>
+    <form className={styles.form}>
       <input
         autoFocus
         className={styles.input}

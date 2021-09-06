@@ -1,19 +1,28 @@
 .container {
   border-radius: 3px;
-  white-space: nowrap;
+  background-color: #ffffff3d;
   height: auto;
   min-height: 32px;
-  background-color: #ffffff3d;
   transition: background 85ms ease-in, opacity 40ms ease-in,
     border-color 85ms ease-in;
 }
 
+.card {
+  padding: 5px;
+  background-color: #ebecf0;
+  margin-bottom: 8px;
+}
+
 .button {
+  border-radius: 3px;
+  padding: 4px;
   width: 100%;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
+  background-color: transparent;
+  transition: color 85ms ease-in;
 }
 
 .button:hover {
@@ -34,19 +43,14 @@
   padding-right: 0;
 }
 
-.card {
-  padding: 5px;
-  background-color: whitesmoke;
+.form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
-  max-width: 300px;
-  min-height: 20px;
   gap: 4px;
 }
 
 .input {
-  background-color: #ebecf0;
+  border: none;
   outline: none;
   box-shadow: inset 0 0 0 2px #0079bf;
   box-sizing: border-box;
@@ -54,6 +58,7 @@
   line-height: 20px;
   padding: 8px 12px;
   color: #172b4d;
+  transition: margin 85ms ease-in, background 85ms ease-in;
 }
 
 .actions {
