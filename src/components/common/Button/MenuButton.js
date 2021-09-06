@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import Icon from "../Icon";
-import styles from "./Menu.module.css";
+import styles from "./MenuButton.module.css";
 
-const IconButton = ({ name, to }) => {
+const MenuButton = ({ name, to }) => {
   if (to) {
     return (
       <Link className={styles.menuButton} to={to}>
@@ -18,4 +18,4 @@ const IconButton = ({ name, to }) => {
   );
 };
 
-export default IconButton;
+export default MenuButton;

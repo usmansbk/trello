@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import loadingLogo from "./imgs/loading.gif";
 import logo from "./imgs/header-logo.gif";
-import MenuIconButton from "../common/Button/Menu";
+import MenuIconButton from "../common/Button/MenuButton";
 import clsx from "clsx";
 
 const Logo = ({ loading }) => (
