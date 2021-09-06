@@ -10,6 +10,7 @@ import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
 import MenuButton from "../common/Button/MenuButton";
 import COLUMNS from "../initialData";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const ColumnHeader = ({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -101,6 +102,8 @@ const BoardTitle = ({ title }) => {
 const Board = () => {
   const [state] = useState(COLUMNS);
 
+  const onDragEnd = () => console.log("Dragged");
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -109,11 +112,13 @@ const Board = () => {
       </header>
       <div className={styles.content}>
         <ul className={styles.board}>
-          {state.map(({ title, id, tasks }) => (
-            <li key={id} className={styles.column}>
-              <List title={title} data={tasks} />
-            </li>
-          ))}
+          <DragDropContext onDragEnd={onDragEnd}>
+            {state.map(({ title, id, tasks }) => (
+              <li key={id} className={styles.column}>
+                <List title={title} data={tasks} />
+              </li>
+            ))}
+          </DragDropContext>
           <li className={styles.column}>
             <AddColumn />
           </li>
