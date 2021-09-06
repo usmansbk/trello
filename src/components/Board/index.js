@@ -8,6 +8,7 @@ import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
+import MenuButton from "../common/Button/MenuButton";
 
 const COLUMNS = [
   {
@@ -117,6 +118,7 @@ const Board = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <BoardTitle title="Board Name" />
+        <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
         <div className={styles.board}>

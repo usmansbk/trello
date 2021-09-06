@@ -9,7 +9,7 @@
   color: white;
   font-weight: bold;
   height: 32px;
-  width: 32px;
+  min-width: 32px;
   line-height: 32px;
   margin: 0 4px 0 0;
   white-space: nowrap;
