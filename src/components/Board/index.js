@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import AutosizeInput from "react-input-autosize";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
@@ -92,19 +93,20 @@ const BoardTitle = ({ title }) => {
   const toggleEdit = () => setEdit(!edit);
 
   return (
-    <input
-      type="text"
-      value={value}
-      spellCheck={false}
-      onChange={(e) => setValue(e.target.value)}
-      onFocus={toggleEdit}
-      onBlur={toggleEdit}
-      className={clsx(
-        styles.headerButton,
-        styles.boardTitle,
-        edit && styles.editTitle
+    <div onClick={toggleEdit} className={styles.headerButton}>
+      {edit ? (
+        <AutosizeInput
+          autoFocus
+          value={value}
+          spellCheck={false}
+          onChange={(e) => setValue(e.target.value)}
+          onBlur={toggleEdit}
+          inputClassName={clsx(styles.boardTitle, styles.editTitle)}
+        />
+      ) : (
+        <h2 className={styles.boardTitle}>{value}</h2>
       )}
-    />
+    </div>
   );
 };
 
