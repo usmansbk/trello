@@ -26,29 +26,31 @@ const ColumnHeader = ({ title }) => {
   const [value, setValue] = useState(title);
   const ref = useRef(null);
 
-  const toggleEdit = () => setEdit(!edit);
+  const toggleEdit = () => {
+    setEdit(!edit);
+  };
+
+  const style = { height: 28 };
+  if (edit && ref.current) {
+    style.height = ref.current.scrollHeight;
+  }
 
   return (
     <div className={styles.columnHeader}>
-      {edit ? (
-        <textarea
-          ref={ref}
-          style={{
-            height: ref.current?.scrollHeight || 28,
-          }}
-          spellCheck={false}
-          maxLength="512"
-          className={styles.columnTitle}
-          autoFocus
-          onBlur={toggleEdit}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        ></textarea>
-      ) : (
-        <h2 onClick={toggleEdit} className={styles.columnTitle}>
-          {value}
-        </h2>
-      )}
+      <textarea
+        ref={ref}
+        style={style}
+        spellCheck={false}
+        maxLength="512"
+        className={styles.columnTitle}
+        autoFocus
+        onBlur={toggleEdit}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      ></textarea>
+      <h2 onClick={toggleEdit} className={styles.columnTitle}>
+        {value}
+      </h2>
       <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
     </div>
   );
