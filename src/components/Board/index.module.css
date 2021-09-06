@@ -2,28 +2,29 @@
   background-color: #0079bf;
   display: flex;
   flex-grow: 1;
+  flex-direction: column;
 }
 
 .content {
   display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  position: relative;
+  height: 100%;
 }
 
 .header {
   padding: 8px 4px 4px 8px;
+  display: flex;
 }
 
 .headerButton {
+  display: flex;
+  overflow: hidden;
+  max-width: calc(100vw - 24px);
   background-color: #ffffff3d;
-  height: 32px;
-  border: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
   border-radius: 3px;
   margin: 4px 0;
-  padding: 0 12px;
-  width: fit-content;
-  box-sizing: border-box;
 }
 
 .headerButton:hover {
@@ -32,24 +33,34 @@
 }
 
 .boardTitle {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 32px;
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  padding: 0 12px;
+  font-weight: 700;
+  height: 32px;
+  line-height: 32px;
   color: white;
 }
 
 .editTitle {
+  border-radius: 3px;
   background-color: white;
-  line-height: 20px;
+  border: none;
+  box-sizing: border-box;
   box-shadow: inset 0 0 0 2px #dfe1e6;
   outline: none;
   color: #172b4d;
-  width: 272px;
+  line-height: 20px;
 }
 
 .editTitle:hover {
   cursor: auto;
+}
+
+.editTitle:focus {
+  box-shadow: inset 0 0 0 2px #0079bf;
 }
 
 .board {
@@ -97,21 +108,39 @@
 }
 
 .columnHeader {
-  min-height: 20px;
-  padding: 8px 12px;
-  padding-right: 4px;
-  flex: 0 0 auto;
   display: flex;
   align-items: center;
+  padding: 10px 8px;
   cursor: pointer;
+  gap: 4px;
+}
+
+.moreButton {
+  align-self: flex-start;
 }
 
 .columnTitle {
-  display: flex;
-  flex-grow: 1;
+  width: 100%;
+  word-wrap: break-word;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 20px;
   color: #172b4d;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  min-height: 20px;
+  max-height: 256px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+  border-radius: 3px;
+}
+
+.columnTitle:focus {
+  box-shadow: inset 0 0 0 2px #0079bf;
+  background-color: white;
 }
 
 .footer {

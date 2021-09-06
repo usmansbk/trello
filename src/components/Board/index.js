@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { nanoid } from "nanoid";
 import { useState } from "react";
+import TextareaAutosize from "react-textarea-autosize";
+import AutosizeInput from "react-input-autosize";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
@@ -22,10 +24,31 @@ const COLUMNS = [
 ];
 
 const ColumnHeader = ({ title }) => {
+  const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState(title);
+
+  const toggleEdit = () => {
+    setEdit(!edit);
+  };
+
   return (
     <div className={styles.columnHeader}>
-      <h2 className={styles.columnTitle}>{title}</h2>
-      <IconButton name="fa-ellipsis-h" />
+      {edit ? (
+        <TextareaAutosize
+          spellCheck={false}
+          maxLength="512"
+          className={styles.columnTitle}
+          autoFocus
+          onBlur={toggleEdit}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      ) : (
+        <h2 onClick={toggleEdit} className={styles.columnTitle}>
+          {value}
+        </h2>
+      )}
+      <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
     </div>
   );
 };
@@ -67,40 +90,34 @@ const BoardTitle = ({ title }) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(title);
 
-  const toggleEdit = () => setEdit(!edit);
+  const showEdit = () => setEdit(true);
+  const hideEdit = () => setEdit(false);
 
-  return edit ? (
-    <form onSubmit={toggleEdit}>
-      <input
-        autoFocus
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={toggleEdit}
-        className={clsx(
-          styles.headerButton,
-          styles.boardTitle,
-          styles.editTitle
-        )}
-      />
-    </form>
-  ) : (
-    <h1
-      className={clsx(styles.headerButton, styles.boardTitle)}
-      onClick={toggleEdit}
-    >
-      {value}
-    </h1>
+  return (
+    <div onClick={showEdit} className={styles.headerButton}>
+      {edit ? (
+        <AutosizeInput
+          autoFocus
+          value={value}
+          spellCheck={false}
+          onChange={(e) => setValue(e.target.value)}
+          onBlur={hideEdit}
+          inputClassName={clsx(styles.boardTitle, styles.editTitle)}
+        />
+      ) : (
+        <h2 className={styles.boardTitle}>{value}</h2>
+      )}
+    </div>
   );
 };
 
 const Board = () => {
   return (
     <div className={styles.container}>
+      <header className={styles.header}>
+        <BoardTitle title="Board Name" />
+      </header>
       <div className={styles.content}>
-        <header className={styles.header}>
-          <BoardTitle title="Board Name" />
-        </header>
         <div className={styles.board}>
           <ul className={styles.columns}>
             {COLUMNS.map(({ title, id }) => (
