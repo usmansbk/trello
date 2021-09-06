@@ -6,6 +6,7 @@ import AutosizeInput from "react-input-autosize";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
+import Cards from "./Cards";
 import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
 import MenuButton from "../common/Button/MenuButton";
@@ -14,6 +15,52 @@ const COLUMNS = [
   {
     id: nanoid(),
     title: "Todo",
+    tasks: [
+      {
+        id: nanoid(),
+        title: `When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"`,
+      },
+      {
+        id: nanoid(),
+        title: `Each column has a "+" button. The user can click this button to create a task card in any column`,
+      },
+      {
+        id: nanoid(),
+        title: `Task cards clearly display the title of the contained task`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can move tasks between columns using drag-and-drop`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can delete a task.`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can expand a task card to see its description`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can move tasks between columns using the "Move" button in the context menu`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can edit column titles`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can create columns`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can change the order of columns using drag-and-drop`,
+      },
+      {
+        id: nanoid(),
+        title: `The user can delete columns (you will have to decide what happens to a column's cards in this case)`,
+      },
+    ],
   },
   {
     id: nanoid(),
@@ -77,13 +124,12 @@ const ColumnFooter = () => {
   );
 };
 
-const CardList = ({ title }) => {
+const List = ({ title, data }) => {
   return (
     <div className={styles.cardList}>
       <ColumnHeader title={title} />
-      <div className={styles.cardBody}>
-        <ColumnFooter />
-      </div>
+      <Cards data={data} />
+      <ColumnFooter />
     </div>
   );
 };
@@ -117,22 +163,20 @@ const Board = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <BoardTitle title="Board Name" />
+        <BoardTitle title="Trello Clone WIP" />
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
-        <div className={styles.board}>
-          <ul className={styles.columns}>
-            {COLUMNS.map(({ title, id }) => (
-              <li key={id} className={styles.column}>
-                <CardList title={title} />
-              </li>
-            ))}
-            <li className={styles.column}>
-              <AddColumn />
+        <ul className={styles.board}>
+          {COLUMNS.map(({ title, id, tasks }) => (
+            <li key={id} className={styles.column}>
+              <List title={title} data={tasks} />
             </li>
-          </ul>
-        </div>
+          ))}
+          <li className={styles.column}>
+            <AddColumn />
+          </li>
+        </ul>
       </div>
     </div>
   );

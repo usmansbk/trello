@@ -1,0 +1,33 @@
+.list {
+  margin: 0 4px;
+  padding: 0 4px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 #091e4240;
+  cursor: pointer;
+  margin-bottom: 8px;
+  min-height: 20px;
+  text-decoration: none;
+  padding: 6px 8px 2px;
+}
+
+.card:hover {
+  background-color: #f4f5f7;
+}
+
+.details {
+  overflow: hidden;
+  color: #172b4d;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 0 4px;
+}
