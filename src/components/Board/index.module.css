@@ -7,21 +7,17 @@
 
 .content {
   display: flex;
-  flex-grow: 1;
-  position: relative;
+  height: 100%;
 }
 
 .header {
   padding: 8px 4px 4px 8px;
-  display: flex;
 }
 
 .headerButton {
   background-color: #ffffff3d;
   border-radius: 3px;
   margin: 4px 0;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .headerButton:hover {
@@ -30,6 +26,7 @@
 }
 
 .boardTitle {
+  white-space: nowrap;
   padding: 0 12px;
   font-size: 18px;
   font-weight: 700;
