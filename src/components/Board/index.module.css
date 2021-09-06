@@ -16,7 +16,13 @@
 }
 
 .headerButton {
+  display: flex;
+  overflow: hidden;
+  width: calc(100vw - 16px);
   background-color: #ffffff3d;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
   border-radius: 3px;
   margin: 4px 0;
 }
@@ -27,13 +33,14 @@
 }
 
 .boardTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 0 12px;
   font-size: 18px;
+  padding: 0 12px;
   font-weight: 700;
   height: 32px;
   line-height: 32px;
-  text-overflow: ellipsis;
   color: white;
 }
 
