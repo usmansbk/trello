@@ -6,13 +6,15 @@ import styles from "./index.module.css";
 
 const Home = () => {
   return (
-    <div className={styles.container}>
+    <>
       <Header />
-      <Switch>
-        <Route exact path="/" component={Boards} />
-        <Route path="/:id" component={Board} />
-      </Switch>
-    </div>
+      <div className={styles.container}>
+        <Switch>
+          <Route exact path="/" component={Boards} />
+          <Route path="/:id" component={Board} />
+        </Switch>
+      </div>
+    </>
   );
 };
 
