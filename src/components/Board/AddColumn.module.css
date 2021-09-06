@@ -1,16 +1,16 @@
 .container {
   border-radius: 3px;
   background-color: #ffffff3d;
-  height: auto;
   min-height: 32px;
   transition: background 85ms ease-in, opacity 40ms ease-in,
     border-color 85ms ease-in;
 }
 
 .card {
-  padding: 5px;
+  padding: 4px;
   background-color: #ebecf0;
   margin-bottom: 8px;
+  height: auto;
 }
 
 .button {
@@ -36,7 +36,6 @@
 .buttonText {
   color: white;
   padding: 6px 8px;
-  transition: color 85ms ease-in;
 }
 
 .buttonIcon {
@@ -58,7 +57,6 @@
   line-height: 20px;
   padding: 8px 12px;
   color: #172b4d;
-  transition: margin 85ms ease-in, background 85ms ease-in;
 }
 
 .actions {

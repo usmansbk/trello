@@ -9,6 +9,7 @@ const Input = ({ onCancel }) => {
   return (
     <form className={styles.form}>
       <input
+        onBlur={onCancel}
         autoFocus
         className={styles.input}
         placeholder="Enter list title..."
