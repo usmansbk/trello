@@ -21,6 +21,10 @@
   transition: color 85ms ease-in;
 }
 
+.buttonIcon {
+  padding-right: 0;
+}
+
 .container {
   white-space: nowrap;
   border-radius: 3px;
