@@ -54,7 +54,7 @@ const List = memo(() => {
       {boards.byIds.map((boardId) => {
         const { id, title } = boards[boardId];
 
-        return <Tile id={id} title={title} />;
+        return <Tile key={id} id={id} title={title} />;
       })}
       <CreateBoardButton className={styles.item} />
     </div>
