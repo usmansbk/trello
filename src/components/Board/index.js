@@ -148,24 +148,54 @@ const Board = () => {
     }
 
     const sourceColumn = state.columns[source.droppableId];
-    const newTasks = [...sourceColumn.taskIds];
-    newTasks.splice(source.index, 1);
-    newTasks.splice(destination.index, 0, draggableId);
+    const destinationColumn = state.columns[destination.droppableId];
 
-    const newColumn = {
-      ...sourceColumn,
-      taskIds: newTasks,
-    };
+    if (sourceColumn === destinationColumn) {
+      const newTasks = [...sourceColumn.taskIds];
+      newTasks.splice(source.index, 1);
+      newTasks.splice(destination.index, 0, draggableId);
 
-    const newState = {
-      ...state,
-      columns: {
-        ...state.columns,
-        [newColumn.id]: newColumn,
-      },
-    };
+      const newColumn = {
+        ...sourceColumn,
+        taskIds: newTasks,
+      };
 
-    setState(newState);
+      const newState = {
+        ...state,
+        columns: {
+          ...state.columns,
+          [newColumn.id]: newColumn,
+        },
+      };
+
+      setState(newState);
+    } else {
+      const newSourceTaskIds = [...sourceColumn.taskIds];
+      newSourceTaskIds.splice(source.index, 1);
+      const newSourceColumn = {
+        ...sourceColumn,
+        taskIds: newSourceTaskIds,
+      };
+
+      const newDestinationTaskIds = [...destinationColumn.taskIds];
+      newDestinationTaskIds.splice(destination.index, 0, draggableId);
+      const newDestinationColumn = {
+        ...destinationColumn,
+        taskIds: newDestinationTaskIds,
+      };
+
+      const newState = {
+        ...state,
+        columns: {
+          ...state.columns,
+          [newSourceColumn.id]: newSourceColumn,
+          [newDestinationColumn.id]: newDestinationColumn,
+        },
+      };
+
+      setState(newState);
+    }
+    return;
   };
 
   return (
