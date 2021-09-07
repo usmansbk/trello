@@ -116,19 +116,27 @@ const Board = () => {
           >
             {(provided) => (
               <div
+                className={styles.board}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className={styles.board}
               >
-                {state.columnOrder.map((columnId) => {
+                {state.columnOrder.map((columnId, index) => {
                   const column = state.columns[columnId];
                   const { title, id, taskIds } = column;
                   const tasks = taskIds.map((taskId) => state.tasks[taskId]);
 
-                  return <Column key={id} id={id} title={title} data={tasks} />;
+                  return (
+                    <Column
+                      key={id}
+                      id={id}
+                      title={title}
+                      data={tasks}
+                      index={index}
+                    />
+                  );
                 })}
-                <AddColumn />
                 {provided.placeholder}
+                <AddColumn />
               </div>
             )}
           </Droppable>

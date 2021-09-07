@@ -7,7 +7,7 @@ import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 
-const ColumnHeader = ({ title }) => {
+const ColumnHeader = ({ title, ...props }) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(title);
 
@@ -16,7 +16,7 @@ const ColumnHeader = ({ title }) => {
   };
 
   return (
-    <div className={styles.columnHeader}>
+    <div className={styles.columnHeader} {...props}>
       {edit ? (
         <TextareaAutosize
           spellCheck={false}
@@ -74,30 +74,38 @@ const Card = ({ title, id, index }) => (
   </Draggable>
 );
 
-const Column = ({ id, title, data }) => {
+const Column = ({ id, title, data, index }) => {
   return (
-    <div className={styles.column}>
-      <div className={styles.cardList}>
-        <ColumnHeader title={title} />
-        <Droppable droppableId={id}>
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className={styles.list}
-            >
-              {data.map(({ id, title }, index) => (
-                <div key={id}>
-                  <Card id={id} title={title} index={index} />
+    <Draggable draggableId={id} index={index}>
+      {(provided) => (
+        <div
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          className={styles.column}
+        >
+          <div className={styles.cardList}>
+            <ColumnHeader title={title} {...provided.dragHandleProps} />
+            <Droppable droppableId={id} type="task">
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className={styles.list}
+                >
+                  {data.map(({ id, title }, index) => (
+                    <div key={id}>
+                      <Card id={id} title={title} index={index} />
+                    </div>
+                  ))}
+                  {provided.placeholder}
+                  <ColumnFooter />
                 </div>
-              ))}
-              {provided.placeholder}
-              <ColumnFooter />
-            </div>
-          )}
-        </Droppable>
-      </div>
-    </div>
+              )}
+            </Droppable>
+          </div>
+        </div>
+      )}
+    </Draggable>
   );
 };
 
