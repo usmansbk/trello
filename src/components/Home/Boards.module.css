@@ -21,13 +21,12 @@
 
 .list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: flex-start;
   gap: 2%;
 }
 
 .item {
-  width: 23.5%;
   box-sizing: border-box;
   cursor: pointer;
   margin-bottom: 2%;
@@ -97,4 +96,15 @@
 
 .fade:hover {
   background-color: #00000026;
+}
+
+@media screen and (min-width: 992px) {
+  .list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .item {
+    width: 23.5%;
+  }
 }
