@@ -222,3 +222,7 @@
   line-height: 20px;
   margin: 0 0 4px;
 }
+
+.dragging {
+  background-color: #f4f5f7;
+}

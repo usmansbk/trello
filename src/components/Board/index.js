@@ -65,12 +65,12 @@ const ColumnFooter = () => {
 
 const Card = ({ title, id, index }) => (
   <Draggable draggableId={id} index={index}>
-    {(provided) => (
+    {(provided, snapshot) => (
       <div
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
-        className={styles.card}
+        className={clsx(styles.card, snapshot.isDragging && styles.dragging)}
       >
         <p className={styles.details}>{title}</p>
       </div>
