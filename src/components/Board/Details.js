@@ -4,6 +4,7 @@ import Icon from "../common/Icon";
 import styles from "./Details.module.css";
 import { useCallback } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import clsx from "clsx";
 
 const Title = ({ title }) => {
   const [value, setValue] = useState(title);
@@ -19,7 +20,7 @@ const Title = ({ title }) => {
           spellCheck={false}
           value={value}
           onBlur={toggleEdit}
-          className={styles.editTitle}
+          className={clsx(styles.title, styles.editTitle)}
           onChange={(e) => setValue(e.target.value)}
         />
       ) : (
