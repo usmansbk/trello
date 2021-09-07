@@ -12,7 +12,7 @@ const Tile = memo(({ title }) => {
   );
 });
 
-const CreateBoard = () => {
+const CreateBoard = memo(() => {
   return (
     <button
       className={clsx(
@@ -25,7 +25,7 @@ const CreateBoard = () => {
       Create new board
     </button>
   );
-};
+});
 
 const List = memo(() => {
   const data = Object.values(initialData.boards);
