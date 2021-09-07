@@ -136,15 +136,12 @@ const Board = () => {
               >
                 {state.columnOrder.map((columnId, index) => {
                   const column = state.columns[columnId];
-                  const { title, id, taskIds } = column;
-                  const tasks = taskIds.map((taskId) => state.tasks[taskId]);
 
                   return (
                     <Column
-                      key={id}
-                      id={id}
-                      title={title}
-                      data={tasks}
+                      key={columnId}
+                      column={column}
+                      taskMap={state.tasks}
                       index={index}
                     />
                   );

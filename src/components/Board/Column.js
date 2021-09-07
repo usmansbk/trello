@@ -75,10 +75,14 @@ const CardList = ({ data }) => {
   ));
 };
 
-const Column = ({ id, title, data, index }) => {
+const Column = ({ column, index, taskMap }) => {
+  const { title, id, taskIds } = column;
+  const tasks = taskIds.map((taskId) => taskMap[taskId]);
   const [showComposer, setComposerVisible] = useState(false);
 
   const toggleComposer = () => setComposerVisible(!showComposer);
+
+  useEffect(() => {}, [column, index, taskMap]);
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -100,7 +104,7 @@ const Column = ({ id, title, data, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {<CardList data={data} />}
+                  {<CardList data={tasks} />}
                   {provided.placeholder}
                   {showComposer && <AddCard onCancel={toggleComposer} />}
                 </div>
