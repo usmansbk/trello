@@ -136,7 +136,7 @@
 }
 
 .draggingCard {
-  background-color: #f4f5f7;
+  box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
 }
 
 .draggingColumn {
