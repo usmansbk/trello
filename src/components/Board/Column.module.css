@@ -133,12 +133,6 @@
   margin: 0 0 4px;
 }
 
-.draggingCard {
+.dragging {
   box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
-}
-
-.draggingColumn {
-  box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
-  /* transform: rotate(4deg); */
-  /* cursor: grabbing; */
 }

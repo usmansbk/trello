@@ -58,7 +58,7 @@ const Card = memo(({ title, id, index }) => {
           <div
             className={clsx(
               styles.card,
-              snapshot.isDragging && styles.draggingCard
+              snapshot.isDragging && styles.dragging
             )}
           >
             <p className={styles.details}>{title}</p>
@@ -93,7 +93,7 @@ const Column = memo(({ column, index, taskMap }) => {
           ref={provided.innerRef}
           className={clsx(
             styles.column,
-            snapshot.isDragging && styles.draggingColumn
+            snapshot.isDragging && styles.dragging
           )}
         >
           <div className={styles.content}>
