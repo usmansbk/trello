@@ -1,7 +1,7 @@
-import Modal from "react-modal";
 import { memo, useCallback, useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import CreateBoard from "./CreateBoard";
 import styles from "./Boards.module.css";
 import initialData from "../initialData";
 
@@ -12,15 +12,6 @@ const Tile = memo(({ title }) => {
     </div>
   );
 });
-
-const CreateBoard = ({ onCancel }) => {
-  return (
-    <div>
-      <h1>Create board</h1>
-      <button onClick={onCancel}>Close</button>
-    </div>
-  );
-};
 
 const CreateBoardButton = memo(() => {
   const [isOpen, setOpen] = useState(false);
@@ -39,9 +30,7 @@ const CreateBoardButton = memo(() => {
       >
         Create new board
       </button>
-      <Modal isOpen={isOpen} onRequestClose={toggleModal}>
-        <CreateBoard onCancel={toggleModal} />
-      </Modal>
+      <CreateBoard visible={isOpen} onDismiss={toggleModal} />
     </>
   );
 });
