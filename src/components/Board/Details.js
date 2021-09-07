@@ -16,7 +16,7 @@ const Details = ({ visible, onDismiss }) => {
     <Modal visible={visible} onDismiss={onDismiss} contentLabel="Task details">
       <div className={styles.container}>
         <header className={styles.header}>
-          <Icon name="fa-credit-card" className={styles.icon} />
+          <Icon name="fa-pen-alt" className={styles.icon} />
           <div>
             <Title title="User should be able to input template image" />
             <span>in list {listTitle}</span>
@@ -25,6 +25,12 @@ const Details = ({ visible, onDismiss }) => {
             <Icon name="fa-times" />
           </button>
         </header>
+        <div>
+          <div className={styles.header}>
+            <Icon name="fa-align-left" className={styles.icon} />
+            <h2 className={styles.subtitle}>Description</h2>
+          </div>
+        </div>
       </div>
     </Modal>
   );
