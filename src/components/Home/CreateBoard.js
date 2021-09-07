@@ -1,4 +1,4 @@
-import Modal from "react-modal";
+import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import Button from "../common/Button";
 import styles from "./CreateBoard.module.css";
@@ -6,13 +6,9 @@ import styles from "./CreateBoard.module.css";
 const CreateBoard = ({ visible, onDismiss }) => {
   return (
     <Modal
-      isOpen={visible}
-      onRequestClose={onDismiss}
+      visible={visible}
+      onDismiss={onDismiss}
       contentLabel="Create a new board"
-      preventScroll
-      ariaHideApp={false}
-      className={styles.root}
-      overlayClassName={styles.overlay}
     >
       <div className={styles.container}>
         <div className={styles.form}>
