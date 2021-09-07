@@ -96,10 +96,10 @@ const Column = ({ id, title, data }) => {
                 </div>
               ))}
               {provided.placeholder}
+              <ColumnFooter />
             </div>
           )}
         </Droppable>
-        <ColumnFooter />
       </div>
     </div>
   );
