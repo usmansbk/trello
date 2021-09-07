@@ -41,6 +41,10 @@ const Subtitle = ({ title, icon }) => {
   );
 };
 
+const DetailsInput = ({ placeholder }) => {
+  return <p className={styles.placeholder}>{placeholder}</p>;
+};
+
 const Details = ({ visible, onDismiss }) => {
   const listTitle = "Todo";
   return (
@@ -63,6 +67,9 @@ const Details = ({ visible, onDismiss }) => {
         </header>
         <div>
           <Subtitle icon="fa-align-left" title="Description" />
+          <div className={styles.gutter}>
+            <DetailsInput placeholder="Add a more detailed description" />
+          </div>
         </div>
       </div>
     </Modal>
