@@ -14,10 +14,15 @@ const Tile = memo(({ title }) => {
 
 const CreateBoard = () => {
   return (
-    <button className={clsx(styles.tile, styles.addButton)}>
-      <div className={clsx(styles.details, styles.center)}>
-        <p className={styles.label}>Create new board</p>
-      </div>
+    <button
+      className={clsx(
+        styles.tile,
+        styles.addButton,
+        styles.details,
+        styles.center
+      )}
+    >
+      Create new board
     </button>
   );
 };
