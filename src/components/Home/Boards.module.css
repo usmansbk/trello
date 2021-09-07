@@ -27,7 +27,6 @@
 }
 
 .item {
-  transform: translate(0);
   width: 23.5%;
   box-sizing: border-box;
   cursor: pointer;
@@ -39,8 +38,6 @@
   background-color: rgb(0, 121, 191);
   border-radius: 3px;
   display: block;
-  background-position: 50%;
-  background-size: cover;
   padding: 8px;
   text-decoration: none;
   position: relative;
@@ -62,21 +59,25 @@
   word-wrap: break-word;
 }
 
-.add {
+.addButton {
+  border: none;
+  width: 100%;
   background-color: #091e420a;
-  display: table-cell;
   transition-duration: 85ms;
   transition-property: background-color, border-color, box-shadow;
   transition-timing-function: ease;
-  width: inherit;
-  height: 80px;
-  vertical-align: middle;
-  text-align: center;
 }
 
-.add:hover {
+.addButton:hover {
   background-color: #091e4214;
   box-shadow: none;
+  cursor: pointer;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .label {

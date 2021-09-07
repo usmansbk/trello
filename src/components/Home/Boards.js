@@ -12,6 +12,16 @@ const Tile = memo(({ title }) => {
   );
 });
 
+const CreateBoard = () => {
+  return (
+    <button className={clsx(styles.tile, styles.addButton)}>
+      <div className={clsx(styles.details, styles.center)}>
+        <p className={styles.label}>Create new board</p>
+      </div>
+    </button>
+  );
+};
+
 const List = memo(() => {
   const data = Object.values(initialData.boards);
   return (
@@ -25,9 +35,7 @@ const List = memo(() => {
         </li>
       ))}
       <li className={styles.item}>
-        <div className={clsx(styles.tile, styles.add)}>
-          <p className={styles.label}>Create new board</p>
-        </div>
+        <CreateBoard />
       </li>
     </ul>
   );
