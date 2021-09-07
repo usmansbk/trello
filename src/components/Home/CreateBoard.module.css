@@ -20,6 +20,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  gap: 8px;
   align-items: center;
 }
 
@@ -27,7 +28,8 @@
   background-color: rgb(0, 121, 191);
   border-radius: 3px;
   box-sizing: border-box;
-  height: 96px;
+  /* height: 96px; */
+  height: 48px;
   padding: 10px 10px 10px 16px;
   width: 296px;
 }
@@ -62,6 +64,10 @@
 .top {
   display: flex;
   justify-content: space-between;
+}
+
+.bottom {
+  align-self: flex-start;
 }
 
 .close {

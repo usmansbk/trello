@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import Icon from "../common/Icon";
+import Button from "../common/Button";
 import styles from "./CreateBoard.module.css";
 
 const CreateBoard = ({ visible, onDismiss }) => {
@@ -25,6 +26,9 @@ const CreateBoard = ({ visible, onDismiss }) => {
               <Icon name="fa-times" className={styles.close} />
             </button>
           </div>
+        </div>
+        <div className={styles.bottom}>
+          <Button value="Create board" disabled />
         </div>
       </div>
     </Modal>
