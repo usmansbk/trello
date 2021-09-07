@@ -8,7 +8,7 @@ import AddCard from "./AddCard";
 import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
 import MenuButton from "../common/Button/MenuButton";
-import COLUMNS from "../initialData";
+import initialData from "../initialData";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const ColumnHeader = ({ title }) => {
@@ -131,10 +131,10 @@ const BoardTitle = ({ title }) => {
 };
 
 const Board = () => {
-  const [state, setState] = useState(COLUMNS);
+  const [state] = useState(initialData);
 
   const onDragEnd = (result) => {
-    const { source, destination, draggableId } = result;
+    const { source, destination } = result;
 
     if (!destination) {
       return;
@@ -157,9 +157,13 @@ const Board = () => {
       <div className={styles.content}>
         <div className={styles.board}>
           <DragDropContext onDragEnd={onDragEnd}>
-            {state.map(({ title, id, tasks }) => (
-              <Column key={id} id={id} title={title} data={tasks} />
-            ))}
+            {state.columnOrder.map((columnId) => {
+              const column = state.columns[columnId];
+              const { title, id, taskIds } = column;
+              const tasks = taskIds.map((taskId) => state.tasks[taskId]);
+
+              return <Column key={id} id={id} title={title} data={tasks} />;
+            })}
           </DragDropContext>
           <div className={styles.column}>
             <AddColumn />
