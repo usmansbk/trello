@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AutosizeInput from "react-input-autosize";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
@@ -108,18 +108,31 @@ const Board = () => {
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
-        <div className={styles.board}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            {state.columnOrder.map((columnId) => {
-              const column = state.columns[columnId];
-              const { title, id, taskIds } = column;
-              const tasks = taskIds.map((taskId) => state.tasks[taskId]);
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            droppableId="all-columns"
+            direction="horizontal"
+            type="column"
+          >
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className={styles.board}
+              >
+                {state.columnOrder.map((columnId) => {
+                  const column = state.columns[columnId];
+                  const { title, id, taskIds } = column;
+                  const tasks = taskIds.map((taskId) => state.tasks[taskId]);
 
-              return <Column key={id} id={id} title={title} data={tasks} />;
-            })}
-          </DragDropContext>
-          <AddColumn />
-        </div>
+                  return <Column key={id} id={id} title={title} data={tasks} />;
+                })}
+                <AddColumn />
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     </div>
   );
