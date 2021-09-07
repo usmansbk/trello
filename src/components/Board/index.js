@@ -118,9 +118,7 @@ const Board = () => {
               return <Column key={id} id={id} title={title} data={tasks} />;
             })}
           </DragDropContext>
-          <div className={styles.column}>
-            <AddColumn />
-          </div>
+          <AddColumn />
         </div>
       </div>
     </div>

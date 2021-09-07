@@ -37,12 +37,14 @@ const AddColumn = () => {
   const toggleEdit = () => setEdit(!edit);
 
   return (
-    <div className={clsx(styles.container, edit && styles.card)}>
-      {!edit ? (
-        <AddListButton onClick={toggleEdit} />
-      ) : (
-        <Input onCancel={toggleEdit} />
-      )}
+    <div className={styles.column}>
+      <div className={clsx(styles.container, edit && styles.card)}>
+        {!edit ? (
+          <AddListButton onClick={toggleEdit} />
+        ) : (
+          <Input onCancel={toggleEdit} />
+        )}
+      </div>
     </div>
   );
 };
