@@ -17,8 +17,33 @@ const initialData = {
   byIds: ["board-1", "board-2", "board-3"],
 };
 
+const REORDER_COLUMNS = "board/reorder-columns";
+
+export const reorderColumns = (payload) => ({
+  type: REORDER_COLUMNS,
+  payload,
+});
+
 const reducer = (state = initialData, action) => {
   switch (action.type) {
+    case REORDER_COLUMNS: {
+      const { result, id } = action.payload;
+      const { source, destination, draggableId } = result;
+
+      const board = state[id];
+
+      const newColumnOrder = [...board.columnIds];
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+
+      return {
+        ...state,
+        [board.id]: {
+          ...board,
+          columnIds: newColumnOrder,
+        },
+      };
+    }
     default:
       return state;
   }
