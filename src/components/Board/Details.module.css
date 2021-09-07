@@ -1,6 +1,6 @@
 .modal {
   width: 100%;
-  margin: 10% 0;
+  margin: 28px 0;
 }
 
 .container {
@@ -138,6 +138,5 @@
 @media screen and (min-width: 768px) {
   .modal {
     width: 57.5%;
-    margin: 28px 0;
   }
 }
