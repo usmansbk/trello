@@ -1,4 +1,5 @@
 import { useState, memo, useCallback } from "react";
+import { useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
@@ -95,7 +96,8 @@ const CardList = memo(({ data }) => {
   );
 });
 
-const Column = memo(({ column, index, taskMap }) => {
+const Column = memo(({ column, index }) => {
+  const taskMap = useSelector((state) => state.tasks);
   const { title, id, taskIds } = column;
   const tasks = taskIds.map((taskId) => taskMap[taskId]);
   const [showComposer, setComposerVisible] = useState(false);

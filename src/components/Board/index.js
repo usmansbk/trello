@@ -1,13 +1,13 @@
 import { memo, useCallback, useState } from "react";
+import { useRouteMatch } from "react-router";
+import { useSelector } from "react-redux";
+import clsx from "clsx";
 import AutosizeInput from "react-input-autosize";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import clsx from "clsx";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
 import styles from "./index.module.css";
-import { useRouteMatch } from "react-router";
-import { useSelector } from "react-redux";
 
 const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -153,12 +153,7 @@ const Board = () => {
                   const column = state.columns[columnId];
 
                   return (
-                    <Column
-                      key={columnId}
-                      column={column}
-                      taskMap={state.tasks}
-                      index={index}
-                    />
+                    <Column key={columnId} column={column} index={index} />
                   );
                 })}
                 {provided.placeholder}
