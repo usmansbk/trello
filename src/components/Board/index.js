@@ -37,7 +37,7 @@ const Board = () => {
   const [state, setState] = useState(initialData);
 
   const onDragEnd = (result) => {
-    const { source, destination, draggableId } = result;
+    const { source, destination, draggableId, type } = result;
 
     if (!destination) {
       return;
@@ -47,6 +47,20 @@ const Board = () => {
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
+      return;
+    }
+
+    if (type === "column") {
+      const newColumnOrder = [...state.columnOrder];
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+
+      const newState = {
+        ...state,
+        columnOrder: newColumnOrder,
+      };
+
+      setState(newState);
       return;
     }
 
