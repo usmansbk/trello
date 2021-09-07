@@ -24,7 +24,7 @@ const Tile = memo(({ id, title }) => {
   );
 });
 
-const CreateBoardButton = memo(({ className }) => {
+const CreateBoardTile = memo(({ className }) => {
   const [isOpen, setOpen] = useState(false);
   const toggleModal = useCallback(() => setOpen((value) => !value), []);
 
@@ -56,7 +56,7 @@ const List = memo(() => {
 
         return <Tile key={id} id={id} title={title} />;
       })}
-      <CreateBoardButton className={styles.item} />
+      <CreateBoardTile className={styles.item} />
     </div>
   );
 });
