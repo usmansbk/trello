@@ -4,6 +4,8 @@
 
 ![screenshot](./app_screenshot.png)
 
+![screenshot](./app_screenshot2.png)
+
 Trello is a collaborative work management app designed to track team projects, highlight tasks underway, show who they are assigned to, and detail progress towards completion.
 
 ## Built With

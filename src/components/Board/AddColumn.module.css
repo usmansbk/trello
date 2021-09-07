@@ -6,6 +6,16 @@
     border-color 85ms ease-in;
 }
 
+.column {
+  height: 100%;
+  margin: 0 4px;
+  min-width: 272px;
+  max-width: 272px;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: auto;
+}
+
 .card {
   padding: 4px;
   background-color: #ebecf0;

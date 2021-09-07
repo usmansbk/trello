@@ -1,109 +1,12 @@
-import clsx from "clsx";
 import { useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
 import AutosizeInput from "react-input-autosize";
-import IconButton from "../common/Button/IconButton";
-import Icon from "../common/Icon";
-import AddCard from "./AddCard";
-import styles from "./index.module.css";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import clsx from "clsx";
 import AddColumn from "./AddColumn";
+import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
+import styles from "./index.module.css";
 import initialData from "../initialData";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-
-const ColumnHeader = ({ title }) => {
-  const [edit, setEdit] = useState(false);
-  const [value, setValue] = useState(title);
-
-  const toggleEdit = () => {
-    setEdit(!edit);
-  };
-
-  return (
-    <div className={styles.columnHeader}>
-      {edit ? (
-        <TextareaAutosize
-          spellCheck={false}
-          maxLength="512"
-          className={styles.columnTitle}
-          autoFocus
-          onBlur={toggleEdit}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-      ) : (
-        <h2 onClick={toggleEdit} className={styles.columnTitle}>
-          {value}
-        </h2>
-      )}
-      <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
-    </div>
-  );
-};
-
-const FooterButton = ({ onClick }) => {
-  return (
-    <button className={styles.footerButton} onClick={onClick}>
-      <Icon name="fa-plus" />
-      <span className={styles.footerButtonText}>Add a card</span>
-    </button>
-  );
-};
-
-const ColumnFooter = () => {
-  const [showComposer, setComposerVisible] = useState(false);
-
-  const toggleComposer = () => setComposerVisible(!showComposer);
-
-  return (
-    <div className={styles.footer}>
-      {showComposer && <AddCard onCancel={toggleComposer} />}
-      {!showComposer && <FooterButton onClick={toggleComposer} />}
-    </div>
-  );
-};
-
-const Card = ({ title, id, index }) => (
-  <Draggable draggableId={id} index={index}>
-    {(provided) => (
-      <div
-        ref={provided.innerRef}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        className={styles.card}
-      >
-        <p className={styles.details}>{title}</p>
-      </div>
-    )}
-  </Draggable>
-);
-
-const Column = ({ id, title, data }) => {
-  return (
-    <div className={styles.column}>
-      <div className={styles.cardList}>
-        <ColumnHeader title={title} />
-        <Droppable droppableId={id}>
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className={styles.list}
-            >
-              {data.map(({ id, title }, index) => (
-                <div key={id}>
-                  <Card id={id} title={title} index={index} />
-                </div>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-        <ColumnFooter />
-      </div>
-    </div>
-  );
-};
 
 const BoardTitle = ({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -134,7 +37,7 @@ const Board = () => {
   const [state, setState] = useState(initialData);
 
   const onDragEnd = (result) => {
-    const { source, destination, draggableId } = result;
+    const { source, destination, draggableId, type } = result;
 
     if (!destination) {
       return;
@@ -147,25 +50,69 @@ const Board = () => {
       return;
     }
 
+    if (type === "column") {
+      const newColumnOrder = [...state.columnOrder];
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+
+      const newState = {
+        ...state,
+        columnOrder: newColumnOrder,
+      };
+
+      setState(newState);
+      return;
+    }
+
     const sourceColumn = state.columns[source.droppableId];
-    const newTasks = [...sourceColumn.taskIds];
-    newTasks.splice(source.index, 1);
-    newTasks.splice(destination.index, 0, draggableId);
+    const destinationColumn = state.columns[destination.droppableId];
 
-    const newColumn = {
-      ...sourceColumn,
-      taskIds: newTasks,
-    };
+    if (sourceColumn === destinationColumn) {
+      const newTasks = [...sourceColumn.taskIds];
+      newTasks.splice(source.index, 1);
+      newTasks.splice(destination.index, 0, draggableId);
 
-    const newState = {
-      ...state,
-      columns: {
-        ...state.columns,
-        [newColumn.id]: newColumn,
-      },
-    };
+      const newColumn = {
+        ...sourceColumn,
+        taskIds: newTasks,
+      };
 
-    setState(newState);
+      const newState = {
+        ...state,
+        columns: {
+          ...state.columns,
+          [newColumn.id]: newColumn,
+        },
+      };
+
+      setState(newState);
+    } else {
+      const newSourceTaskIds = [...sourceColumn.taskIds];
+      newSourceTaskIds.splice(source.index, 1);
+      const newSourceColumn = {
+        ...sourceColumn,
+        taskIds: newSourceTaskIds,
+      };
+
+      const newDestinationTaskIds = [...destinationColumn.taskIds];
+      newDestinationTaskIds.splice(destination.index, 0, draggableId);
+      const newDestinationColumn = {
+        ...destinationColumn,
+        taskIds: newDestinationTaskIds,
+      };
+
+      const newState = {
+        ...state,
+        columns: {
+          ...state.columns,
+          [newSourceColumn.id]: newSourceColumn,
+          [newDestinationColumn.id]: newDestinationColumn,
+        },
+      };
+
+      setState(newState);
+    }
+    return;
   };
 
   return (
@@ -175,20 +122,39 @@ const Board = () => {
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
-        <div className={styles.board}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            {state.columnOrder.map((columnId) => {
-              const column = state.columns[columnId];
-              const { title, id, taskIds } = column;
-              const tasks = taskIds.map((taskId) => state.tasks[taskId]);
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            droppableId="all-columns"
+            direction="horizontal"
+            type="column"
+          >
+            {(provided) => (
+              <div
+                className={styles.board}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {state.columnOrder.map((columnId, index) => {
+                  const column = state.columns[columnId];
+                  const { title, id, taskIds } = column;
+                  const tasks = taskIds.map((taskId) => state.tasks[taskId]);
 
-              return <Column key={id} id={id} title={title} data={tasks} />;
-            })}
-          </DragDropContext>
-          <div className={styles.column}>
-            <AddColumn />
-          </div>
-        </div>
+                  return (
+                    <Column
+                      key={id}
+                      id={id}
+                      title={title}
+                      data={tasks}
+                      index={index}
+                    />
+                  );
+                })}
+                {provided.placeholder}
+                <AddColumn />
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     </div>
   );
