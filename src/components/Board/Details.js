@@ -11,12 +11,16 @@ const Title = ({ title }) => {
 };
 
 const Details = ({ visible, onDismiss }) => {
+  const listTitle = "Todo";
   return (
     <Modal visible={visible} onDismiss={onDismiss} contentLabel="Task details">
       <div className={styles.container}>
         <header className={styles.header}>
           <Icon name="fa-credit-card" className={styles.icon} />
-          <Title title="User should be able to input template image" />
+          <div>
+            <Title title="User should be able to input template image" />
+            <span>in list {listTitle}</span>
+          </div>
           <button className={styles.closeButton} onClick={onDismiss}>
             <Icon name="fa-times" />
           </button>
