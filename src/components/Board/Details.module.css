@@ -37,3 +37,20 @@
   align-items: center;
   overflow: hidden;
 }
+
+.closeButton {
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  margin: 4px;
+  padding: 4px;
+  transition: background-color 85ms, color 85ms;
+}
+
+.closeButton:hover {
+  cursor: pointer;
+  background-color: #091e4214;
+  color: #42526e;
+}

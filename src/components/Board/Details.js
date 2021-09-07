@@ -17,6 +17,9 @@ const Details = ({ visible, onDismiss }) => {
         <header className={styles.header}>
           <Icon name="fa-credit-card" className={styles.icon} />
           <Title title="User should be able to input template image" />
+          <button className={styles.closeButton} onClick={onDismiss}>
+            <Icon name="fa-times" />
+          </button>
         </header>
       </div>
     </Modal>
