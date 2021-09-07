@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
@@ -7,13 +7,13 @@ import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 
-const ColumnHeader = ({ title, ...props }) => {
+const ColumnHeader = memo(({ title, ...props }) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(title);
 
-  const toggleEdit = () => {
+  const toggleEdit = useCallback(() => {
     setEdit(!edit);
-  };
+  }, [edit]);
 
   return (
     <div className={styles.columnHeader} {...props}>
@@ -35,52 +35,55 @@ const ColumnHeader = ({ title, ...props }) => {
       <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
     </div>
   );
-};
+});
 
-const FooterButton = ({ onClick }) => {
+const FooterButton = memo(({ onClick }) => {
   return (
     <button className={styles.footerButton} onClick={onClick}>
       <Icon name="fa-plus" />
       <span className={styles.footerButtonText}>Add a card</span>
     </button>
   );
-};
+});
 
-const Card = ({ title, id, index }) => (
-  <Draggable draggableId={id} index={index}>
-    {(provided, snapshot) => (
-      <div
-        ref={provided.innerRef}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-      >
+const Card = memo(({ title, id, index }) => {
+  return (
+    <Draggable draggableId={id} index={index}>
+      {(provided, snapshot) => (
         <div
-          className={clsx(
-            styles.card,
-            snapshot.isDragging && styles.draggingCard
-          )}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
         >
-          <p className={styles.details}>{title}</p>
+          <div
+            className={clsx(
+              styles.card,
+              snapshot.isDragging && styles.draggingCard
+            )}
+          >
+            <p className={styles.details}>{title}</p>
+          </div>
         </div>
-      </div>
-    )}
-  </Draggable>
-);
+      )}
+    </Draggable>
+  );
+});
 
-const CardList = ({ data }) => {
-  useEffect(() => {}, [data]);
-
+const CardList = memo(({ data }) => {
   return data.map(({ id, title }, index) => (
     <Card key={id} id={id} title={title} index={index} />
   ));
-};
+});
 
 const Column = ({ column, index, taskMap }) => {
   const { title, id, taskIds } = column;
   const tasks = taskIds.map((taskId) => taskMap[taskId]);
   const [showComposer, setComposerVisible] = useState(false);
 
-  const toggleComposer = () => setComposerVisible(!showComposer);
+  const toggleComposer = useCallback(
+    () => setComposerVisible(!showComposer),
+    [showComposer]
+  );
 
   useEffect(() => {}, [column, index, taskMap]);
 
