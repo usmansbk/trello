@@ -38,8 +38,8 @@ const Board = () => {
   const {
     params: { id },
   } = useRouteMatch();
-  const state = useSelector((state) => state.data);
-  const [, setState] = useState(state);
+  const data = useSelector((state) => state.data);
+  const [state, setState] = useState(data);
 
   const board = state.boards[id];
 
