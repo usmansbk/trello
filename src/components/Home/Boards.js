@@ -1,43 +1,26 @@
+import { memo } from "react";
 import clsx from "clsx";
-import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
 import styles from "./Boards.module.css";
+import initialData from "../initialData";
 
-const DATA = [
-  {
-    id: nanoid(),
-    name: "Mintbean Hackthon",
-  },
-  {
-    id: nanoid(),
-    name: "School Project",
-  },
-  {
-    id: nanoid(),
-    name: "React Capstone project",
-  },
-  {
-    id: nanoid(),
-    name: "React Group project",
-  },
-];
-
-const Tile = ({ name }) => {
+const Tile = memo(({ title }) => {
   return (
     <div className={styles.details}>
-      <h3 className={styles.name}>{name}</h3>
+      <h3 className={styles.name}>{title}</h3>
     </div>
   );
-};
+});
 
-const List = ({ data = [] }) => {
+const List = memo(() => {
+  const data = Object.values(initialData.boards);
   return (
     <ul className={styles.list}>
-      {data.map(({ id, name }) => (
+      {data.map(({ id, title }) => (
         <li key={id} className={styles.item}>
           <Link to={`/${id}`} className={styles.tile}>
             <span className={styles.fade} />
-            <Tile id={id} name={name} />
+            <Tile id={id} title={title} />
           </Link>
         </li>
       ))}
@@ -48,17 +31,17 @@ const List = ({ data = [] }) => {
       </li>
     </ul>
   );
-};
+});
 
-const Boards = () => {
+const Boards = memo(() => {
   return (
     <div className={styles.container}>
       <section className={styles.content}>
         <h1 className={styles.title}>YOUR BOARDS</h1>
-        <List data={DATA} />
+        <List />
       </section>
     </div>
   );
-};
+});
 
 export default Boards;
