@@ -6,6 +6,7 @@ import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
+import Details from "./Details";
 
 const ColumnHeader = memo(({ title, ...props }) => {
   const [edit, setEdit] = useState(false);
@@ -46,7 +47,9 @@ const FooterButton = memo(({ onClick }) => {
   );
 });
 
-const Card = memo(({ title, id, index }) => {
+const Card = memo(({ title, id, index, onPressItem }) => {
+  const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
+
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
@@ -54,6 +57,7 @@ const Card = memo(({ title, id, index }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          onClick={onPress}
         >
           <div
             className={clsx(
@@ -70,9 +74,25 @@ const Card = memo(({ title, id, index }) => {
 });
 
 const CardList = memo(({ data }) => {
-  return data.map(({ id, title }, index) => (
-    <Card key={id} id={id} title={title} index={index} />
-  ));
+  const [seletedId, setSelectedId] = useState(null);
+
+  const onPressCard = useCallback((id) => setSelectedId(id), []);
+  const onDismiss = useCallback(() => setSelectedId(null), []);
+
+  return (
+    <>
+      {data.map(({ id, title }, index) => (
+        <Card
+          key={id}
+          id={id}
+          title={title}
+          index={index}
+          onPressItem={onPressCard}
+        />
+      ))}
+      <Details id={seletedId} visible={!!seletedId} onDismiss={onDismiss} />
+    </>
+  );
 });
 
 const Column = memo(({ column, index, taskMap }) => {
