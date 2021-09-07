@@ -80,7 +80,7 @@ const Column = ({ id, title, data, index }) => {
             snapshot.isDragging && styles.draggingColumn
           )}
         >
-          <div className={styles.cardList}>
+          <div className={styles.content}>
             <ColumnHeader title={title} {...provided.dragHandleProps} />
             <Droppable droppableId={id} type="task">
               {(provided) => (

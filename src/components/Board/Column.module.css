@@ -15,9 +15,12 @@
   vertical-align: top;
   white-space: nowrap;
   overflow: auto;
+  max-height: 100%;
+  height: fit-content;
+  display: flex;
 }
 
-.cardList {
+.content {
   background-color: #ebecf0;
   border-radius: 3px;
   box-sizing: border-box;
@@ -27,6 +30,17 @@
   max-height: 100%;
   min-height: 100px;
   white-space: normal;
+}
+
+.list {
+  margin: 0 4px;
+  padding: 0 4px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .columnHeader {
@@ -99,17 +113,6 @@
 
 .footerButtonText {
   color: inherit;
-}
-
-.list {
-  margin: 0 4px;
-  padding: 0 4px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
 }
 
 .card {
