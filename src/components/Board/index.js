@@ -1,76 +1,15 @@
 import clsx from "clsx";
-import { nanoid } from "nanoid";
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import AutosizeInput from "react-input-autosize";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
-import Cards from "./Cards";
 import styles from "./index.module.css";
 import AddColumn from "./AddColumn";
 import MenuButton from "../common/Button/MenuButton";
-
-const COLUMNS = [
-  {
-    id: nanoid(),
-    title: "Todo",
-    tasks: [
-      {
-        id: nanoid(),
-        title: `When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"`,
-      },
-      {
-        id: nanoid(),
-        title: `Each column has a "+" button. The user can click this button to create a task card in any column`,
-      },
-      {
-        id: nanoid(),
-        title: `Task cards clearly display the title of the contained task`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can move tasks between columns using drag-and-drop`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can delete a task.`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can expand a task card to see its description`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can move tasks between columns using the "Move" button in the context menu`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can edit column titles`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can create columns`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can change the order of columns using drag-and-drop`,
-      },
-      {
-        id: nanoid(),
-        title: `The user can delete columns (you will have to decide what happens to a column's cards in this case)`,
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    title: "In progress",
-  },
-  {
-    id: nanoid(),
-    title: "Done",
-  },
-];
+import initialData from "../initialData";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const ColumnHeader = ({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -124,12 +63,44 @@ const ColumnFooter = () => {
   );
 };
 
-const List = ({ title, data }) => {
+const Card = ({ title, id, index }) => (
+  <Draggable draggableId={id} index={index}>
+    {(provided) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        className={styles.card}
+      >
+        <p className={styles.details}>{title}</p>
+      </div>
+    )}
+  </Draggable>
+);
+
+const Column = ({ id, title, data }) => {
   return (
-    <div className={styles.cardList}>
-      <ColumnHeader title={title} />
-      <Cards data={data} />
-      <ColumnFooter />
+    <div className={styles.column}>
+      <div className={styles.cardList}>
+        <ColumnHeader title={title} />
+        <Droppable droppableId={id}>
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className={styles.list}
+            >
+              {data.map(({ id, title }, index) => (
+                <div key={id}>
+                  <Card id={id} title={title} index={index} />
+                </div>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+        <ColumnFooter />
+      </div>
     </div>
   );
 };
@@ -160,6 +131,43 @@ const BoardTitle = ({ title }) => {
 };
 
 const Board = () => {
+  const [state, setState] = useState(initialData);
+
+  const onDragEnd = (result) => {
+    const { source, destination, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const sourceColumn = state.columns[source.droppableId];
+    const newTasks = [...sourceColumn.taskIds];
+    newTasks.splice(source.index, 1);
+    newTasks.splice(destination.index, 0, draggableId);
+
+    const newColumn = {
+      ...sourceColumn,
+      taskIds: newTasks,
+    };
+
+    const newState = {
+      ...state,
+      columns: {
+        ...state.columns,
+        [newColumn.id]: newColumn,
+      },
+    };
+
+    setState(newState);
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -167,16 +175,20 @@ const Board = () => {
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
-        <ul className={styles.board}>
-          {COLUMNS.map(({ title, id, tasks }) => (
-            <li key={id} className={styles.column}>
-              <List title={title} data={tasks} />
-            </li>
-          ))}
-          <li className={styles.column}>
+        <div className={styles.board}>
+          <DragDropContext onDragEnd={onDragEnd}>
+            {state.columnOrder.map((columnId) => {
+              const column = state.columns[columnId];
+              const { title, id, taskIds } = column;
+              const tasks = taskIds.map((taskId) => state.tasks[taskId]);
+
+              return <Column key={id} id={id} title={title} data={tasks} />;
+            })}
+          </DragDropContext>
+          <div className={styles.column}>
             <AddColumn />
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
