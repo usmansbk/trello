@@ -2,12 +2,25 @@
   background-color: #f4f5f7;
   border-radius: 2px;
   min-height: 300px;
+  overflow: hidden;
 }
 
 .header {
   margin: 8px 10px;
   padding: 16px 0;
   min-height: 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.icon {
+  color: #42526e;
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
 }
 
 .title {
@@ -16,4 +29,11 @@
   font-size: 20px;
   line-height: 24px;
   color: #172b4d;
+}
+
+.titleContainer {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  overflow: hidden;
 }
