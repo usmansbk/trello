@@ -18,10 +18,10 @@ const initialData = {
   },
 };
 
-const REORDER_TASKS = "columns/swap-tasks";
+const DRAG_TASK = "columns/drag-task";
 
-export const swapTasks = (payload) => ({
-  type: REORDER_TASKS,
+export const dragTask = (payload) => ({
+  type: DRAG_TASK,
   payload,
 });
 
@@ -70,7 +70,7 @@ const reorderTasks = (state, action) => {
 
 const reducer = (state = initialData, action) => {
   switch (action.type) {
-    case REORDER_TASKS: {
+    case DRAG_TASK: {
       return reorderTasks(state, action);
     }
     default:

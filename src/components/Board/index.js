@@ -7,8 +7,8 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
-import { swapColumns } from "../../redux/boards";
-import { swapTasks } from "../../redux/columns";
+import { dragColumn } from "../../redux/boards";
+import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
 
 const BoardTitle = memo(({ title }) => {
@@ -61,10 +61,10 @@ const Board = () => {
     }
 
     if (type === "column") {
-      return dispatch(swapColumns({ id, result }));
+      return dispatch(dragColumn({ id, result }));
     }
 
-    return dispatch(swapTasks({ result }));
+    return dispatch(dragTask({ result }));
   };
 
   return (
