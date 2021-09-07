@@ -1,26 +1,6 @@
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-}
-
-.root {
-  background-color: transparent;
-  padding: 20px;
-  margin: 48px 0px;
-  width: fit-content;
-  height: fit-content;
-}
-
 .container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-items: center;
 }
 
@@ -28,10 +8,12 @@
   background-color: rgb(0, 121, 191);
   border-radius: 3px;
   box-sizing: border-box;
-  /* height: 96px; */
-  height: 48px;
+  height: 96px;
   padding: 10px 10px 10px 16px;
   width: 296px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .input {

@@ -7,6 +7,20 @@
   border-radius: 0.3em;
   font-weight: bold;
   padding: 0.6em 1.3em;
+  transition: background-color, border-color, box-shadow;
+  transition-duration: 85ms;
+  transition-timing-function: ease;
+}
+
+.small {
+  padding: 6px 12px;
+  font-weight: 400;
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  line-height: 20px;
 }
 
 .button:hover {

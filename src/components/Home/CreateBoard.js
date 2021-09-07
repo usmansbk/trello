@@ -22,9 +22,9 @@ const CreateBoard = ({ visible, onDismiss }) => {
               <Icon name="fa-times" className={styles.close} />
             </button>
           </div>
-        </div>
-        <div className={styles.bottom}>
-          <Button value="Create board" disabled />
+          <div className={styles.bottom}>
+            <Button small value="Create board" disabled />
+          </div>
         </div>
       </div>
     </Modal>
