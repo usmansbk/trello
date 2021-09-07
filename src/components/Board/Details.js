@@ -52,7 +52,7 @@ const Details = ({ visible, onDismiss }) => {
       <div className={styles.container}>
         <header className={styles.header}>
           <Icon name="fa-pen-alt" className={styles.icon} />
-          <div>
+          <div className={styles.headerContent}>
             <Title title="User should be able to input template image" />
             <span>in list {listTitle}</span>
           </div>

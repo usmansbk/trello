@@ -9,6 +9,8 @@
   min-height: 300px;
   overflow: hidden;
   padding: 8px 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -16,9 +18,16 @@
   min-height: 32px;
   padding: 4px 0;
   display: flex;
-  align-items: baseline;
-  gap: 4px;
+  align-items: center;
+  gap: 16px;
   overflow: hidden;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
 }
 
 .icon {
@@ -27,21 +36,11 @@
   width: 32px;
   height: 32px;
   line-height: 32px;
+  align-self: flex-start;
 }
 
 .titleContainer {
-  display: flex;
-  flex-grow: 1;
   align-items: center;
-  overflow: hidden;
-}
-
-.title {
-  font-weight: 600;
-  margin: 0 0 8px;
-  font-size: 20px;
-  line-height: 24px;
-  color: #172b4d;
 }
 
 .subtitle {
@@ -54,6 +53,7 @@
 }
 
 .closeButton {
+  align-self: flex-start;
   background-color: transparent;
   outline: none;
   border: none;
@@ -68,6 +68,13 @@
   cursor: pointer;
   background-color: #091e4214;
   color: #42526e;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #172b4d;
 }
 
 .editTitle {
@@ -87,6 +94,7 @@
   transition-property: background-color, border-color, box-shadow;
   transition-timing-function: ease;
   color: #172b4d;
+  width: 100%;
 }
 
 .editTitle:focus {
