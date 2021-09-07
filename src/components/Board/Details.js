@@ -42,7 +42,23 @@ const Subtitle = ({ title, icon }) => {
 };
 
 const DetailsInput = ({ placeholder }) => {
-  return <p className={styles.placeholder}>{placeholder}</p>;
+  const [edit, setEdit] = useState(false);
+
+  const toggleEdit = useCallback(() => setEdit((mode) => !mode), []);
+
+  return edit ? (
+    <TextareaAutosize
+      onBlur={toggleEdit}
+      className={styles.detailsInput}
+      autoFocus
+      spellCheck={false}
+      placeholder={placeholder}
+    />
+  ) : (
+    <p onClick={toggleEdit} className={styles.placeholder}>
+      {placeholder}
+    </p>
+  );
 };
 
 const Details = ({ visible, onDismiss }) => {
@@ -68,7 +84,7 @@ const Details = ({ visible, onDismiss }) => {
         <div>
           <Subtitle icon="fa-align-left" title="Description" />
           <div className={styles.gutter}>
-            <DetailsInput placeholder="Add a more detailed description" />
+            <DetailsInput placeholder="Add a more detailed description..." />
           </div>
         </div>
       </div>

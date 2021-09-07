@@ -74,6 +74,8 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
+  min-height: 24px;
+  width: 100%;
   color: #172b4d;
 }
 
@@ -81,7 +83,6 @@
   background-color: white;
   border-radius: 3px;
   box-shadow: none;
-  min-height: 24px;
   padding: 4px 8px;
   resize: none;
   box-sizing: border-box;
@@ -91,7 +92,6 @@
   transition-duration: 85ms;
   transition-property: background-color, border-color, box-shadow;
   transition-timing-function: ease;
-  width: 100%;
 }
 
 .editTitle:focus {
@@ -109,4 +109,28 @@
 
 .gutter {
   margin-left: 40px;
+}
+
+.detailsInput {
+  background-color: white;
+  box-shadow: none;
+  min-height: 108px;
+  border-color: #091e4221;
+  margin-bottom: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 3px;
+  line-height: 20px;
+  padding: 8px 12px;
+  outline: none;
+  border: none;
+  color: #172b4d;
+  transition-duration: 85ms;
+  transition-property: border-color, box-shadow;
+  transition-timing-function: ease;
+  resize: none;
+}
+
+.detailsInput:focus {
+  box-shadow: inset 0 0 0 2px #0079bf;
 }
