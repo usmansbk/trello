@@ -1,11 +1,32 @@
+import { useState } from "react";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import styles from "./Details.module.css";
+import { useCallback } from "react";
+import TextareaAutosize from "react-textarea-autosize";
 
 const Title = ({ title }) => {
+  const [value, setValue] = useState(title);
+  const [edit, setEdit] = useState(false);
+
+  const toggleEdit = useCallback(() => setEdit((mode) => !mode), []);
+
   return (
     <div className={styles.titleContainer}>
-      <h2 className={styles.title}>{title}</h2>
+      {edit ? (
+        <TextareaAutosize
+          autoFocus
+          spellCheck={false}
+          value={value}
+          onBlur={toggleEdit}
+          className={styles.editTitle}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      ) : (
+        <h2 onClick={toggleEdit} className={styles.title}>
+          {value}
+        </h2>
+      )}
     </div>
   );
 };

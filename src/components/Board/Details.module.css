@@ -63,3 +63,26 @@
   background-color: #091e4214;
   color: #42526e;
 }
+
+.editTitle {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  min-height: 24px;
+  padding: 4px 8px;
+  resize: none;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  transition-duration: 85ms;
+  transition-property: background-color, border-color, box-shadow;
+  transition-timing-function: ease;
+  color: #172b4d;
+}
+
+.editTitle:focus {
+  box-shadow: inset 0 0 0 2px #0079bf;
+}
