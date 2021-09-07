@@ -97,9 +97,11 @@ const CardList = memo(({ data }) => {
 });
 
 const Column = memo(({ column, index }) => {
-  const taskMap = useSelector((state) => state.tasks);
   const { title, id, taskIds } = column;
+
+  const taskMap = useSelector((state) => state.tasks);
   const tasks = taskIds.map((taskId) => taskMap[taskId]);
+
   const [showComposer, setComposerVisible] = useState(false);
 
   const toggleComposer = useCallback(
