@@ -17,16 +17,16 @@ const initialData = {
   byIds: ["board-1", "board-2", "board-3"],
 };
 
-const REORDER_COLUMNS = "board/reorder-columns";
+const SWAP_COLUMNS = "boards/swap-columns";
 
-export const reorderColumns = (payload) => ({
-  type: REORDER_COLUMNS,
+export const swapColumns = (payload) => ({
+  type: SWAP_COLUMNS,
   payload,
 });
 
 const reducer = (state = initialData, action) => {
   switch (action.type) {
-    case REORDER_COLUMNS: {
+    case SWAP_COLUMNS: {
       const { result, id } = action.payload;
       const { source, destination, draggableId } = result;
 

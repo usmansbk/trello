@@ -1,6 +1,6 @@
 import { memo, useCallback, useState } from "react";
 import { useRouteMatch } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import AutosizeInput from "react-input-autosize";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -8,6 +8,8 @@ import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
 import styles from "./index.module.css";
+import { swapColumns } from "../../redux/boards";
+import { swapTasks } from "../../redux/columns";
 
 const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -38,13 +40,14 @@ const Board = () => {
   const {
     params: { id },
   } = useRouteMatch();
-  const data = useSelector((state) => state);
-  const [state, setState] = useState(data);
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => state);
 
   const board = state.boards[id];
 
   const onDragEnd = (result) => {
-    const { source, destination, draggableId, type } = result;
+    const { source, destination, type } = result;
 
     if (!destination) {
       return;
@@ -58,76 +61,10 @@ const Board = () => {
     }
 
     if (type === "column") {
-      const newColumnOrder = [...board.columnIds];
-      newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, draggableId);
-
-      const newBoards = {
-        ...state.boards,
-        [board.id]: {
-          ...board,
-          columnIds: newColumnOrder,
-        },
-      };
-
-      const newState = {
-        ...state,
-        boards: newBoards,
-      };
-
-      setState(newState);
-      return;
+      return dispatch(swapColumns({ id, result }));
     }
 
-    const sourceColumn = state.columns[source.droppableId];
-    const destinationColumn = state.columns[destination.droppableId];
-
-    if (sourceColumn === destinationColumn) {
-      const newTasks = [...sourceColumn.taskIds];
-      newTasks.splice(source.index, 1);
-      newTasks.splice(destination.index, 0, draggableId);
-
-      const newColumn = {
-        ...sourceColumn,
-        taskIds: newTasks,
-      };
-
-      const newState = {
-        ...state,
-        columns: {
-          ...state.columns,
-          [newColumn.id]: newColumn,
-        },
-      };
-
-      setState(newState);
-    } else {
-      const newSourceTaskIds = [...sourceColumn.taskIds];
-      newSourceTaskIds.splice(source.index, 1);
-      const newSourceColumn = {
-        ...sourceColumn,
-        taskIds: newSourceTaskIds,
-      };
-
-      const newDestinationTaskIds = [...destinationColumn.taskIds];
-      newDestinationTaskIds.splice(destination.index, 0, draggableId);
-      const newDestinationColumn = {
-        ...destinationColumn,
-        taskIds: newDestinationTaskIds,
-      };
-
-      const newState = {
-        ...state,
-        columns: {
-          ...state.columns,
-          [newSourceColumn.id]: newSourceColumn,
-          [newDestinationColumn.id]: newDestinationColumn,
-        },
-      };
-
-      setState(newState);
-    }
-    return;
+    return dispatch(swapTasks({ result }));
   };
 
   return (
