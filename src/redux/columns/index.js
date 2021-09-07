@@ -62,11 +62,8 @@ const reorderTasks = (state, action) => {
 
     return {
       ...state,
-      columns: {
-        ...state.columns,
-        [newSourceColumn.id]: newSourceColumn,
-        [newDestinationColumn.id]: newDestinationColumn,
-      },
+      [newSourceColumn.id]: newSourceColumn,
+      [newDestinationColumn.id]: newDestinationColumn,
     };
   }
 };
