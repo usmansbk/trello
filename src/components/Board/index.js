@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import AutosizeInput from "react-input-autosize";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
@@ -8,12 +8,12 @@ import MenuButton from "../common/Button/MenuButton";
 import styles from "./index.module.css";
 import initialData from "../initialData";
 
-const BoardTitle = ({ title }) => {
+const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(title);
 
-  const showEdit = () => setEdit(true);
-  const hideEdit = () => setEdit(false);
+  const showEdit = useCallback(() => setEdit(true), []);
+  const hideEdit = useCallback(() => setEdit(false), []);
 
   return (
     <div onClick={showEdit} className={styles.headerButton}>
@@ -31,7 +31,7 @@ const BoardTitle = ({ title }) => {
       )}
     </div>
   );
-};
+});
 
 const Board = () => {
   const [state, setState] = useState(initialData);
