@@ -53,7 +53,10 @@ const Card = ({ title, id, index }) => (
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
-        className={clsx(styles.card, snapshot.isDragging && styles.dragging)}
+        className={clsx(
+          styles.card,
+          snapshot.isDragging && styles.draggingCard
+        )}
       >
         <p className={styles.details}>{title}</p>
       </div>
@@ -68,11 +71,14 @@ const Column = ({ id, title, data, index }) => {
 
   return (
     <Draggable draggableId={id} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
           ref={provided.innerRef}
-          className={styles.column}
+          className={clsx(
+            styles.column,
+            snapshot.isDragging && styles.draggingColumn
+          )}
         >
           <div className={styles.cardList}>
             <ColumnHeader title={title} {...provided.dragHandleProps} />
