@@ -131,10 +131,10 @@ const BoardTitle = ({ title }) => {
 };
 
 const Board = () => {
-  const [state] = useState(initialData);
+  const [state, setState] = useState(initialData);
 
   const onDragEnd = (result) => {
-    const { source, destination } = result;
+    const { source, destination, draggableId } = result;
 
     if (!destination) {
       return;
@@ -146,6 +146,26 @@ const Board = () => {
     ) {
       return;
     }
+
+    const sourceColumn = state.columns[source.droppableId];
+    const newTasks = [...sourceColumn.taskIds];
+    newTasks.splice(source.index, 1);
+    newTasks.splice(destination.index, 0, draggableId);
+
+    const newColumn = {
+      ...sourceColumn,
+      taskIds: newTasks,
+    };
+
+    const newState = {
+      ...state,
+      columns: {
+        ...state.columns,
+        [newColumn.id]: newColumn,
+      },
+    };
+
+    setState(newState);
   };
 
   return (
