@@ -6,8 +6,8 @@ import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
 import styles from "./index.module.css";
-import initialData from "../initialData";
 import { useRouteMatch } from "react-router";
+import { useSelector } from "react-redux";
 
 const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -38,7 +38,8 @@ const Board = () => {
   const {
     params: { id },
   } = useRouteMatch();
-  const [state, setState] = useState(initialData);
+  const state = useSelector((state) => state.data);
+  const [, setState] = useState(state);
 
   const board = state.boards[id];
 

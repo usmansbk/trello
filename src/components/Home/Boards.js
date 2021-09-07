@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 import CreateBoard from "./CreateBoard";
 import styles from "./Boards.module.css";
-import initialData from "../initialData";
+import { useSelector } from "react-redux";
 
 const Tile = memo(({ title }) => {
   return (
@@ -36,7 +36,8 @@ const CreateBoardButton = memo(() => {
 });
 
 const List = memo(() => {
-  const data = Object.values(initialData.boards);
+  const data = useSelector((state) => Object.values(state.data.boards));
+
   return (
     <ul className={styles.list}>
       {data.map(({ id, title }) => (
