@@ -36,11 +36,11 @@ const CreateBoardButton = memo(() => {
 });
 
 const List = memo(() => {
-  const data = useSelector((state) => Object.values(state.boards));
+  const boards = useSelector((state) => Object.values(state.boards));
 
   return (
     <ul className={styles.list}>
-      {data.map(({ id, title }) => (
+      {boards.map(({ id, title }) => (
         <li key={id} className={styles.item}>
           <Link to={`/${id}`} className={styles.tile}>
             <span className={styles.fade} />
