@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { memo, useState } from "react";
 import CardButton from "../common/Button/CardButton";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import styles from "./AddColumn.module.css";
 
-const Input = ({ onCancel }) => {
+const Input = memo(({ onCancel }) => {
   return (
     <form className={styles.form}>
       <input
@@ -20,9 +20,9 @@ const Input = ({ onCancel }) => {
       </div>
     </form>
   );
-};
+});
 
-const AddListButton = ({ onClick }) => (
+const AddListButton = memo(({ onClick }) => (
   <button className={styles.button} onClick={onClick}>
     <Icon
       name="fa-plus"
@@ -30,9 +30,9 @@ const AddListButton = ({ onClick }) => (
     />
     <span className={styles.buttonText}>Add another list</span>
   </button>
-);
+));
 
-const AddColumn = () => {
+const AddColumn = memo(() => {
   const [edit, setEdit] = useState(false);
   const toggleEdit = () => setEdit(!edit);
 
@@ -47,6 +47,6 @@ const AddColumn = () => {
       </div>
     </div>
   );
-};
+});
 
 export default AddColumn;

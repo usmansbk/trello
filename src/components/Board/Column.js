@@ -1,4 +1,4 @@
-import { useEffect, useState, memo, useCallback } from "react";
+import { useState, memo, useCallback } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
@@ -75,7 +75,7 @@ const CardList = memo(({ data }) => {
   ));
 });
 
-const Column = ({ column, index, taskMap }) => {
+const Column = memo(({ column, index, taskMap }) => {
   const { title, id, taskIds } = column;
   const tasks = taskIds.map((taskId) => taskMap[taskId]);
   const [showComposer, setComposerVisible] = useState(false);
@@ -84,8 +84,6 @@ const Column = ({ column, index, taskMap }) => {
     () => setComposerVisible(!showComposer),
     [showComposer]
   );
-
-  useEffect(() => {}, [column, index, taskMap]);
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -123,6 +121,6 @@ const Column = ({ column, index, taskMap }) => {
       )}
     </Draggable>
   );
-};
+});
 
 export default Column;
