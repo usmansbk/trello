@@ -7,6 +7,7 @@ import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
 import styles from "./index.module.css";
 import initialData from "../initialData";
+import { useRouteMatch } from "react-router";
 
 const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -34,7 +35,12 @@ const BoardTitle = memo(({ title }) => {
 });
 
 const Board = () => {
+  const {
+    params: { id },
+  } = useRouteMatch();
   const [state, setState] = useState(initialData);
+
+  const board = state.boards[id];
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId, type } = result;
@@ -51,13 +57,21 @@ const Board = () => {
     }
 
     if (type === "column") {
-      const newColumnOrder = [...state.columnOrder];
+      const newColumnOrder = [...board.columnIds];
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, draggableId);
 
+      const newBoards = {
+        ...state.boards,
+        [board.id]: {
+          ...board,
+          columnIds: newColumnOrder,
+        },
+      };
+
       const newState = {
         ...state,
-        columnOrder: newColumnOrder,
+        boards: newBoards,
       };
 
       setState(newState);
@@ -118,7 +132,7 @@ const Board = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <BoardTitle title="Trello Clone WIP" />
+        <BoardTitle title={board.title} />
         <MenuButton name="fa-trash" />
       </header>
       <div className={styles.content}>
@@ -134,7 +148,7 @@ const Board = () => {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {state.columnOrder.map((columnId, index) => {
+                {board.columnIds.map((columnId, index) => {
                   const column = state.columns[columnId];
 
                   return (

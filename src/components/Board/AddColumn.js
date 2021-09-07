@@ -28,7 +28,7 @@ const AddListButton = memo(({ onClick }) => (
       name="fa-plus"
       className={clsx(styles.buttonText, styles.buttonIcon)}
     />
-    <span className={styles.buttonText}>Add another list</span>
+    <span className={styles.buttonText}>Add new list</span>
   </button>
 ));
 
