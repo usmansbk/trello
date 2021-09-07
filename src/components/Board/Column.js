@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
@@ -67,6 +67,14 @@ const Card = ({ title, id, index }) => (
   </Draggable>
 );
 
+const CardList = ({ data }) => {
+  useEffect(() => {}, [data]);
+
+  return data.map(({ id, title }, index) => (
+    <Card key={id} id={id} title={title} index={index} />
+  ));
+};
+
 const Column = ({ id, title, data, index }) => {
   const [showComposer, setComposerVisible] = useState(false);
 
@@ -92,9 +100,7 @@ const Column = ({ id, title, data, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {data.map(({ id, title }, index) => (
-                    <Card key={id} id={id} title={title} index={index} />
-                  ))}
+                  {<CardList data={data} />}
                   {provided.placeholder}
                   {showComposer && <AddCard onCancel={toggleComposer} />}
                 </div>
