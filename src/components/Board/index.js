@@ -7,9 +7,9 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
-import styles from "./index.module.css";
 import { swapColumns } from "../../redux/boards";
 import { swapTasks } from "../../redux/columns";
+import styles from "./index.module.css";
 
 const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);

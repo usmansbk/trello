@@ -24,25 +24,29 @@ export const swapColumns = (payload) => ({
   payload,
 });
 
+const reorderColumns = (state, action) => {
+  const { result, id } = action.payload;
+  const { source, destination, draggableId } = result;
+
+  const board = state[id];
+
+  const newColumnOrder = [...board.columnIds];
+  newColumnOrder.splice(source.index, 1);
+  newColumnOrder.splice(destination.index, 0, draggableId);
+
+  return {
+    ...state,
+    [board.id]: {
+      ...board,
+      columnIds: newColumnOrder,
+    },
+  };
+};
+
 const reducer = (state = initialData, action) => {
   switch (action.type) {
     case SWAP_COLUMNS: {
-      const { result, id } = action.payload;
-      const { source, destination, draggableId } = result;
-
-      const board = state[id];
-
-      const newColumnOrder = [...board.columnIds];
-      newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, draggableId);
-
-      return {
-        ...state,
-        [board.id]: {
-          ...board,
-          columnIds: newColumnOrder,
-        },
-      };
+      return reorderColumns(state, action);
     }
     default:
       return state;
