@@ -46,19 +46,6 @@ const FooterButton = ({ onClick }) => {
   );
 };
 
-const ColumnFooter = () => {
-  const [showComposer, setComposerVisible] = useState(false);
-
-  const toggleComposer = () => setComposerVisible(!showComposer);
-
-  return (
-    <div className={styles.footer}>
-      {showComposer && <AddCard onCancel={toggleComposer} />}
-      {!showComposer && <FooterButton onClick={toggleComposer} />}
-    </div>
-  );
-};
-
 const Card = ({ title, id, index }) => (
   <Draggable draggableId={id} index={index}>
     {(provided, snapshot) => (
@@ -75,6 +62,10 @@ const Card = ({ title, id, index }) => (
 );
 
 const Column = ({ id, title, data, index }) => {
+  const [showComposer, setComposerVisible] = useState(false);
+
+  const toggleComposer = () => setComposerVisible(!showComposer);
+
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -98,10 +89,15 @@ const Column = ({ id, title, data, index }) => {
                     </div>
                   ))}
                   {provided.placeholder}
-                  <ColumnFooter />
+                  {showComposer && <AddCard onCancel={toggleComposer} />}
                 </div>
               )}
             </Droppable>
+            {!showComposer && (
+              <div className={styles.footer}>
+                <FooterButton onClick={toggleComposer} />
+              </div>
+            )}
           </div>
         </div>
       )}

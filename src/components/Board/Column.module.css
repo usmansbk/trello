@@ -75,6 +75,7 @@
   border: none;
   border-radius: 3px;
   flex: 1 0 auto;
+  margin: 0 4px;
   margin-bottom: 8px;
   padding: 4px 8px;
   user-select: none;
