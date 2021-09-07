@@ -43,7 +43,12 @@ const Subtitle = ({ title, icon }) => {
 const Details = ({ visible, onDismiss }) => {
   const listTitle = "Todo";
   return (
-    <Modal visible={visible} onDismiss={onDismiss} contentLabel="Task details">
+    <Modal
+      className={styles.modal}
+      visible={visible}
+      onDismiss={onDismiss}
+      contentLabel="Task details"
+    >
       <div className={styles.container}>
         <header className={styles.header}>
           <Icon name="fa-pen-alt" className={styles.icon} />
