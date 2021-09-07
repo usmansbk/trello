@@ -53,12 +53,15 @@ const Card = ({ title, id, index }) => (
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
-        className={clsx(
-          styles.card,
-          snapshot.isDragging && styles.draggingCard
-        )}
       >
-        <p className={styles.details}>{title}</p>
+        <div
+          className={clsx(
+            styles.card,
+            snapshot.isDragging && styles.draggingCard
+          )}
+        >
+          <p className={styles.details}>{title}</p>
+        </div>
       </div>
     )}
   </Draggable>
@@ -90,9 +93,7 @@ const Column = ({ id, title, data, index }) => {
                   className={styles.list}
                 >
                   {data.map(({ id, title }, index) => (
-                    <div key={id}>
-                      <Card id={id} title={title} index={index} />
-                    </div>
+                    <Card key={id} id={id} title={title} index={index} />
                   ))}
                   {provided.placeholder}
                   {showComposer && <AddCard onCancel={toggleComposer} />}
