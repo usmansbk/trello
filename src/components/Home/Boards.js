@@ -36,7 +36,7 @@ const CreateBoardButton = memo(() => {
 });
 
 const List = memo(() => {
-  const data = useSelector((state) => Object.values(state.data.boards));
+  const data = useSelector((state) => Object.values(state.boards));
 
   return (
     <ul className={styles.list}>
