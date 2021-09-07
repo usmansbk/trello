@@ -1,6 +1,6 @@
 .modal {
-  width: 57.5%;
-  margin: 28px 0;
+  width: 100%;
+  margin: 12px 0;
 }
 
 .container {
@@ -133,4 +133,11 @@
 
 .detailsInput:focus {
   box-shadow: inset 0 0 0 2px #0079bf;
+}
+
+@media screen and (min-width: 992px) {
+  .modal {
+    width: 57.5%;
+    margin: 28px 0;
+  }
 }
