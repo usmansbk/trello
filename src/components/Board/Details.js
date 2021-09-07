@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
+import clsx from "clsx";
+import TextareaAutosize from "react-textarea-autosize";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import styles from "./Details.module.css";
-import { useCallback } from "react";
-import TextareaAutosize from "react-textarea-autosize";
-import clsx from "clsx";
 
-const Title = ({ title }) => {
+const Title = memo(({ title }) => {
   const [value, setValue] = useState(title);
   const [edit, setEdit] = useState(false);
 
@@ -30,18 +29,18 @@ const Title = ({ title }) => {
       )}
     </div>
   );
-};
+});
 
-const Subtitle = ({ title, icon }) => {
+const Subtitle = memo(({ title, icon }) => {
   return (
     <div className={styles.header}>
       <Icon name={icon} className={styles.icon} />
       <h2 className={styles.subtitle}>{title}</h2>
     </div>
   );
-};
+});
 
-const DetailsInput = ({ placeholder }) => {
+const DetailsInput = memo(({ placeholder }) => {
   const [edit, setEdit] = useState(false);
 
   const toggleEdit = useCallback(() => setEdit((mode) => !mode), []);
@@ -59,9 +58,9 @@ const DetailsInput = ({ placeholder }) => {
       {placeholder}
     </p>
   );
-};
+});
 
-const Details = ({ visible, onDismiss }) => {
+const Details = memo(({ visible, onDismiss }) => {
   const listTitle = "Todo";
   return (
     <Modal
@@ -90,6 +89,6 @@ const Details = ({ visible, onDismiss }) => {
       </div>
     </Modal>
   );
-};
+});
 
 export default Details;
