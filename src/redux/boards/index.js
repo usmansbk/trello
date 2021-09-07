@@ -14,6 +14,7 @@ const initialData = {
     title: "Side Project",
     columnIds: [],
   },
+  byIds: ["board-1", "board-2", "board-3"],
 };
 
 const reducer = (state = initialData, action) => {
