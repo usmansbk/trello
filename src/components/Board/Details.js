@@ -10,6 +10,15 @@ const Title = ({ title }) => {
   );
 };
 
+const Subtitle = ({ title, icon }) => {
+  return (
+    <div className={styles.header}>
+      <Icon name={icon} className={styles.icon} />
+      <h2 className={styles.subtitle}>{title}</h2>
+    </div>
+  );
+};
+
 const Details = ({ visible, onDismiss }) => {
   const listTitle = "Todo";
   return (
@@ -26,10 +35,7 @@ const Details = ({ visible, onDismiss }) => {
           </button>
         </header>
         <div>
-          <div className={styles.header}>
-            <Icon name="fa-align-left" className={styles.icon} />
-            <h2 className={styles.subtitle}>Description</h2>
-          </div>
+          <Subtitle icon="fa-align-left" title="Description" />
         </div>
       </div>
     </Modal>
