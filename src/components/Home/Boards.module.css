@@ -98,7 +98,7 @@
   background-color: #00000026;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .list {
     flex-direction: row;
     flex-wrap: wrap;

@@ -1,6 +1,6 @@
 .modal {
   width: 100%;
-  margin: 20% 0;
+  margin: 10% 0;
 }
 
 .container {
@@ -135,7 +135,7 @@
   box-shadow: inset 0 0 0 2px #0079bf;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .modal {
     width: 57.5%;
     margin: 28px 0;
