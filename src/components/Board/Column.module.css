@@ -4,12 +4,7 @@
   overflow-x: auto;
 }
 
-.column:first-child {
-  margin-left: 8px;
-}
-
 .column {
-  margin: 0 4px;
   min-width: 272px;
   max-width: 272px;
   vertical-align: top;
