@@ -107,10 +107,6 @@
   color: #172b4d;
 }
 
-.gutter {
-  margin-left: 40px;
-}
-
 .detailsInput {
   background-color: white;
   box-shadow: none;
@@ -138,5 +134,9 @@
 @media screen and (min-width: 768px) {
   .modal {
     width: 57.5%;
+  }
+
+  .gutter {
+    margin-left: 40px;
   }
 }
