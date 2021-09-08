@@ -18,17 +18,38 @@ const ColumnHeader = memo(({ title, ...props }) => {
     setEdit(!edit);
   }, [edit]);
 
+  const onChange = useCallback((e) => {
+    setValue(e.target.value);
+  }, []);
+
+  const onSubmit = useCallback(() => {
+    console.log(value);
+    toggleEdit();
+  }, [toggleEdit, value]);
+
+  const handleEnter = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        onSubmit();
+      }
+      e.stopPropagation();
+    },
+    [onSubmit]
+  );
+
   return (
     <div className={styles.columnHeader} {...props}>
       {edit ? (
         <TextareaAutosize
-          spellCheck={false}
-          maxLength="512"
-          className={styles.columnTitle}
-          autoFocus
-          onBlur={toggleEdit}
+          id="title"
+          name="title"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={handleEnter}
+          onChange={onChange}
+          spellCheck={false}
+          className={clsx(styles.columnTitle, styles.editTitle)}
+          autoFocus
+          onBlur={onSubmit}
         />
       ) : (
         <h2 onClick={toggleEdit} className={styles.columnTitle}>

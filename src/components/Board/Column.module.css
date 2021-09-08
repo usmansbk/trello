@@ -40,6 +40,7 @@
 
 .columnHeader {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 5px 8px;
   cursor: pointer;
@@ -51,7 +52,8 @@
 }
 
 .columnTitle {
-  width: 100%;
+  display: flex;
+  flex-grow: 1;
   word-wrap: break-word;
   font-weight: 600;
   line-height: 20px;
@@ -60,13 +62,16 @@
   box-sizing: border-box;
   min-height: 20px;
   max-height: 256px;
+  background-color: transparent;
+}
+
+.editTitle {
+  border-radius: 3px;
   overflow-x: hidden;
   overflow-y: auto;
+  resize: none;
   border: none;
   outline: none;
-  background-color: transparent;
-  resize: none;
-  border-radius: 3px;
 }
 
 .columnTitle:focus {
