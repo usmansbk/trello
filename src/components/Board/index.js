@@ -1,5 +1,3 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { memo, useCallback, useState } from "react";
 import { useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,41 +14,24 @@ import { selectBoardById } from "../../redux/selectors";
 
 const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState(title);
 
   const showEdit = useCallback(() => setEdit(true), []);
   const hideEdit = useCallback(() => setEdit(false), []);
 
-  const formik = useFormik({
-    initialValues: {
-      title,
-    },
-    onSubmit: (values) => {
-      console.log(values);
-      hideEdit();
-    },
-    onReset: () => hideEdit(),
-    validationSchema: Yup.object({
-      title: Yup.string().max(512).required(),
-    }),
-  });
-
   return (
     <div onClick={showEdit} className={styles.headerButton}>
       {edit ? (
-        <form onSubmit={formik.handleSubmit}>
-          <AutosizeInput
-            id="title"
-            name="title"
-            autoFocus
-            value={formik.values.title}
-            spellCheck={false}
-            onChange={formik.handleChange}
-            onBlur={formik.resetForm}
-            inputClassName={clsx(styles.boardTitle, styles.editTitle)}
-          />
-        </form>
+        <AutosizeInput
+          autoFocus
+          value={value}
+          spellCheck={false}
+          onChange={(e) => setValue(e.target.value)}
+          onBlur={hideEdit}
+          inputClassName={clsx(styles.boardTitle, styles.editTitle)}
+        />
       ) : (
-        <h2 className={styles.boardTitle}>{formik.values.title}</h2>
+        <h2 className={styles.boardTitle}>{value}</h2>
       )}
     </div>
   );

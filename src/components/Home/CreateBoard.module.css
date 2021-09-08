@@ -4,17 +4,13 @@
   align-items: center;
 }
 
-.content {
-  position: relative;
+.form {
   background-color: rgb(0, 121, 191);
   border-radius: 3px;
   box-sizing: border-box;
   height: 96px;
   padding: 10px 10px 10px 16px;
   width: 296px;
-}
-
-.form {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -61,10 +57,6 @@
 }
 
 .closeButton {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 8px;
   cursor: pointer;
   border: none;
   border-radius: 3px;
