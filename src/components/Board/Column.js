@@ -15,14 +15,18 @@ import { renameColumn } from "../../redux/columns";
 const ColumnHeader = memo(({ id, title, ...props }) => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
-  const { register, handleSubmit, formState } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty },
+  } = useForm();
 
   const toggleEdit = useCallback(() => {
     setEdit(!edit);
   }, [edit]);
 
   const onSubmit = handleSubmit((data) => {
-    if (formState.isDirty) {
+    if (isDirty) {
       dispatch(
         renameColumn({
           id,
