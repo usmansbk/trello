@@ -68,7 +68,7 @@ const Board = () => {
     confirmAlert({
       title: "Delete this board?",
       message:
-        "This action will permanently delete all your card. You cant undo this action",
+        "This action will permanently delete all your cards. You cant undo this action.",
       buttons: [
         {
           label: "Yes, Delete",
@@ -81,6 +81,7 @@ const Board = () => {
           label: "No",
         },
       ],
+      overlayClassName: styles.overlay,
     });
   }, [dispatch, history, id]);
 
