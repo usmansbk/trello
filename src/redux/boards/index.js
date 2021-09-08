@@ -18,6 +18,7 @@ const initialData = {
 };
 
 const CREATE_BOARD = "boards/create";
+const DELETE_BOARD = "boards/delete";
 const DRAG_COLUMN = "boards/drag-column";
 
 export const createBoard = (data) => ({
@@ -26,6 +27,11 @@ export const createBoard = (data) => ({
     ...data,
     columnIds: [],
   },
+});
+
+export const deleteBoard = (id) => ({
+  type: DELETE_BOARD,
+  id,
 });
 
 export const dragColumn = (payload) => ({
@@ -60,6 +66,20 @@ const reducer = (state = initialData, action) => {
         ...state,
         [payload.id]: payload,
         byIds: [...state.byIds, payload.id],
+      };
+    }
+    case DELETE_BOARD: {
+      return {
+        ...Object.keys(state).reduce((result, key) => {
+          if (key === action.id) {
+            return result;
+          }
+          return {
+            ...result,
+            [key]: state[key],
+          };
+        }, {}),
+        byIds: state.byIds.filter((id) => id !== action.id),
       };
     }
     case DRAG_COLUMN: {

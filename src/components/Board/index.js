@@ -1,12 +1,12 @@
 import { memo } from "react";
 import { useForm } from "react-hook-form";
-import { useRouteMatch } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
-import { dragColumn } from "../../redux/boards";
+import { deleteBoard, dragColumn } from "../../redux/boards";
 import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
@@ -36,6 +36,7 @@ const Board = () => {
   const {
     params: { id },
   } = useRouteMatch();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const board = useSelector(selectBoardById(id));
@@ -65,7 +66,13 @@ const Board = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <BoardTitle title={board.title} />
-        <MenuButton name="fa-trash" />
+        <MenuButton
+          name="fa-trash"
+          onClick={() => {
+            history.replace("/");
+            dispatch(deleteBoard(id));
+          }}
+        />
       </header>
       <div className={styles.content}>
         <DragDropContext onDragEnd={onDragEnd}>
