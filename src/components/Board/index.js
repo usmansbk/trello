@@ -18,12 +18,16 @@ const BoardTitle = memo(({ title }) => {
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-    <form onSubmit={onSubmit} className={styles.headerButton}>
-      <AutosizeInput
-        {...register("title", { required: true, maxLength: 512, value: title })}
+    <form onSubmit={onSubmit}>
+      <input
+        {...register("title", {
+          required: true,
+          maxLength: 512,
+          value: title,
+        })}
         autoFocus
         spellCheck={false}
-        inputClassName={styles.boardTitle}
+        className={styles.boardTitle}
       />
     </form>
   );
