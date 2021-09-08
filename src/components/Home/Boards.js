@@ -17,7 +17,6 @@ const Tile = memo(({ id, title }) => {
   return (
     <div className={styles.item}>
       <Link to={`/${id}`} className={styles.tile}>
-        <span className={styles.fade} />
         <Details id={id} title={title} />
       </Link>
     </div>
@@ -29,7 +28,7 @@ const CreateBoardTile = memo(() => {
   const toggleModal = useCallback(() => setOpen((value) => !value), []);
 
   return (
-    <div className={styles.item}>
+    <div className={clsx(styles.item, styles.button)}>
       <button
         onClick={toggleModal}
         className={clsx(styles.tile, styles.addButton)}
