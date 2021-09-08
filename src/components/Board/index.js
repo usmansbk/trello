@@ -45,7 +45,7 @@ const BoardTitle = memo(({ title }) => {
             value={formik.values.title}
             spellCheck={false}
             onChange={formik.handleChange}
-            onBlur={() => formik.resetForm()}
+            onBlur={formik.resetForm}
             inputClassName={clsx(styles.boardTitle, styles.editTitle)}
           />
         </form>
