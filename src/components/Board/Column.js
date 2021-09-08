@@ -8,6 +8,7 @@ import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
+import { selectColumnById } from "../../redux/selectors";
 
 const ColumnHeader = memo(({ title, ...props }) => {
   const [edit, setEdit] = useState(false);
@@ -101,9 +102,7 @@ const CardList = memo(({ taskIds }) => {
 });
 
 const Column = memo(({ columnId, index }) => {
-  const { title, id, taskIds } = useSelector(
-    (state) => state.columns[columnId]
-  );
+  const { title, id, taskIds } = useSelector(selectColumnById(columnId));
 
   const [showComposer, setComposerVisible] = useState(false);
 

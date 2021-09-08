@@ -10,6 +10,7 @@ import MenuButton from "../common/Button/MenuButton";
 import { dragColumn } from "../../redux/boards";
 import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
+import { selectBoardById } from "../../redux/selectors";
 
 const BoardTitle = memo(({ title }) => {
   const [edit, setEdit] = useState(false);
@@ -42,7 +43,7 @@ const Board = () => {
   } = useRouteMatch();
   const dispatch = useDispatch();
 
-  const board = useSelector((state) => state.boards[id]);
+  const board = useSelector(selectBoardById(id));
 
   const onDragEnd = (result) => {
     const { source, destination, type } = result;
