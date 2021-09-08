@@ -5,19 +5,13 @@ import CreateBoard from "./CreateBoard";
 import styles from "./Boards.module.css";
 import { useSelector } from "react-redux";
 
-const Details = memo(({ title }) => {
-  return (
-    <div className={styles.details}>
-      <h3 className={styles.name}>{title}</h3>
-    </div>
-  );
-});
-
 const Tile = memo(({ id, title }) => {
   return (
     <div className={styles.item}>
       <Link to={`/${id}`} className={styles.tile}>
-        <Details id={id} title={title} />
+        <div className={styles.details}>
+          <h3 className={styles.name}>{title}</h3>
+        </div>
       </Link>
     </div>
   );
