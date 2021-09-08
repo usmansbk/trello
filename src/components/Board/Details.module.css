@@ -4,6 +4,7 @@
 }
 
 .container {
+  position: relative;
   background-color: #f4f5f7;
   border-radius: 2px;
   min-height: 300px;
@@ -52,7 +53,12 @@
 }
 
 .closeButton {
-  align-self: flex-start;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 4px;
+  overflow: hidden;
+  z-index: 2;
   background-color: transparent;
   outline: none;
   border: none;
