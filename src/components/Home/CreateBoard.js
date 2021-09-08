@@ -1,8 +1,10 @@
+import { nanoid } from "nanoid";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import Button from "../common/Button";
 import styles from "./CreateBoard.module.css";
-import { useFormik } from "formik";
 
 const CreateBoard = ({ visible, onDismiss }) => {
   const formik = useFormik({
@@ -10,8 +12,15 @@ const CreateBoard = ({ visible, onDismiss }) => {
       title: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      const data = {
+        id: nanoid(),
+        ...values,
+      };
+      console.log(data);
     },
+    validationSchema: Yup.object({
+      title: Yup.string().max(512).required(),
+    }),
   });
 
   return (
@@ -37,7 +46,12 @@ const CreateBoard = ({ visible, onDismiss }) => {
               />
             </div>
             <div className={styles.bottom}>
-              <Button type="submit" small value="Create board" />
+              <Button
+                type="submit"
+                small
+                value="Create board"
+                disabled={!formik.isValid}
+              />
             </div>
           </form>
         </div>
