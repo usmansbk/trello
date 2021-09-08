@@ -75,7 +75,7 @@ const Card = memo(({ title, id, index, onPressItem }) => {
   );
 });
 
-const CardList = memo(({ taskIds }) => {
+const CardList = memo(({ taskIds, columnTitle }) => {
   const selectTaskByIds = useCallback(makeSelectTasksByIds, []);
   const tasks = useSelector(selectTaskByIds(taskIds));
 
@@ -96,7 +96,12 @@ const CardList = memo(({ taskIds }) => {
         />
       ))}
       {!!selectedId && (
-        <Details id={selectedId} visible onDismiss={onDismiss} />
+        <Details
+          id={selectedId}
+          columnTitle={columnTitle}
+          visible
+          onDismiss={onDismiss}
+        />
       )}
     </>
   );
@@ -132,7 +137,7 @@ const Column = memo(({ columnId, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {<CardList taskIds={taskIds} />}
+                  {<CardList columnTitle={title} taskIds={taskIds} />}
                   {provided.placeholder}
                   {showComposer && <AddCard onCancel={toggleComposer} />}
                 </div>

@@ -61,10 +61,9 @@ const DetailsInput = memo(({ placeholder }) => {
   );
 });
 
-const Details = memo(({ id, visible, onDismiss }) => {
+const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
   const task = useSelector((state) => state.tasks[id]);
   const { title } = task;
-  const listTitle = "Todo";
 
   return (
     <Modal
@@ -78,7 +77,7 @@ const Details = memo(({ id, visible, onDismiss }) => {
           <Icon name="fa-pen-alt" className={styles.icon} />
           <div className={styles.headerContent}>
             <Title title={title} />
-            <span>in list {listTitle}</span>
+            <span>{columnTitle}</span>
           </div>
           <button className={styles.closeButton} onClick={onDismiss}>
             <Icon name="fa-times" />
