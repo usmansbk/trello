@@ -4,6 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
 import IconButton from "../common/Button/IconButton";
+import { useForm } from "react-hook-form";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
@@ -12,20 +13,16 @@ import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 
 const ColumnHeader = memo(({ title, ...props }) => {
   const [edit, setEdit] = useState(false);
-  const [value, setValue] = useState(title);
+  const { register, handleSubmit } = useForm();
 
   const toggleEdit = useCallback(() => {
     setEdit(!edit);
   }, [edit]);
 
-  const onChange = useCallback((e) => {
-    setValue(e.target.value);
-  }, []);
-
-  const onSubmit = useCallback(() => {
-    console.log(value);
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
     toggleEdit();
-  }, [toggleEdit, value]);
+  });
 
   const handleEnter = useCallback(
     (e) => {
@@ -41,19 +38,19 @@ const ColumnHeader = memo(({ title, ...props }) => {
     <div className={styles.columnHeader} {...props}>
       {edit ? (
         <TextareaAutosize
-          id="title"
-          name="title"
-          value={value}
+          {...register("title", {
+            required: true,
+            value: title,
+          })}
           onKeyDown={handleEnter}
-          onChange={onChange}
+          onBlur={onSubmit}
           spellCheck={false}
           className={clsx(styles.columnTitle, styles.editTitle)}
           autoFocus
-          onBlur={onSubmit}
         />
       ) : (
         <h2 onClick={toggleEdit} className={styles.columnTitle}>
-          {value}
+          {title}
         </h2>
       )}
       <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
