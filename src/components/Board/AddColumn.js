@@ -13,9 +13,9 @@ import styles from "./AddColumn.module.css";
 const Input = memo(({ onCancel }) => {
   const dispatch = useDispatch();
   const { params } = useRouteMatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = handleSubmit((data) =>
+  const onSubmit = handleSubmit((data) => {
     dispatch(
       createColumn({
         boardId: params.id,
@@ -24,8 +24,9 @@ const Input = memo(({ onCancel }) => {
           id: nanoid(),
         },
       })
-    )
-  );
+    );
+    reset();
+  });
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
