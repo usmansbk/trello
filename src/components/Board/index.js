@@ -1,8 +1,9 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { confirmAlert } from "react-confirm-alert";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
@@ -10,6 +11,7 @@ import { deleteBoard, dragColumn } from "../../redux/boards";
 import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const BoardTitle = memo(({ title }) => {
   const { register, handleSubmit } = useForm();
@@ -62,17 +64,31 @@ const Board = () => {
     return dispatch(dragTask({ result }));
   };
 
+  const handleDelete = useCallback(() => {
+    confirmAlert({
+      title: "Delete this board?",
+      message:
+        "This action will permanently delete all your card. You cant undo this action",
+      buttons: [
+        {
+          label: "Yes, Delete",
+          onClick: () => {
+            history.replace("/");
+            dispatch(deleteBoard(id));
+          },
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  }, [dispatch, history, id]);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <BoardTitle title={board.title} />
-        <MenuButton
-          name="fa-trash"
-          onClick={() => {
-            history.replace("/");
-            dispatch(deleteBoard(id));
-          }}
-        />
+        <MenuButton name="fa-trash" onClick={handleDelete} />
       </header>
       <div className={styles.content}>
         <DragDropContext onDragEnd={onDragEnd}>
