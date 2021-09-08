@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import AutosizeInput from "react-input-autosize";
+// import AutosizeInput from "react-input-autosize";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
