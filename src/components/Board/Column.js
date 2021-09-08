@@ -8,6 +8,7 @@ import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
+import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 
 const ColumnHeader = memo(({ title, ...props }) => {
   const [edit, setEdit] = useState(false);
@@ -74,15 +75,18 @@ const Card = memo(({ title, id, index, onPressItem }) => {
   );
 });
 
-const CardList = memo(({ data }) => {
-  const [seletedId, setSelectedId] = useState(null);
+const CardList = memo(({ taskIds, columnTitle }) => {
+  const selectTaskByIds = useCallback(makeSelectTasksByIds, []);
+  const tasks = useSelector(selectTaskByIds(taskIds));
+
+  const [selectedId, setSelectedId] = useState(null);
 
   const onPressCard = useCallback((id) => setSelectedId(id), []);
   const onDismiss = useCallback(() => setSelectedId(null), []);
 
   return (
     <>
-      {data.map(({ id, title }, index) => (
+      {tasks.map(({ id, title }, index) => (
         <Card
           key={id}
           id={id}
@@ -91,16 +95,20 @@ const CardList = memo(({ data }) => {
           onPressItem={onPressCard}
         />
       ))}
-      <Details id={seletedId} visible={!!seletedId} onDismiss={onDismiss} />
+      {!!selectedId && (
+        <Details
+          id={selectedId}
+          columnTitle={columnTitle}
+          visible
+          onDismiss={onDismiss}
+        />
+      )}
     </>
   );
 });
 
-const Column = memo(({ column, index }) => {
-  const { title, id, taskIds } = column;
-
-  const taskMap = useSelector((state) => state.tasks);
-  const tasks = taskIds.map((taskId) => taskMap[taskId]);
+const Column = memo(({ columnId, index }) => {
+  const { title, id, taskIds } = useSelector(selectColumnById(columnId));
 
   const [showComposer, setComposerVisible] = useState(false);
 
@@ -129,7 +137,7 @@ const Column = memo(({ column, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {<CardList data={tasks} />}
+                  {<CardList columnTitle={title} taskIds={taskIds} />}
                   {provided.placeholder}
                   {showComposer && <AddCard onCancel={toggleComposer} />}
                 </div>
