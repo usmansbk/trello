@@ -1,6 +1,3 @@
-import { nanoid } from "nanoid";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import clsx from "clsx";
 import { memo, useState } from "react";
 import CardButton from "../common/Button/CardButton";
@@ -9,35 +6,16 @@ import Icon from "../common/Icon";
 import styles from "./AddColumn.module.css";
 
 const Input = memo(({ onCancel }) => {
-  const formik = useFormik({
-    initialValues: {
-      title: "",
-    },
-    onSubmit: (values) => {
-      const data = {
-        id: nanoid(),
-        ...values,
-      };
-      console.log(data);
-    },
-    validationSchema: Yup.object({
-      title: Yup.string().max(512).required(),
-    }),
-  });
-
   return (
-    <form className={styles.form} onSubmit={formik.handleSubmit}>
+    <form className={styles.form}>
       <input
-        id="title"
-        name="title"
-        value={formik.values.title}
-        onChange={formik.handleChange}
+        onBlur={onCancel}
         autoFocus
         className={styles.input}
         placeholder="Enter list title..."
       />
       <div className={styles.actions}>
-        <CardButton type="submit" text="Add list" />
+        <CardButton text="Add list" onClick={onCancel} />
         <IconButton name="fa-times" onClick={onCancel} />
       </div>
     </form>
