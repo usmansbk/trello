@@ -1,5 +1,5 @@
 import { useState, memo, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
@@ -10,17 +10,26 @@ import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
+import { renameColumn } from "../../redux/columns";
 
-const ColumnHeader = memo(({ title, ...props }) => {
+const ColumnHeader = memo(({ id, title, ...props }) => {
+  const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const toggleEdit = useCallback(() => {
     setEdit(!edit);
   }, [edit]);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    if (formState.isDirty) {
+      dispatch(
+        renameColumn({
+          id,
+          ...data,
+        })
+      );
+    }
     toggleEdit();
   });
 
@@ -148,7 +157,11 @@ const Column = memo(({ columnId, index }) => {
           )}
         >
           <div className={styles.content}>
-            <ColumnHeader title={title} {...provided.dragHandleProps} />
+            <ColumnHeader
+              id={columnId}
+              title={title}
+              {...provided.dragHandleProps}
+            />
             <Droppable droppableId={columnId} type="task">
               {(provided) => (
                 <div

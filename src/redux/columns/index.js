@@ -21,6 +21,12 @@ const initialData = {
 };
 
 const DRAG_TASK = "columns/drag-task";
+const RENAME_COLUMN = "columns/rename";
+
+export const renameColumn = (payload) => ({
+  type: RENAME_COLUMN,
+  payload,
+});
 
 export const dragTask = (payload) => ({
   type: DRAG_TASK,
@@ -81,6 +87,20 @@ const reducer = (state = initialData, action) => {
         [column.id]: {
           ...column,
           taskIds: [],
+        },
+      };
+    }
+    case RENAME_COLUMN: {
+      const {
+        payload: { id, title },
+      } = action;
+      const column = state[id];
+
+      return {
+        ...state,
+        [id]: {
+          ...column,
+          title,
         },
       };
     }

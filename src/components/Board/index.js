@@ -15,10 +15,10 @@ import Confirm from "../common/Modal/Confirm";
 
 const BoardTitle = memo(({ title, id }) => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    if (title !== data.title) {
+    if (formState.isDirty) {
       dispatch(
         renameBoard({
           id,
