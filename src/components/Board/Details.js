@@ -1,22 +1,10 @@
-import { useState, memo } from "react";
+import { memo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import styles from "./Details.module.css";
-
-const Title = memo(({ title }) => {
-  const [value, setValue] = useState(title);
-
-  return (
-    <TextareaAutosize
-      spellCheck={false}
-      value={value}
-      className={styles.title}
-      onChange={(e) => setValue(e.target.value)}
-    />
-  );
-});
+import { useForm } from "react-hook-form";
 
 const Subtitle = memo(({ title, icon }) => {
   return (
@@ -27,19 +15,22 @@ const Subtitle = memo(({ title, icon }) => {
   );
 });
 
-const DetailsInput = memo(({ placeholder }) => {
-  return (
-    <TextareaAutosize
-      className={styles.detailsInput}
-      spellCheck={false}
-      placeholder={placeholder}
-    />
-  );
-});
-
 const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
   const task = useSelector((state) => state.tasks[id]);
-  const { title } = task;
+  const { title, description = "" } = task;
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit((data) => console.log(data));
+
+  const handleEnter = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        onSubmit();
+      }
+      e.stopPropagation();
+    },
+    [onSubmit]
+  );
 
   return (
     <Modal
@@ -52,7 +43,17 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
         <header className={styles.header}>
           <Icon name="fa-pen-alt" className={styles.icon} />
           <div className={styles.headerContent}>
-            <Title title={title} />
+            <TextareaAutosize
+              {...register("title", {
+                required: true,
+                maxLength: 512,
+                value: title,
+              })}
+              spellCheck={false}
+              className={styles.title}
+              onKeyDown={handleEnter}
+              onBlur={onSubmit}
+            />
             <span>{columnTitle}</span>
           </div>
           <button className={styles.closeButton} onClick={onDismiss}>
@@ -62,7 +63,17 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
         <div>
           <Subtitle icon="fa-align-left" title="Description" />
           <div className={styles.gutter}>
-            <DetailsInput placeholder="Add a more detailed description..." />
+            <TextareaAutosize
+              {...register("description", {
+                value: description,
+                maxLength: 512,
+              })}
+              className={styles.detailsInput}
+              spellCheck={false}
+              placeholder="Add a more detailed description..."
+              onKeyDown={handleEnter}
+              onBlur={onSubmit}
+            />
           </div>
         </div>
       </div>

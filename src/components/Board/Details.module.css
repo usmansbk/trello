@@ -112,7 +112,7 @@
   border: none;
   color: #172b4d;
   transition-duration: 85ms;
-  transition-property: border-color, box-shadow;
+  transition-property: border-color, box-shadow, min-height;
   transition-timing-function: ease;
   resize: none;
 }
