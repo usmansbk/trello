@@ -1,5 +1,5 @@
 import { useState, memo, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import clsx from "clsx";
@@ -10,17 +10,30 @@ import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
+import { renameColumn } from "../../redux/columns";
 
-const ColumnHeader = memo(({ title, ...props }) => {
+const ColumnHeader = memo(({ id, title, ...props }) => {
+  const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty },
+  } = useForm();
 
   const toggleEdit = useCallback(() => {
     setEdit(!edit);
   }, [edit]);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    if (isDirty) {
+      dispatch(
+        renameColumn({
+          id,
+          ...data,
+        })
+      );
+    }
     toggleEdit();
   });
 
@@ -28,8 +41,8 @@ const ColumnHeader = memo(({ title, ...props }) => {
     (e) => {
       if (e.key === "Enter") {
         onSubmit();
+        e.preventDefault();
       }
-      e.stopPropagation();
     },
     [onSubmit]
   );
@@ -127,7 +140,7 @@ const CardList = memo(({ taskIds, columnTitle }) => {
 });
 
 const Column = memo(({ columnId, index }) => {
-  const { title, id, taskIds } = useSelector(selectColumnById(columnId));
+  const { title, taskIds } = useSelector(selectColumnById(columnId));
 
   const [showComposer, setComposerVisible] = useState(false);
 
@@ -137,7 +150,7 @@ const Column = memo(({ columnId, index }) => {
   );
 
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable draggableId={columnId} index={index}>
       {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
@@ -148,8 +161,12 @@ const Column = memo(({ columnId, index }) => {
           )}
         >
           <div className={styles.content}>
-            <ColumnHeader title={title} {...provided.dragHandleProps} />
-            <Droppable droppableId={id} type="task">
+            <ColumnHeader
+              id={columnId}
+              title={title}
+              {...provided.dragHandleProps}
+            />
+            <Droppable droppableId={columnId} type="task">
               {(provided) => (
                 <div
                   ref={provided.innerRef}
@@ -158,7 +175,9 @@ const Column = memo(({ columnId, index }) => {
                 >
                   {<CardList columnTitle={title} taskIds={taskIds} />}
                   {provided.placeholder}
-                  {showComposer && <AddCard onCancel={toggleComposer} />}
+                  {showComposer && (
+                    <AddCard columnId={columnId} onCancel={toggleComposer} />
+                  )}
                 </div>
               )}
             </Droppable>

@@ -1,23 +1,36 @@
+import { CREATE_COLUMN } from "../actions";
+
 const initialData = {
   "board-1": {
     id: "board-1",
-    title: "MintBean Project",
+    title: "MintBean Hackathon",
     columnIds: ["col-1", "col-2", "col-3"],
   },
-  "board-2": {
-    id: "board-2",
-    title: "React Capstone",
-    columnIds: [],
-  },
-  "board-3": {
-    id: "board-3",
-    title: "Side Project",
-    columnIds: [],
-  },
-  byIds: ["board-1", "board-2", "board-3"],
+  byIds: ["board-1"],
 };
 
+const CREATE_BOARD = "boards/create";
+const DELETE_BOARD = "boards/delete";
+const RENAME_BOARD = "boards/rename";
 const DRAG_COLUMN = "boards/drag-column";
+
+export const createBoard = (data) => ({
+  type: CREATE_BOARD,
+  payload: {
+    ...data,
+    columnIds: [],
+  },
+});
+
+export const renameBoard = (payload) => ({
+  type: RENAME_BOARD,
+  payload,
+});
+
+export const deleteBoard = (id) => ({
+  type: DELETE_BOARD,
+  id,
+});
 
 export const dragColumn = (payload) => ({
   type: DRAG_COLUMN,
@@ -45,6 +58,56 @@ const reorderColumns = (state, action) => {
 
 const reducer = (state = initialData, action) => {
   switch (action.type) {
+    case CREATE_BOARD: {
+      const { payload } = action;
+      return {
+        ...state,
+        [payload.id]: payload,
+        byIds: [...state.byIds, payload.id],
+      };
+    }
+    case CREATE_COLUMN: {
+      const {
+        payload: { boardId, column },
+      } = action;
+      const board = state[boardId];
+
+      return {
+        ...state,
+        [boardId]: {
+          ...board,
+          columnIds: [...board.columnIds, column.id],
+        },
+      };
+    }
+    case RENAME_BOARD: {
+      const {
+        payload: { id, title },
+      } = action;
+      const board = state[id];
+
+      return {
+        ...state,
+        [id]: {
+          ...board,
+          title,
+        },
+      };
+    }
+    case DELETE_BOARD: {
+      return {
+        ...Object.keys(state).reduce((result, key) => {
+          if (key === action.id) {
+            return result;
+          }
+          return {
+            ...result,
+            [key]: state[key],
+          };
+        }, {}),
+        byIds: state.byIds.filter((id) => id !== action.id),
+      };
+    }
     case DRAG_COLUMN: {
       return reorderColumns(state, action);
     }

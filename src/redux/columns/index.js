@@ -1,3 +1,5 @@
+import { CREATE_COLUMN, CREATE_TASK } from "../actions";
+
 const initialData = {
   "col-1": {
     id: "col-1",
@@ -19,6 +21,12 @@ const initialData = {
 };
 
 const DRAG_TASK = "columns/drag-task";
+const RENAME_COLUMN = "columns/rename";
+
+export const renameColumn = (payload) => ({
+  type: RENAME_COLUMN,
+  payload,
+});
 
 export const dragTask = (payload) => ({
   type: DRAG_TASK,
@@ -70,6 +78,46 @@ const reorderTasks = (state, action) => {
 
 const reducer = (state = initialData, action) => {
   switch (action.type) {
+    case CREATE_COLUMN: {
+      const {
+        payload: { column },
+      } = action;
+      return {
+        ...state,
+        [column.id]: {
+          ...column,
+          taskIds: [],
+        },
+      };
+    }
+    case RENAME_COLUMN: {
+      const {
+        payload: { id, title },
+      } = action;
+      const column = state[id];
+
+      return {
+        ...state,
+        [id]: {
+          ...column,
+          title,
+        },
+      };
+    }
+    case CREATE_TASK: {
+      const {
+        payload: { columnId, task },
+      } = action;
+      const column = state[columnId];
+
+      return {
+        ...state,
+        [columnId]: {
+          ...column,
+          taskIds: [...column.taskIds, task.id],
+        },
+      };
+    }
     case DRAG_TASK: {
       return reorderTasks(state, action);
     }

@@ -1,3 +1,5 @@
+import { CREATE_TASK } from "../actions";
+
 const initialData = {
   "task-1": {
     id: "task-1",
@@ -51,6 +53,16 @@ const initialData = {
 
 const reducer = (state = initialData, action) => {
   switch (action.type) {
+    case CREATE_TASK: {
+      const {
+        payload: { task },
+      } = action;
+
+      return {
+        ...state,
+        [task.id]: task,
+      };
+    }
     default:
       return state;
   }

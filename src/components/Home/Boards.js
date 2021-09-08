@@ -5,41 +5,31 @@ import CreateBoard from "./CreateBoard";
 import styles from "./Boards.module.css";
 import { useSelector } from "react-redux";
 
-const Details = memo(({ title }) => {
-  return (
-    <div className={styles.details}>
-      <h3 className={styles.name}>{title}</h3>
-    </div>
-  );
-});
-
 const Tile = memo(({ id, title }) => {
   return (
     <div className={styles.item}>
       <Link to={`/${id}`} className={styles.tile}>
-        <span className={styles.fade} />
-        <Details id={id} title={title} />
+        <div className={styles.details}>
+          <h3 className={styles.name}>{title}</h3>
+        </div>
       </Link>
     </div>
   );
 });
 
-const CreateBoardTile = memo(({ className }) => {
+const CreateBoardTile = memo(() => {
   const [isOpen, setOpen] = useState(false);
   const toggleModal = useCallback(() => setOpen((value) => !value), []);
 
   return (
-    <div className={className}>
+    <div className={clsx(styles.item, styles.button)}>
       <button
         onClick={toggleModal}
-        className={clsx(
-          styles.tile,
-          styles.addButton,
-          styles.details,
-          styles.center
-        )}
+        className={clsx(styles.tile, styles.addButton)}
       >
-        Create new board
+        <div className={clsx(styles.details, styles.center)}>
+          Create new board
+        </div>
       </button>
       <CreateBoard visible={isOpen} onDismiss={toggleModal} />
     </div>
@@ -56,7 +46,7 @@ const List = memo(() => {
 
         return <Tile key={id} id={id} title={title} />;
       })}
-      <CreateBoardTile className={styles.item} />
+      <CreateBoardTile />
     </div>
   );
 });

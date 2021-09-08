@@ -4,18 +4,33 @@ import TextareaAutosize from "react-textarea-autosize";
 import IconButton from "../common/Button/IconButton";
 import CardButton from "../common/Button/CardButton";
 import styles from "./AddCard.module.css";
+import { useDispatch } from "react-redux";
+import { createTask } from "../../redux/actions";
+import { nanoid } from "nanoid";
 
-const AddCard = ({ onCancel }) => {
-  const { register, handleSubmit } = useForm();
+const AddCard = ({ onCancel, columnId }) => {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data) => {
+    dispatch(
+      createTask({
+        task: {
+          id: nanoid(),
+          ...data,
+        },
+        columnId,
+      })
+    );
+    reset();
+  });
 
   const handleEnter = useCallback(
     (e) => {
       if (e.key === "Enter") {
         onSubmit();
+        e.preventDefault();
       }
-      e.stopPropagation();
     },
     [onSubmit]
   );
