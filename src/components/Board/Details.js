@@ -1,36 +1,10 @@
-import { useState, useCallback, memo } from "react";
+import { memo, useCallback } from "react";
 import { useSelector } from "react-redux";
-import clsx from "clsx";
 import TextareaAutosize from "react-textarea-autosize";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import styles from "./Details.module.css";
-
-const Title = memo(({ title }) => {
-  const [value, setValue] = useState(title);
-  const [edit, setEdit] = useState(false);
-
-  const toggleEdit = useCallback(() => setEdit((mode) => !mode), []);
-
-  return (
-    <div className={styles.titleContainer}>
-      {edit ? (
-        <TextareaAutosize
-          autoFocus
-          spellCheck={false}
-          value={value}
-          onBlur={toggleEdit}
-          className={clsx(styles.title, styles.editTitle)}
-          onChange={(e) => setValue(e.target.value)}
-        />
-      ) : (
-        <h2 onClick={toggleEdit} className={styles.title}>
-          {value}
-        </h2>
-      )}
-    </div>
-  );
-});
+import { useForm } from "react-hook-form";
 
 const Subtitle = memo(({ title, icon }) => {
   return (
@@ -41,29 +15,22 @@ const Subtitle = memo(({ title, icon }) => {
   );
 });
 
-const DetailsInput = memo(({ placeholder }) => {
-  const [edit, setEdit] = useState(false);
-
-  const toggleEdit = useCallback(() => setEdit((mode) => !mode), []);
-
-  return edit ? (
-    <TextareaAutosize
-      onBlur={toggleEdit}
-      className={styles.detailsInput}
-      autoFocus
-      spellCheck={false}
-      placeholder={placeholder}
-    />
-  ) : (
-    <p onClick={toggleEdit} className={styles.placeholder}>
-      {placeholder}
-    </p>
-  );
-});
-
 const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
   const task = useSelector((state) => state.tasks[id]);
-  const { title } = task;
+  const { title, description = "" } = task;
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit((data) => console.log(data));
+
+  const handleEnter = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        onSubmit();
+      }
+      e.stopPropagation();
+    },
+    [onSubmit]
+  );
 
   return (
     <Modal
@@ -76,7 +43,17 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
         <header className={styles.header}>
           <Icon name="fa-pen-alt" className={styles.icon} />
           <div className={styles.headerContent}>
-            <Title title={title} />
+            <TextareaAutosize
+              {...register("title", {
+                required: true,
+                maxLength: 512,
+                value: title,
+              })}
+              spellCheck={false}
+              className={styles.title}
+              onKeyDown={handleEnter}
+              onBlur={onSubmit}
+            />
             <span>{columnTitle}</span>
           </div>
           <button className={styles.closeButton} onClick={onDismiss}>
@@ -86,7 +63,17 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
         <div>
           <Subtitle icon="fa-align-left" title="Description" />
           <div className={styles.gutter}>
-            <DetailsInput placeholder="Add a more detailed description..." />
+            <TextareaAutosize
+              {...register("description", {
+                value: description,
+                maxLength: 512,
+              })}
+              className={styles.detailsInput}
+              spellCheck={false}
+              placeholder="Add a more detailed description..."
+              onKeyDown={handleEnter}
+              onBlur={onSubmit}
+            />
           </div>
         </div>
       </div>
