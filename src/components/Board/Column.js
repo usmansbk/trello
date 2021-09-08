@@ -74,7 +74,11 @@ const Card = memo(({ title, id, index, onPressItem }) => {
   );
 });
 
-const CardList = memo(({ data }) => {
+const CardList = memo(({ taskIds }) => {
+  const taskMap = useSelector((state) => state.tasks);
+
+  const tasks = taskIds.map((taskId) => taskMap[taskId]);
+
   const [seletedId, setSelectedId] = useState(null);
 
   const onPressCard = useCallback((id) => setSelectedId(id), []);
@@ -82,7 +86,7 @@ const CardList = memo(({ data }) => {
 
   return (
     <>
-      {data.map(({ id, title }, index) => (
+      {tasks.map(({ id, title }, index) => (
         <Card
           key={id}
           id={id}
@@ -96,11 +100,10 @@ const CardList = memo(({ data }) => {
   );
 });
 
-const Column = memo(({ column, index }) => {
-  const { title, id, taskIds } = column;
-
-  const taskMap = useSelector((state) => state.tasks);
-  const tasks = taskIds.map((taskId) => taskMap[taskId]);
+const Column = memo(({ columnId, index }) => {
+  const { title, id, taskIds } = useSelector(
+    (state) => state.columns[columnId]
+  );
 
   const [showComposer, setComposerVisible] = useState(false);
 
@@ -129,7 +132,7 @@ const Column = memo(({ column, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {<CardList data={tasks} />}
+                  {<CardList taskIds={taskIds} />}
                   {provided.placeholder}
                   {showComposer && <AddCard onCancel={toggleComposer} />}
                 </div>

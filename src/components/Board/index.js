@@ -42,9 +42,7 @@ const Board = () => {
   } = useRouteMatch();
   const dispatch = useDispatch();
 
-  const { boards, columns } = useSelector((state) => state);
-
-  const board = boards[id];
+  const board = useSelector((state) => state.boards[id]);
 
   const onDragEnd = (result) => {
     const { source, destination, type } = result;
@@ -87,10 +85,8 @@ const Board = () => {
                 {...provided.droppableProps}
               >
                 {board.columnIds.map((columnId, index) => {
-                  const column = columns[columnId];
-
                   return (
-                    <Column key={columnId} column={column} index={index} />
+                    <Column key={columnId} columnId={columnId} index={index} />
                   );
                 })}
                 {provided.placeholder}
