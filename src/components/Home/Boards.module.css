@@ -55,8 +55,7 @@
   text-overflow: ellipsis;
   font-size: 16px;
   font-weight: 700;
-  /* color: white; */
-  color: tan;
+  color: white;
   line-height: 20px;
   word-wrap: break-word;
 }
