@@ -127,7 +127,7 @@ const CardList = memo(({ taskIds, columnTitle }) => {
 });
 
 const Column = memo(({ columnId, index }) => {
-  const { title, id, taskIds } = useSelector(selectColumnById(columnId));
+  const { title, taskIds } = useSelector(selectColumnById(columnId));
 
   const [showComposer, setComposerVisible] = useState(false);
 
@@ -137,7 +137,7 @@ const Column = memo(({ columnId, index }) => {
   );
 
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable draggableId={columnId} index={index}>
       {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
@@ -149,7 +149,7 @@ const Column = memo(({ columnId, index }) => {
         >
           <div className={styles.content}>
             <ColumnHeader title={title} {...provided.dragHandleProps} />
-            <Droppable droppableId={id} type="task">
+            <Droppable droppableId={columnId} type="task">
               {(provided) => (
                 <div
                   ref={provided.innerRef}
@@ -158,7 +158,9 @@ const Column = memo(({ columnId, index }) => {
                 >
                   {<CardList columnTitle={title} taskIds={taskIds} />}
                   {provided.placeholder}
-                  {showComposer && <AddCard onCancel={toggleComposer} />}
+                  {showComposer && (
+                    <AddCard columnId={columnId} onCancel={toggleComposer} />
+                  )}
                 </div>
               )}
             </Droppable>
