@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  position: relative;
+  background-color: rgb(0, 121, 191);
+  border-radius: 3px;
+  box-sizing: border-box;
+  height: 96px;
+  width: 296px;
+}
+
+.form {
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom {
+  align-self: flex-start;
+}
+
+.close {
+  color: white;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  background-color: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  height: 20px;
+  width: 16px;
+}

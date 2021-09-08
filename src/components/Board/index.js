@@ -11,7 +11,7 @@ import { deleteBoard, dragColumn } from "../../redux/boards";
 import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
-import "react-confirm-alert/src/react-confirm-alert.css";
+import Confirm from "../common/Modal/Confirm";
 
 const BoardTitle = memo(({ title }) => {
   const { register, handleSubmit } = useForm();
@@ -66,22 +66,19 @@ const Board = () => {
 
   const handleDelete = useCallback(() => {
     confirmAlert({
-      title: "Delete this board?",
-      message:
-        "This action will permanently delete all your cards. You cant undo this action.",
-      buttons: [
-        {
-          label: "Yes, Delete",
-          onClick: () => {
+      customUI: ({ onClose }) => (
+        <Confirm
+          visible
+          title="Delete this board?"
+          onDismiss={onClose}
+          buttonText="Yes, delete"
+          onConfirm={() => {
             history.replace("/");
             dispatch(deleteBoard(id));
-          },
-        },
-        {
-          label: "No",
-        },
-      ],
-      overlayClassName: styles.overlay,
+            onClose();
+          }}
+        />
+      ),
     });
   }, [dispatch, history, id]);
 
