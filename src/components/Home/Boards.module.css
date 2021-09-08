@@ -14,7 +14,6 @@
 .title {
   font-weight: 700;
   line-height: 24px;
-  text-overflow: ellipsis;
   font-size: 16px;
   margin: 20px 0;
 }
@@ -27,38 +26,37 @@
 }
 
 .item {
+  display: flex;
   box-sizing: border-box;
   cursor: pointer;
   margin-bottom: 2%;
-  position: relative;
 }
 
 .tile {
   background-color: rgb(0, 121, 191);
   border-radius: 3px;
-  display: block;
   padding: 8px;
   text-decoration: none;
-  position: relative;
 }
 
 .details {
-  display: flex;
-  flex-direction: column;
+  background-color: red;
   min-height: 80px;
-  justify-content: space-between;
+  height: 80px;
 }
 
 .name {
   text-overflow: ellipsis;
   font-size: 16px;
   font-weight: 700;
-  color: white;
+  /* color: white; */
+  color: tan;
   line-height: 20px;
   word-wrap: break-word;
 }
 
 .addButton {
+  align-items: center;
   border: none;
   width: 100%;
   height: 100%;
@@ -76,7 +74,7 @@
 
 .center {
   display: flex;
-  height: 100%;
+  flex-grow: 1;
   align-items: center;
   justify-content: center;
 }
