@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { nanoid } from "nanoid";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
@@ -9,11 +10,14 @@ import { createBoard } from "../../redux/boards";
 
 const CreateBoard = ({ visible, onDismiss }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = handleSubmit((data) =>
-    dispatch(createBoard({ ...data, id: nanoid() }))
-  );
+  const onSubmit = handleSubmit((data) => {
+    const id = nanoid();
+    dispatch(createBoard({ ...data, id }));
+    history.push(`/${id}`);
+  });
 
   return (
     <Modal
