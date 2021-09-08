@@ -45,7 +45,7 @@
 .details {
   display: flex;
   flex-direction: column;
-  height: 80px;
+  min-height: 80px;
   justify-content: space-between;
 }
 
@@ -76,6 +76,7 @@
 
 .center {
   display: flex;
+  height: 100%;
   align-items: center;
   justify-content: center;
 }

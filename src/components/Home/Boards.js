@@ -24,22 +24,19 @@ const Tile = memo(({ id, title }) => {
   );
 });
 
-const CreateBoardTile = memo(({ className }) => {
+const CreateBoardTile = memo(() => {
   const [isOpen, setOpen] = useState(false);
   const toggleModal = useCallback(() => setOpen((value) => !value), []);
 
   return (
-    <div className={className}>
+    <div className={styles.item}>
       <button
         onClick={toggleModal}
-        className={clsx(
-          styles.tile,
-          styles.addButton,
-          styles.details,
-          styles.center
-        )}
+        className={clsx(styles.tile, styles.addButton)}
       >
-        Create new board
+        <div className={clsx(styles.details, styles.center)}>
+          Create new board
+        </div>
       </button>
       <CreateBoard visible={isOpen} onDismiss={toggleModal} />
     </div>
@@ -56,7 +53,7 @@ const List = memo(() => {
 
         return <Tile key={id} id={id} title={title} />;
       })}
-      <CreateBoardTile className={styles.item} />
+      <CreateBoardTile />
     </div>
   );
 });
