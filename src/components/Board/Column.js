@@ -12,16 +12,10 @@ import Details from "./Details";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 
 const ColumnHeader = memo(({ title, ...props }) => {
-  const [edit, setEdit] = useState(false);
   const { register, handleSubmit } = useForm();
-
-  const toggleEdit = useCallback(() => {
-    setEdit(!edit);
-  }, [edit]);
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
-    toggleEdit();
   });
 
   const handleEnter = useCallback(
@@ -36,24 +30,18 @@ const ColumnHeader = memo(({ title, ...props }) => {
 
   return (
     <div className={styles.columnHeader} {...props}>
-      {edit ? (
-        <TextareaAutosize
-          {...register("title", {
-            required: true,
-            value: title,
-            maxLength: 512,
-          })}
-          onKeyDown={handleEnter}
-          onBlur={onSubmit}
-          spellCheck={false}
-          className={clsx(styles.columnTitle, styles.editTitle)}
-          autoFocus
-        />
-      ) : (
-        <h2 onClick={toggleEdit} className={styles.columnTitle}>
-          {title}
-        </h2>
-      )}
+      <TextareaAutosize
+        {...register("title", {
+          required: true,
+          value: title,
+          maxLength: 512,
+        })}
+        onKeyDown={handleEnter}
+        onBlur={onSubmit}
+        spellCheck={false}
+        className={clsx(styles.columnTitle, styles.editTitle)}
+        autoFocus
+      />
       <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
     </div>
   );
