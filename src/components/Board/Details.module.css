@@ -19,7 +19,6 @@
   padding: 4px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
   overflow: hidden;
 }
 
@@ -33,8 +32,8 @@
 .icon {
   color: #42526e;
   font-size: 20px;
-  width: 32px;
-  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
   line-height: 32px;
   align-self: flex-start;
 }
@@ -137,6 +136,6 @@
   }
 
   .gutter {
-    margin-left: 40px;
+    margin-left: 32px;
   }
 }
