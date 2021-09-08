@@ -41,6 +41,7 @@ const ColumnHeader = memo(({ title, ...props }) => {
           {...register("title", {
             required: true,
             value: title,
+            maxLength: 512,
           })}
           onKeyDown={handleEnter}
           onBlur={onSubmit}

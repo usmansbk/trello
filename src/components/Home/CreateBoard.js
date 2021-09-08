@@ -23,7 +23,7 @@ const CreateBoard = ({ visible, onDismiss }) => {
           <form onSubmit={onSubmit} className={styles.form}>
             <div className={styles.top}>
               <input
-                {...register("title", { required: true })}
+                {...register("title", { required: true, maxLength: 512 })}
                 autoFocus
                 className={styles.input}
                 placeholder="Add board title"
