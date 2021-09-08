@@ -1,21 +1,25 @@
 import clsx from "clsx";
 import { memo, useState } from "react";
+import { useForm } from "react-hook-form";
 import CardButton from "../common/Button/CardButton";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import styles from "./AddColumn.module.css";
 
 const Input = memo(({ onCancel }) => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = handleSubmit((data) => console.log(data));
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <input
-        onBlur={onCancel}
+        {...register("title", { required: true, maxLength: 512 })}
         autoFocus
         className={styles.input}
         placeholder="Enter list title..."
       />
       <div className={styles.actions}>
-        <CardButton text="Add list" onClick={onCancel} />
+        <CardButton type="submit" text="Add list" />
         <IconButton name="fa-times" onClick={onCancel} />
       </div>
     </form>
