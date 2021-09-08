@@ -8,7 +8,7 @@ import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
-import { selectColumnById } from "../../redux/selectors";
+import { selectColumnById, selectTaskByIds } from "../../redux/selectors";
 
 const ColumnHeader = memo(({ title, ...props }) => {
   const [edit, setEdit] = useState(false);
@@ -76,9 +76,8 @@ const Card = memo(({ title, id, index, onPressItem }) => {
 });
 
 const CardList = memo(({ taskIds }) => {
-  const taskMap = useSelector((state) => state.tasks);
-
-  const tasks = taskIds.map((taskId) => taskMap[taskId]);
+  const tasks = useSelector(selectTaskByIds(taskIds));
+  console.log("render list");
 
   const [seletedId, setSelectedId] = useState(null);
 
