@@ -1,3 +1,5 @@
+import { CREATE_COLUMN } from "../actions";
+
 const initialData = {
   "col-1": {
     id: "col-1",
@@ -70,6 +72,18 @@ const reorderTasks = (state, action) => {
 
 const reducer = (state = initialData, action) => {
   switch (action.type) {
+    case CREATE_COLUMN: {
+      const {
+        payload: { column },
+      } = action;
+      return {
+        ...state,
+        [column.id]: {
+          ...column,
+          taskIds: [],
+        },
+      };
+    }
     case DRAG_TASK: {
       return reorderTasks(state, action);
     }

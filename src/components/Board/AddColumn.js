@@ -1,14 +1,31 @@
 import clsx from "clsx";
+import { nanoid } from "nanoid";
 import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useRouteMatch } from "react-router";
+import { createColumn } from "../../redux/actions";
 import CardButton from "../common/Button/CardButton";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import styles from "./AddColumn.module.css";
 
 const Input = memo(({ onCancel }) => {
+  const dispatch = useDispatch();
+  const { params } = useRouteMatch();
   const { register, handleSubmit } = useForm();
-  const onSubmit = handleSubmit((data) => console.log(data));
+
+  const onSubmit = handleSubmit((data) =>
+    dispatch(
+      createColumn({
+        boardId: params.id,
+        column: {
+          ...data,
+          id: nanoid(),
+        },
+      })
+    )
+  );
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

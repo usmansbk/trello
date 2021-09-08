@@ -1,3 +1,5 @@
+import { CREATE_COLUMN } from "../actions";
+
 const initialData = {
   "board-1": {
     id: "board-1",
@@ -66,6 +68,20 @@ const reducer = (state = initialData, action) => {
         ...state,
         [payload.id]: payload,
         byIds: [...state.byIds, payload.id],
+      };
+    }
+    case CREATE_COLUMN: {
+      const {
+        payload: { boardId, column },
+      } = action;
+      const board = state[boardId];
+
+      return {
+        ...state,
+        [boardId]: {
+          ...board,
+          columnIds: [...board.columnIds, column.id],
+        },
       };
     }
     case DELETE_BOARD: {
