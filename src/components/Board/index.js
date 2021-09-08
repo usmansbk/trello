@@ -24,6 +24,7 @@ const BoardTitle = memo(({ title }) => {
           maxLength: 512,
           value: title,
         })}
+        onBlur={onSubmit}
         spellCheck={false}
         className={styles.boardTitle}
       />
