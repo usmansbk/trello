@@ -56,10 +56,10 @@
 }
 
 .addButton {
+  display: flex;
+  flex-grow: 1;
   align-items: center;
   border: none;
-  width: 100%;
-  height: 100%;
   background-color: #091e420a;
   transition-duration: 85ms;
   transition-property: background-color, border-color, box-shadow;
