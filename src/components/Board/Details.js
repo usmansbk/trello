@@ -42,22 +42,13 @@ const Subtitle = memo(({ title, icon }) => {
 });
 
 const DetailsInput = memo(({ placeholder }) => {
-  const [edit, setEdit] = useState(false);
-
-  const toggleEdit = useCallback(() => setEdit((mode) => !mode), []);
-
-  return edit ? (
+  return (
     <TextareaAutosize
-      onBlur={toggleEdit}
       className={styles.detailsInput}
       autoFocus
       spellCheck={false}
       placeholder={placeholder}
     />
-  ) : (
-    <p onClick={toggleEdit} className={styles.placeholder}>
-      {placeholder}
-    </p>
   );
 });
 
