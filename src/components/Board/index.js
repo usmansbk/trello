@@ -1,7 +1,7 @@
-import { memo, useCallback, useState } from "react";
+import { memo } from "react";
+import { useForm } from "react-hook-form";
 import { useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import clsx from "clsx";
 import AutosizeInput from "react-input-autosize";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import AddColumn from "./AddColumn";
@@ -13,27 +13,19 @@ import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
 
 const BoardTitle = memo(({ title }) => {
-  const [edit, setEdit] = useState(false);
-  const [value, setValue] = useState(title);
+  const { register, handleSubmit } = useForm();
 
-  const showEdit = useCallback(() => setEdit(true), []);
-  const hideEdit = useCallback(() => setEdit(false), []);
+  const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-    <div onClick={showEdit} className={styles.headerButton}>
-      {edit ? (
-        <AutosizeInput
-          autoFocus
-          value={value}
-          spellCheck={false}
-          onChange={(e) => setValue(e.target.value)}
-          onBlur={hideEdit}
-          inputClassName={clsx(styles.boardTitle, styles.editTitle)}
-        />
-      ) : (
-        <h2 className={styles.boardTitle}>{value}</h2>
-      )}
-    </div>
+    <form onSubmit={onSubmit} className={styles.headerButton}>
+      <AutosizeInput
+        {...register("title", { required: true, maxLength: 512, value: title })}
+        autoFocus
+        spellCheck={false}
+        inputClassName={styles.boardTitle}
+      />
+    </form>
   );
 });
 
