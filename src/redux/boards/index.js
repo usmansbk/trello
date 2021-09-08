@@ -17,7 +17,16 @@ const initialData = {
   byIds: ["board-1", "board-2", "board-3"],
 };
 
+const CREATE_BOARD = "boards/create";
 const DRAG_COLUMN = "boards/drag-column";
+
+export const createBoard = (data) => ({
+  type: CREATE_BOARD,
+  payload: {
+    ...data,
+    columnIds: [],
+  },
+});
 
 export const dragColumn = (payload) => ({
   type: DRAG_COLUMN,
@@ -45,6 +54,14 @@ const reorderColumns = (state, action) => {
 
 const reducer = (state = initialData, action) => {
   switch (action.type) {
+    case CREATE_BOARD: {
+      const { payload } = action;
+      return {
+        ...state,
+        [payload.id]: payload,
+        byIds: [...state.byIds, payload.id],
+      };
+    }
     case DRAG_COLUMN: {
       return reorderColumns(state, action);
     }
