@@ -39,10 +39,6 @@
   align-self: flex-start;
 }
 
-.titleContainer {
-  align-items: center;
-}
-
 .subtitle {
   font-weight: 600;
   font-size: 16px;
@@ -79,27 +75,25 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-  min-height: 24px;
   width: 100%;
   color: #172b4d;
-}
-
-.editTitle {
-  background-color: white;
-  border-radius: 3px;
-  box-shadow: none;
-  padding: 4px 8px;
   resize: none;
   box-sizing: border-box;
   border: none;
   outline: none;
+  box-shadow: none;
+  border-radius: 3px;
+  padding: 4px 8px;
   margin: -4px -8px;
   transition-duration: 85ms;
   transition-property: background-color, border-color, box-shadow;
   transition-timing-function: ease;
+  overflow: hidden;
+  background-color: transparent;
 }
 
-.editTitle:focus {
+.title:focus {
+  background-color: white;
   box-shadow: inset 0 0 0 2px #0079bf;
 }
 
