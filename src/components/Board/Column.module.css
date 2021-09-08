@@ -16,6 +16,7 @@
 }
 
 .content {
+  overflow: hidden;
   background-color: #ebecf0;
   border-radius: 3px;
   box-sizing: border-box;
@@ -52,6 +53,7 @@
 }
 
 .columnTitle {
+  overflow: hidden;
   display: flex;
   flex-grow: 1;
   word-wrap: break-word;
