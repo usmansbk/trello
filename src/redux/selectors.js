@@ -1,10 +1,10 @@
+import { createSelector } from "reselect";
+
 export const selectBoardById = (id) => (state) => state.boards[id];
 
 export const selectColumnById = (id) => (state) => state.columns[id];
 
-export const selectTaskByIds = (ids) => (state) => {
-  const taskMap = state.tasks;
-  const tasks = ids.map((taskId) => taskMap[taskId]);
+const tasksSelector = (state) => state.tasks;
 
-  return tasks;
-};
+export const selectTaskByIds = (ids) =>
+  createSelector(tasksSelector, (tasks) => ids.map((id) => tasks[id]));
