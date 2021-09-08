@@ -28,8 +28,8 @@ const ColumnHeader = memo(({ title, ...props }) => {
     (e) => {
       if (e.key === "Enter") {
         onSubmit();
+        e.preventDefault();
       }
-      e.stopPropagation();
     },
     [onSubmit]
   );

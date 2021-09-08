@@ -26,8 +26,8 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
     (e) => {
       if (e.key === "Enter") {
         onSubmit();
+        e.preventDefault();
       }
-      e.stopPropagation();
     },
     [onSubmit]
   );

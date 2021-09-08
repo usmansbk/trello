@@ -29,8 +29,8 @@ const AddCard = ({ onCancel, columnId }) => {
     (e) => {
       if (e.key === "Enter") {
         onSubmit();
+        e.preventDefault();
       }
-      e.stopPropagation();
     },
     [onSubmit]
   );
