@@ -1,4 +1,5 @@
 import { useState, useCallback, memo } from "react";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 import TextareaAutosize from "react-textarea-autosize";
 import Modal from "../common/Modal";
@@ -60,8 +61,11 @@ const DetailsInput = memo(({ placeholder }) => {
   );
 });
 
-const Details = memo(({ visible, onDismiss }) => {
+const Details = memo(({ id, visible, onDismiss }) => {
+  const task = useSelector((state) => state.tasks[id]);
+  const { title } = task;
   const listTitle = "Todo";
+
   return (
     <Modal
       className={styles.modal}
@@ -73,7 +77,7 @@ const Details = memo(({ visible, onDismiss }) => {
         <header className={styles.header}>
           <Icon name="fa-pen-alt" className={styles.icon} />
           <div className={styles.headerContent}>
-            <Title title="User should be able to input template image" />
+            <Title title={title} />
             <span>in list {listTitle}</span>
           </div>
           <button className={styles.closeButton} onClick={onDismiss}>

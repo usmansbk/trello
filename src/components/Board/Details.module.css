@@ -58,8 +58,8 @@
   outline: none;
   border: none;
   border-radius: 50%;
-  height: 32px;
-  width: 32px;
+  min-height: 32px;
+  min-width: 32px;
   padding: 4px;
   transition: background-color 85ms, color 85ms;
 }

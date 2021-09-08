@@ -79,7 +79,7 @@ const CardList = memo(({ taskIds }) => {
   const selectTaskByIds = useCallback(makeSelectTasksByIds, []);
   const tasks = useSelector(selectTaskByIds(taskIds));
 
-  const [seletedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
 
   const onPressCard = useCallback((id) => setSelectedId(id), []);
   const onDismiss = useCallback(() => setSelectedId(null), []);
@@ -95,7 +95,9 @@ const CardList = memo(({ taskIds }) => {
           onPressItem={onPressCard}
         />
       ))}
-      <Details id={seletedId} visible={!!seletedId} onDismiss={onDismiss} />
+      {!!selectedId && (
+        <Details id={selectedId} visible onDismiss={onDismiss} />
+      )}
     </>
   );
 });
