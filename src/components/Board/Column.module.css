@@ -54,8 +54,7 @@
 
 .columnTitle {
   overflow: hidden;
-  display: flex;
-  flex-grow: 1;
+  width: 100%;
   word-wrap: break-word;
   font-weight: 600;
   line-height: 20px;
