@@ -11,6 +11,7 @@ const initialData = {
 
 const CREATE_BOARD = "boards/create";
 const DELETE_BOARD = "boards/delete";
+const RENAME_BOARD = "boards/rename";
 const DRAG_COLUMN = "boards/drag-column";
 
 export const createBoard = (data) => ({
@@ -19,6 +20,11 @@ export const createBoard = (data) => ({
     ...data,
     columnIds: [],
   },
+});
+
+export const renameBoard = (payload) => ({
+  type: RENAME_BOARD,
+  payload,
 });
 
 export const deleteBoard = (id) => ({
@@ -71,6 +77,20 @@ const reducer = (state = initialData, action) => {
         [boardId]: {
           ...board,
           columnIds: [...board.columnIds, column.id],
+        },
+      };
+    }
+    case RENAME_BOARD: {
+      const {
+        payload: { id, title },
+      } = action;
+      const board = state[id];
+
+      return {
+        ...state,
+        [id]: {
+          ...board,
+          title,
         },
       };
     }

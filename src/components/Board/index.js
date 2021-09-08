@@ -7,16 +7,26 @@ import { confirmAlert } from "react-confirm-alert";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
-import { deleteBoard, dragColumn } from "../../redux/boards";
+import { deleteBoard, dragColumn, renameBoard } from "../../redux/boards";
 import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
 import Confirm from "../common/Modal/Confirm";
 
-const BoardTitle = memo(({ title }) => {
+const BoardTitle = memo(({ title, id }) => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data) => {
+    if (title !== data.title) {
+      dispatch(
+        renameBoard({
+          id,
+          ...data,
+        })
+      );
+    }
+  });
 
   return (
     <form onSubmit={onSubmit}>
@@ -85,7 +95,7 @@ const Board = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <BoardTitle title={board.title} />
+        <BoardTitle id={id} title={board.title} />
         <MenuButton name="fa-trash" onClick={handleDelete} />
       </header>
       <div className={styles.content}>
