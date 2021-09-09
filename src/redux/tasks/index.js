@@ -1,4 +1,4 @@
-import { CREATE_TASK, DELETE_COLUMN } from "../actions";
+import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK } from "../actions";
 
 const initialData = {
   "task-1": {
@@ -88,6 +88,22 @@ const reducer = (state = initialData, action) => {
         ...state,
         [task.id]: task,
       };
+    }
+    case DELETE_TASK: {
+      const {
+        payload: { taskId },
+      } = action;
+
+      return Object.keys(state).reduce((newState, key) => {
+        if (key === taskId) {
+          return newState;
+        }
+
+        return {
+          ...newState,
+          [key]: state[key],
+        };
+      }, {});
     }
     default:
       return state;
