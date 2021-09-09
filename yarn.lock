@@ -1601,14 +1601,6 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@szhsin/react-menu@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@szhsin/react-menu/-/react-menu-2.0.1.tgz#0b6cdc5337f7da921d02df6350746138957227b5"
-  integrity sha512-pKwvRe22ByxBXwCjalaU8KI+HdVZc1YTh2oj44p+EfxsPeV7wjfydjmhqBJAEFJFiQqGkdo7ACwJVRmoaUycFw==
-  dependencies:
-    prop-types "^15.7.2"
-    react-transition-state "^0.3.0"
-
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
@@ -9315,11 +9307,6 @@ react-tooltip@^4.2.21:
   dependencies:
     prop-types "^15.7.2"
     uuid "^7.0.3"
-
-react-transition-state@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/react-transition-state/-/react-transition-state-0.3.0.tgz#31dcf3cc95dc6eab4243fbdbdf665de2e4174438"
-  integrity sha512-SwfZCOk9nIPCAz/9wC9t/eS5ut7pkSrQoJGJ+xPPbXLQP52ySLjf5fvBX6ySKk8Al0qXM8MM1NU152CFfpFXaQ==
 
 react@^17.0.2:
   version "17.0.2"
