@@ -34,7 +34,6 @@ const SideBar = memo(({ taskId, columnId, onDismiss }) => {
     <aside className={styles.sideBar}>
       <h3 className={styles.sidebarTitle}>ACTIONS</h3>
       <div className={styles.actions}>
-        <IconButton name="fa-arrow-right" text="Move" />
         <IconButton onClick={onDelete} name="fa-trash-alt" text="Delete" />
       </div>
     </aside>
