@@ -21,6 +21,7 @@ const IconButton = ({
       )}
       onClick={onClick}
       data-tip={tooltip}
+      data-delay-show={600}
     >
       <Icon name={name} color={color} />
       {!!text && (

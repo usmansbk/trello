@@ -12,7 +12,12 @@ const MenuButton = ({ name, to, onClick, tooltip }) => {
   }
 
   return (
-    <button className={styles.menuButton} onClick={onClick} data-tip={tooltip}>
+    <button
+      className={styles.menuButton}
+      onClick={onClick}
+      data-tip={tooltip}
+      data-delay-show={600}
+    >
       <Icon name={name} className={styles.icon} />
     </button>
   );
