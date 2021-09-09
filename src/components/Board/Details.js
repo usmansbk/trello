@@ -32,14 +32,14 @@ const SideBar = memo(({ taskId, columnId, onDismiss }) => {
           onDismiss={onClose}
           buttonText="Yes, delete"
           onConfirm={() => {
+            onClose();
+            onDismiss();
             dispatch(
               deleteTask({
                 taskId,
                 columnId,
               })
             );
-            onClose();
-            onDismiss();
           }}
         />
       ),
