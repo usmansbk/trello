@@ -1,12 +1,28 @@
 .button {
   border: none;
-  width: 32px;
-  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
   padding: 6px;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  box-sizing: border-box;
 }
 
 .button:hover {
   background-color: #091e4214;
   cursor: pointer;
+}
+
+.withText {
+  gap: 12px;
+  padding: 6px 12px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.buttonText {
+  color: #172b4d;
 }
