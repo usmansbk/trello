@@ -9,7 +9,7 @@ import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
 import { deleteBoard, dragColumn, renameBoard } from "../../redux/boards";
-import { dragTask } from "../../redux/columns";
+import { dragTask } from "../../redux/actions";
 import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
 import Confirm from "../common/Modal/Confirm";

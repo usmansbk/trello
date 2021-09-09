@@ -122,7 +122,7 @@ const MenuHeader = memo(({ title }) => (
   </div>
 ));
 
-const Card = memo(({ title, id, index, onPressItem }) => {
+const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
 
   return (
@@ -157,7 +157,7 @@ const Card = memo(({ title, id, index, onPressItem }) => {
   );
 });
 
-const CardList = memo(({ taskIds, columnTitle }) => {
+const CardList = memo(({ taskIds, columnTitle, boardId }) => {
   const selectTaskByIds = useCallback(makeSelectTasksByIds, []);
   const tasks = useSelector(selectTaskByIds(taskIds));
 
@@ -168,11 +168,13 @@ const CardList = memo(({ taskIds, columnTitle }) => {
 
   return (
     <>
-      {tasks.map(({ id, title }, index) => (
+      {tasks.map(({ id, title, columnId }, index) => (
         <Card
           key={id}
           id={id}
           title={title}
+          boardId={boardId}
+          columnId={columnId}
           index={index}
           onPressItem={onPressCard}
         />
@@ -224,7 +226,13 @@ const Column = memo(({ columnId, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {<CardList columnTitle={title} taskIds={taskIds} />}
+                  {
+                    <CardList
+                      columnTitle={title}
+                      taskIds={taskIds}
+                      boardId={boardId}
+                    />
+                  }
                   {provided.placeholder}
                   {showComposer && (
                     <AddCard columnId={columnId} onCancel={toggleComposer} />

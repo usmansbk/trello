@@ -3,6 +3,7 @@ import {
   CREATE_TASK,
   DELETE_COLUMN,
   DELETE_TASK,
+  DRAG_TASK,
 } from "../actions";
 
 const initialData = {
@@ -26,16 +27,10 @@ const initialData = {
   },
 };
 
-const DRAG_TASK = "column/drag-task";
 const RENAME_COLUMN = "column/rename";
 
 export const renameColumn = (payload) => ({
   type: RENAME_COLUMN,
-  payload,
-});
-
-export const dragTask = (payload) => ({
-  type: DRAG_TASK,
   payload,
 });
 

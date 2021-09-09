@@ -4,6 +4,12 @@ export const CREATE_COLUMN = "board/create-column";
 export const CREATE_TASK = "column/create-task";
 export const DELETE_COLUMN = "column/delete";
 export const DELETE_TASK = "task/delete";
+export const DRAG_TASK = "column/drag-task";
+
+export const dragTask = (payload) => ({
+  type: DRAG_TASK,
+  payload,
+});
 
 export const deleteColumn = (payload) => ({
   type: DELETE_COLUMN,

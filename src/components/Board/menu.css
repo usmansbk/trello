@@ -16,6 +16,7 @@
   opacity: 1;
   pointer-events: auto;
   z-index: 9999;
+  overflow: hidden;
 }
 
 .react-contextmenu-item {
