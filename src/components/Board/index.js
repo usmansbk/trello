@@ -108,7 +108,11 @@ const Board = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <BoardTitle id={id} title={board.title} />
-        <MenuButton name="fa-trash" onClick={handleDelete} />
+        <MenuButton
+          tooltip="Delete board"
+          name="fa-trash"
+          onClick={handleDelete}
+        />
       </header>
       <div className={styles.content}>
         <DragDropContext onDragEnd={onDragEnd}>

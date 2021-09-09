@@ -99,6 +99,7 @@ const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
         className={styles.moreButton}
         name="fa-trash-alt"
         onClick={handleDelete}
+        tooltip="Delete list"
       />
     </div>
   );

@@ -1,8 +1,17 @@
 import clsx from "clsx";
+import ReactToolTip from "react-tooltip";
 import Icon from "../Icon";
 import styles from "./IconButton.module.css";
 
-const IconButton = ({ name, onClick, className, text, color, danger }) => {
+const IconButton = ({
+  name,
+  onClick,
+  className,
+  text,
+  color,
+  danger,
+  tooltip,
+}) => {
   return (
     <button
       className={clsx(
@@ -12,6 +21,7 @@ const IconButton = ({ name, onClick, className, text, color, danger }) => {
         className
       )}
       onClick={onClick}
+      data-tip={tooltip}
     >
       <Icon name={name} color={color} />
       {!!text && (
@@ -19,6 +29,7 @@ const IconButton = ({ name, onClick, className, text, color, danger }) => {
           {text}
         </span>
       )}
+      <ReactToolTip />
     </button>
   );
 };
