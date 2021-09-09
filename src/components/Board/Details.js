@@ -73,20 +73,25 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
             <Icon name="fa-times" />
           </button>
         </header>
-        <div>
-          <Subtitle icon="fa-align-left" title="Description" />
-          <div className={styles.gutter}>
-            <TextareaAutosize
-              {...register("description", {
-                maxLength: 512,
-              })}
-              className={styles.detailsInput}
-              spellCheck={false}
-              placeholder="Add a more detailed description..."
-              onKeyDown={handleEnter}
-              onBlur={onSubmit}
-            />
+        <div className={styles.body}>
+          <div className={styles.descriptionWrapper}>
+            <Subtitle icon="fa-align-left" title="Description" />
+            <div className={styles.gutter}>
+              <TextareaAutosize
+                {...register("description", {
+                  maxLength: 512,
+                })}
+                className={styles.detailsInput}
+                spellCheck={false}
+                placeholder="Add a more detailed description..."
+                onKeyDown={handleEnter}
+                onBlur={onSubmit}
+              />
+            </div>
           </div>
+          <aside>
+            <h3 className={styles.actionsTitle}>ACTIONS</h3>
+          </aside>
         </div>
       </div>
     </Modal>

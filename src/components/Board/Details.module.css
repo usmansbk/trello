@@ -123,6 +123,28 @@
   box-shadow: inset 0 0 0 2px #0079bf;
 }
 
+.actionsTitle {
+  margin: 0 0 8px;
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 20px;
+  margin-bottom: -4px;
+  text-transform: uppercase;
+}
+
+.body {
+  display: flex;
+}
+
+.descriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
 @media screen and (min-width: 768px) {
   .modal {
     width: 57.5%;
@@ -130,5 +152,9 @@
 
   .gutter {
     margin-left: 32px;
+  }
+
+  .descriptionWrapper {
+    flex-direction: column;
   }
 }
