@@ -33,12 +33,22 @@ const AddCard = ({ onCancel, columnId }) => {
     [onSubmit]
   );
 
+  const onBlur = useCallback(
+    (e) => {
+      if (!e.target.value) {
+        onCancel();
+      }
+    },
+    [onCancel]
+  );
+
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles.card}>
         <TextareaAutosize
           {...register("title", { required: true, maxLength: 512 })}
           autoFocus
+          onBlur={onBlur}
           onKeyDown={handleEnter}
           className={styles.textarea}
           placeholder="Enter a title for this card..."

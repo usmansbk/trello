@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { nanoid } from "nanoid";
-import { memo, useState } from "react";
+import { memo, useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { createColumn } from "../../redux/actions";
@@ -24,11 +24,21 @@ const Input = memo(({ onCancel, boardId }) => {
     reset();
   });
 
+  const onBlur = useCallback(
+    (e) => {
+      if (!e.target.value) {
+        onCancel();
+      }
+    },
+    [onCancel]
+  );
+
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <input
         {...register("title", { required: true, maxLength: 512 })}
         autoFocus
+        onBlur={onBlur}
         className={styles.input}
         placeholder="Enter list title..."
       />
