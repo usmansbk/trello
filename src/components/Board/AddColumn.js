@@ -3,22 +3,20 @@ import { nanoid } from "nanoid";
 import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useRouteMatch } from "react-router";
 import { createColumn } from "../../redux/actions";
 import CardButton from "../common/Button/CardButton";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import styles from "./AddColumn.module.css";
 
-const Input = memo(({ onCancel }) => {
+const Input = memo(({ onCancel, boardId }) => {
   const dispatch = useDispatch();
-  const { params } = useRouteMatch();
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = handleSubmit((data) => {
     dispatch(
       createColumn({
-        boardId: params.id,
+        boardId,
         column: {
           ...data,
           id: nanoid(),
@@ -54,7 +52,7 @@ const AddListButton = memo(({ onClick }) => (
   </button>
 ));
 
-const AddColumn = memo(() => {
+const AddColumn = memo(({ boardId }) => {
   const [edit, setEdit] = useState(false);
   const toggleEdit = () => setEdit(!edit);
 
@@ -64,7 +62,7 @@ const AddColumn = memo(() => {
         {!edit ? (
           <AddListButton onClick={toggleEdit} />
         ) : (
-          <Input onCancel={toggleEdit} />
+          <Input onCancel={toggleEdit} boardId={boardId} />
         )}
       </div>
     </div>

@@ -121,7 +121,7 @@ const Board = () => {
                   );
                 })}
                 {provided.placeholder}
-                <AddColumn />
+                <AddColumn boardId={id} />
               </div>
             )}
           </Droppable>
