@@ -1,14 +1,16 @@
 import { useState, memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import clsx from "clsx";
+import { confirmAlert } from "react-confirm-alert";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import clsx from "clsx";
 import IconButton from "../common/Button/IconButton";
-import { useForm } from "react-hook-form";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
+import Confirm from "../common/Modal/Confirm";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
 
@@ -47,6 +49,23 @@ const ColumnHeader = memo(({ id, title, ...props }) => {
     [onSubmit]
   );
 
+  const handleDelete = useCallback(() => {
+    confirmAlert({
+      customUI: ({ onClose }) => (
+        <Confirm
+          visible
+          title="Delete this list?"
+          onDismiss={onClose}
+          buttonText="Yes, delete"
+          onConfirm={() => {
+            // dispatch(deleteBoard(id));
+            onClose();
+          }}
+        />
+      ),
+    });
+  }, []);
+
   return (
     <div className={styles.columnHeader} {...props}>
       {edit ? (
@@ -67,7 +86,11 @@ const ColumnHeader = memo(({ id, title, ...props }) => {
           {title}
         </h2>
       )}
-      <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
+      <IconButton
+        className={styles.moreButton}
+        name="fa-trash-alt"
+        onClick={handleDelete}
+      />
     </div>
   );
 });
