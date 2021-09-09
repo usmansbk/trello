@@ -123,12 +123,52 @@
   box-shadow: inset 0 0 0 2px #0079bf;
 }
 
-@media screen and (min-width: 768px) {
+.body {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.bodyContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.sideBar {
+  width: 100%;
+}
+
+.sidebarTitle {
+  margin: 0 0 8px;
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media screen and (min-width: 992px) {
   .modal {
     width: 57.5%;
   }
 
   .gutter {
     margin-left: 32px;
+  }
+
+  .body {
+    flex-direction: row;
+  }
+
+  .sideBar {
+    width: calc(100% - 600px);
   }
 }

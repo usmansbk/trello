@@ -1,27 +1,33 @@
-import { CREATE_COLUMN, CREATE_TASK } from "../actions";
+import {
+  CREATE_COLUMN,
+  CREATE_TASK,
+  DELETE_COLUMN,
+  DELETE_TASK,
+} from "../actions";
 
 const initialData = {
   "col-1": {
     id: "col-1",
     title: "Todo",
-    taskIds: new Array(11)
-      .fill("task")
-      .map((value, index) => value + "-" + (index + 1)),
+    taskIds: ["tut-1", "tut-2", "tut-3"],
+    boardId: "default",
   },
   "col-2": {
     id: "col-2",
     title: "In progress",
     taskIds: [],
+    boardId: "default",
   },
   "col-3": {
     id: "col-3",
     title: "Done",
     taskIds: [],
+    boardId: "default",
   },
 };
 
-const DRAG_TASK = "columns/drag-task";
-const RENAME_COLUMN = "columns/rename";
+const DRAG_TASK = "column/drag-task";
+const RENAME_COLUMN = "column/rename";
 
 export const renameColumn = (payload) => ({
   type: RENAME_COLUMN,
@@ -79,9 +85,7 @@ const reorderTasks = (state, action) => {
 const reducer = (state = initialData, action) => {
   switch (action.type) {
     case CREATE_COLUMN: {
-      const {
-        payload: { column },
-      } = action;
+      const { payload: column } = action;
       return {
         ...state,
         [column.id]: {
@@ -89,6 +93,21 @@ const reducer = (state = initialData, action) => {
           taskIds: [],
         },
       };
+    }
+    case DELETE_COLUMN: {
+      const {
+        payload: { columnId },
+      } = action;
+      return Object.keys(state).reduce((newState, key) => {
+        if (key === columnId) {
+          return newState;
+        }
+
+        return {
+          ...newState,
+          [key]: state[key],
+        };
+      }, {});
     }
     case RENAME_COLUMN: {
       const {
@@ -105,8 +124,20 @@ const reducer = (state = initialData, action) => {
       };
     }
     case CREATE_TASK: {
+      const { payload: task } = action;
+      const column = state[task.columnId];
+
+      return {
+        ...state,
+        [column.id]: {
+          ...column,
+          taskIds: [...column.taskIds, task.id],
+        },
+      };
+    }
+    case DELETE_TASK: {
       const {
-        payload: { columnId, task },
+        payload: { columnId, taskId },
       } = action;
       const column = state[columnId];
 
@@ -114,7 +145,7 @@ const reducer = (state = initialData, action) => {
         ...state,
         [columnId]: {
           ...column,
-          taskIds: [...column.taskIds, task.id],
+          taskIds: column.taskIds.filter((id) => id !== taskId),
         },
       };
     }

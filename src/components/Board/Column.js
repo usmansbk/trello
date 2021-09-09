@@ -1,25 +1,32 @@
 import { useState, memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import clsx from "clsx";
+import { confirmAlert } from "react-confirm-alert";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import clsx from "clsx";
 import IconButton from "../common/Button/IconButton";
-import { useForm } from "react-hook-form";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
+import Confirm from "../common/Modal/Confirm";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
+import { deleteColumn } from "../../redux/actions";
 
-const ColumnHeader = memo(({ id, title, ...props }) => {
+const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { isDirty },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title,
+    },
+  });
 
   const toggleEdit = useCallback(() => {
     setEdit(!edit);
@@ -47,13 +54,34 @@ const ColumnHeader = memo(({ id, title, ...props }) => {
     [onSubmit]
   );
 
+  const handleDelete = useCallback(() => {
+    confirmAlert({
+      customUI: ({ onClose }) => (
+        <Confirm
+          visible
+          title="Delete this list?"
+          onDismiss={onClose}
+          buttonText="Yes, delete"
+          onConfirm={() => {
+            dispatch(
+              deleteColumn({
+                columnId: id,
+                boardId,
+              })
+            );
+            onClose();
+          }}
+        />
+      ),
+    });
+  }, [dispatch, id, boardId]);
+
   return (
     <div className={styles.columnHeader} {...props}>
       {edit ? (
         <TextareaAutosize
           {...register("title", {
             required: true,
-            value: title,
             maxLength: 512,
           })}
           onKeyDown={handleEnter}
@@ -67,7 +95,11 @@ const ColumnHeader = memo(({ id, title, ...props }) => {
           {title}
         </h2>
       )}
-      <IconButton className={styles.moreButton} name="fa-ellipsis-h" />
+      <IconButton
+        className={styles.moreButton}
+        name="fa-trash-alt"
+        onClick={handleDelete}
+      />
     </div>
   );
 });
@@ -140,7 +172,7 @@ const CardList = memo(({ taskIds, columnTitle }) => {
 });
 
 const Column = memo(({ columnId, index }) => {
-  const { title, taskIds } = useSelector(selectColumnById(columnId));
+  const { title, boardId, taskIds } = useSelector(selectColumnById(columnId));
 
   const [showComposer, setComposerVisible] = useState(false);
 
@@ -163,6 +195,7 @@ const Column = memo(({ columnId, index }) => {
           <div className={styles.content}>
             <ColumnHeader
               id={columnId}
+              boardId={boardId}
               title={title}
               {...provided.dragHandleProps}
             />

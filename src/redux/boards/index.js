@@ -1,18 +1,18 @@
-import { CREATE_COLUMN } from "../actions";
+import { CREATE_COLUMN, DELETE_COLUMN } from "../actions";
 
 const initialData = {
-  "board-1": {
-    id: "board-1",
-    title: "MintBean Hackathon",
+  default: {
+    id: "default",
+    title: "Kanban",
     columnIds: ["col-1", "col-2", "col-3"],
   },
-  byIds: ["board-1"],
+  byIds: ["default"],
 };
 
-const CREATE_BOARD = "boards/create";
-const DELETE_BOARD = "boards/delete";
-const RENAME_BOARD = "boards/rename";
-const DRAG_COLUMN = "boards/drag-column";
+const CREATE_BOARD = "board/create";
+const DELETE_BOARD = "board/delete";
+const RENAME_BOARD = "board/rename";
+const DRAG_COLUMN = "board/drag-column";
 
 export const createBoard = (data) => ({
   type: CREATE_BOARD,
@@ -67,8 +67,20 @@ const reducer = (state = initialData, action) => {
       };
     }
     case CREATE_COLUMN: {
+      const { payload: column } = action;
+      const board = state[column.boardId];
+
+      return {
+        ...state,
+        [board.id]: {
+          ...board,
+          columnIds: [...board.columnIds, column.id],
+        },
+      };
+    }
+    case DELETE_COLUMN: {
       const {
-        payload: { boardId, column },
+        payload: { boardId, columnId },
       } = action;
       const board = state[boardId];
 
@@ -76,7 +88,7 @@ const reducer = (state = initialData, action) => {
         ...state,
         [boardId]: {
           ...board,
-          columnIds: [...board.columnIds, column.id],
+          columnIds: board.columnIds.filter((id) => id !== columnId),
         },
       };
     }

@@ -1,49 +1,25 @@
-import { CREATE_TASK } from "../actions";
+import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK } from "../actions";
 
-const initialData = {
-  "task-1": {
-    id: "task-1",
-    title: `When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"`,
+const intialState = {
+  "tut-1": {
+    id: "tut-1",
+    title: "Create card",
+    columnId: "col-1",
   },
-  "task-2": {
-    id: "task-2",
-    title: `Each column has a "+" button. The user can click this button to create a task card in any column`,
+  "tut-2": {
+    id: "tut-2",
+    title: "Drag card",
+    columnId: "col-1",
   },
-  "task-3": {
-    id: "task-3",
-    title: `Task cards clearly display the title of the contained task`,
+  "tut-3": {
+    id: "tut-3",
+    title: "Drag list",
+    columnId: "col-1",
   },
-  "task-4": {
-    id: "task-4",
-    title: `The user can move tasks between columns using drag-and-drop`,
-  },
-  "task-5": {
-    id: "task-5",
-    title: `The user can delete a task.`,
-  },
-  "task-6": {
-    id: "task-6",
-    title: `The user can expand a task card to see its description`,
-  },
-  "task-7": {
-    id: "task-7",
-    title: `The user can move tasks between columns using the "Move" button in the context menu`,
-  },
-  "task-8": {
-    id: "task-8",
-    title: `The user can edit column titles`,
-  },
-  "task-9": {
-    id: "task-9",
-    title: `The user can create columns`,
-  },
-  "task-10": {
-    id: "task-10",
-    title: `The user can change the order of columns using drag-and-drop`,
-  },
-  "task-11": {
-    id: "task-11",
-    title: `The user can delete columns (you will have to decide what happens to a column's cards in this case)`,
+  "tut-4": {
+    id: "tut-4",
+    title: "Create list",
+    columnId: "col-1",
   },
 };
 
@@ -54,12 +30,27 @@ export const updateTask = (payload) => ({
   payload,
 });
 
-const reducer = (state = initialData, action) => {
+const reducer = (state = intialState, action) => {
   switch (action.type) {
-    case CREATE_TASK: {
+    case DELETE_COLUMN: {
       const {
-        payload: { task },
+        payload: { columnId },
       } = action;
+
+      return Object.keys(state).reduce((newState, key) => {
+        const task = state[key];
+        if (task.columnId === columnId) {
+          return newState;
+        }
+
+        return {
+          ...newState,
+          [key]: task,
+        };
+      }, {});
+    }
+    case CREATE_TASK: {
+      const { payload: task } = action;
 
       return {
         ...state,
@@ -73,6 +64,22 @@ const reducer = (state = initialData, action) => {
         ...state,
         [task.id]: task,
       };
+    }
+    case DELETE_TASK: {
+      const {
+        payload: { taskId },
+      } = action;
+
+      return Object.keys(state).reduce((newState, key) => {
+        if (key === taskId) {
+          return newState;
+        }
+
+        return {
+          ...newState,
+          [key]: state[key],
+        };
+      }, {});
     }
     default:
       return state;

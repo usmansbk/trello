@@ -1,9 +1,9 @@
 import { memo, useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import CreateBoard from "./CreateBoard";
 import styles from "./Boards.module.css";
-import { useSelector } from "react-redux";
 
 const Tile = memo(({ id, title }) => {
   return (

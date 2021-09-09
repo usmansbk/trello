@@ -12,6 +12,7 @@ import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
 import Confirm from "../common/Modal/Confirm";
+import NoMatch from "../NoMatch";
 
 const BoardTitle = memo(({ title, id }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,11 @@ const BoardTitle = memo(({ title, id }) => {
     register,
     handleSubmit,
     formState: { isDirty },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title,
+    },
+  });
 
   const onSubmit = handleSubmit((data) => {
     if (isDirty) {
@@ -38,7 +43,6 @@ const BoardTitle = memo(({ title, id }) => {
         {...register("title", {
           required: true,
           maxLength: 512,
-          value: title,
         })}
         onBlur={onSubmit}
         spellCheck={false}
@@ -96,6 +100,10 @@ const Board = () => {
     });
   }, [dispatch, history, id]);
 
+  if (!board) {
+    return <NoMatch />;
+  }
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -121,7 +129,7 @@ const Board = () => {
                   );
                 })}
                 {provided.placeholder}
-                <AddColumn />
+                <AddColumn boardId={id} />
               </div>
             )}
           </Droppable>
