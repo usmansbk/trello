@@ -116,6 +116,12 @@ const FooterButton = memo(({ onClick }) => {
   );
 });
 
+const MenuHeader = memo(({ title }) => (
+  <div className="menu-header">
+    <h3 className="menu-header-title">{title}</h3>
+  </div>
+));
+
 const Card = memo(({ title, id, index, onPressItem }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
 
@@ -141,9 +147,7 @@ const Card = memo(({ title, id, index, onPressItem }) => {
             </div>
           </ContextMenuTrigger>
           <ContextMenu id={id}>
-            <div className="menu-header">
-              <h3 className="menu-header-title">Move to</h3>
-            </div>
+            <MenuHeader title="Move to" />
             <MenuItem data={{ foo: "bar" }}>In Progress</MenuItem>
             <MenuItem data={{ foo: "bar" }}>Done</MenuItem>
           </ContextMenu>
