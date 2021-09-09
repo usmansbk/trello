@@ -75,7 +75,7 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
           </button>
         </header>
         <div className={styles.body}>
-          <div className={styles.descriptionWrapper}>
+          <div className={styles.bodyContent}>
             <Subtitle icon="fa-align-left" title="Description" />
             <div className={styles.gutter}>
               <TextareaAutosize
@@ -90,8 +90,8 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
               />
             </div>
           </div>
-          <aside>
-            <h3 className={styles.actionsTitle}>ACTIONS</h3>
+          <aside className={styles.sideBar}>
+            <h3 className={styles.sidebarTitle}>ACTIONS</h3>
             <div className={styles.actions}>
               <IconButton name="fa-arrow-right" text="Move" />
             </div>

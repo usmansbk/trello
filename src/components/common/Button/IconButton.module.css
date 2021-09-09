@@ -21,6 +21,7 @@
   padding: 6px 12px;
   max-width: 300px;
   width: 100%;
+  justify-content: flex-start;
 }
 
 .buttonText {
