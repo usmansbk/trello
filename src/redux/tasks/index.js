@@ -1,4 +1,4 @@
-import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK } from "../actions";
+import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK, DRAG_TASK } from "../actions";
 
 const intialState = {
   "tut-1": {
@@ -65,6 +65,19 @@ const reducer = (state = intialState, action) => {
           [key]: state[key],
         };
       }, {});
+    }
+    case DRAG_TASK: {
+      const {
+        result: { destination, draggableId },
+      } = action.payload;
+      const task = state[draggableId];
+      return {
+        ...state,
+        [draggableId]: {
+          ...task,
+          columnId: destination.droppableId,
+        },
+      };
     }
     default:
       return state;
