@@ -52,7 +52,7 @@ const SideBar = memo(({ taskId, columnId, onDismiss }) => {
       <div className={styles.actions}>
         <IconButton
           onClick={handleDelete}
-          name="fa-trash-alt"
+          name="fa-minus"
           text="Delete"
           color="white"
           danger
