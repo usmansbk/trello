@@ -22,13 +22,18 @@ const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
     register,
     handleSubmit,
     formState: { isDirty },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title,
+    },
+  });
 
   const toggleEdit = useCallback(() => {
     setEdit(!edit);
   }, [edit]);
 
   const onSubmit = handleSubmit((data) => {
+    console.log(data);
     if (isDirty) {
       dispatch(
         renameColumn({
@@ -78,7 +83,6 @@ const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
         <TextareaAutosize
           {...register("title", {
             required: true,
-            value: title,
             maxLength: 512,
           })}
           onKeyDown={handleEnter}

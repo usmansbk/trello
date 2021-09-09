@@ -20,7 +20,12 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
   const dispatch = useDispatch();
   const task = useSelector((state) => state.tasks[id]);
   const { title, description = "" } = task;
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      title,
+      description,
+    },
+  });
 
   const onSubmit = handleSubmit((data) =>
     dispatch(
@@ -56,7 +61,6 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
               {...register("title", {
                 required: true,
                 maxLength: 512,
-                value: title,
               })}
               spellCheck={false}
               className={styles.title}
@@ -74,7 +78,6 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
           <div className={styles.gutter}>
             <TextareaAutosize
               {...register("description", {
-                value: description,
                 maxLength: 512,
               })}
               className={styles.detailsInput}
