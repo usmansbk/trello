@@ -47,12 +47,27 @@ const initialData = {
   },
 };
 
+const UPDATE_TASK = "tasks/update";
+
+export const updateTask = (payload) => ({
+  type: UPDATE_TASK,
+  payload,
+});
+
 const reducer = (state = initialData, action) => {
   switch (action.type) {
     case CREATE_TASK: {
       const {
         payload: { task },
       } = action;
+
+      return {
+        ...state,
+        [task.id]: task,
+      };
+    }
+    case UPDATE_TASK: {
+      const { payload: task } = action;
 
       return {
         ...state,
