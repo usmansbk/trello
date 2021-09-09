@@ -11,8 +11,7 @@ const intialState = {
     id: "welcome-1",
     columnId: "col-1",
     title: "Welcome to Trello",
-    description: `
-Welcome to Trello Kanban 
+    description: `Welcome to Trello Kanban 
 
 We're so excited that you've decided to create a new project! Now that you're here, let's make sure you know how to get the most out of Trello Kanban.
 - [x] Create a new project
