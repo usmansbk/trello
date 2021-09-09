@@ -1,10 +1,11 @@
 import { memo, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import styles from "./Details.module.css";
 import { useForm } from "react-hook-form";
+import { updateTask } from "../../redux/tasks";
 
 const Subtitle = memo(({ title, icon }) => {
   return (
@@ -16,11 +17,19 @@ const Subtitle = memo(({ title, icon }) => {
 });
 
 const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
+  const dispatch = useDispatch();
   const task = useSelector((state) => state.tasks[id]);
   const { title, description = "" } = task;
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data) =>
+    dispatch(
+      updateTask({
+        id,
+        ...data,
+      })
+    )
+  );
 
   const handleEnter = useCallback(
     (e) => {
