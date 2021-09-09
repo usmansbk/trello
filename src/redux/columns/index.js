@@ -79,9 +79,7 @@ const reorderTasks = (state, action) => {
 const reducer = (state = initialData, action) => {
   switch (action.type) {
     case CREATE_COLUMN: {
-      const {
-        payload: { column },
-      } = action;
+      const { payload: column } = action;
       return {
         ...state,
         [column.id]: {

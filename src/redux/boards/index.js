@@ -67,14 +67,12 @@ const reducer = (state = initialData, action) => {
       };
     }
     case CREATE_COLUMN: {
-      const {
-        payload: { boardId, column },
-      } = action;
-      const board = state[boardId];
+      const { payload: column } = action;
+      const board = state[column.boardId];
 
       return {
         ...state,
-        [boardId]: {
+        [board.id]: {
           ...board,
           columnIds: [...board.columnIds, column.id],
         },

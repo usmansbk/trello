@@ -17,6 +17,7 @@ const AddCard = ({ onCancel, columnId }) => {
       createTask({
         task: {
           id: nanoid(),
+          columnId,
           ...data,
         },
         columnId,

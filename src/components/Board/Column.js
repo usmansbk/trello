@@ -13,6 +13,7 @@ import Details from "./Details";
 import Confirm from "../common/Modal/Confirm";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
+import { deleteColumn } from "../../redux/actions";
 
 const ColumnHeader = memo(({ id, title, ...props }) => {
   const dispatch = useDispatch();
@@ -58,13 +59,13 @@ const ColumnHeader = memo(({ id, title, ...props }) => {
           onDismiss={onClose}
           buttonText="Yes, delete"
           onConfirm={() => {
-            // dispatch(deleteBoard(id));
+            dispatch(deleteColumn(id));
             onClose();
           }}
         />
       ),
     });
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <div className={styles.columnHeader} {...props}>

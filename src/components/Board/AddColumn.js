@@ -16,11 +16,9 @@ const Input = memo(({ onCancel, boardId }) => {
   const onSubmit = handleSubmit((data) => {
     dispatch(
       createColumn({
+        id: nanoid(),
         boardId,
-        column: {
-          ...data,
-          id: nanoid(),
-        },
+        ...data,
       })
     );
     reset();
