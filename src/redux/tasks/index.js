@@ -6,21 +6,6 @@ const intialState = {
     title: "Create card",
     columnId: "col-1",
   },
-  "tut-2": {
-    id: "tut-2",
-    title: "Drag card",
-    columnId: "col-1",
-  },
-  "tut-3": {
-    id: "tut-3",
-    title: "Drag list",
-    columnId: "col-1",
-  },
-  "tut-4": {
-    id: "tut-4",
-    title: "Create list",
-    columnId: "col-1",
-  },
 };
 
 const UPDATE_TASK = "tasks/update";
