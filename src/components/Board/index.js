@@ -12,6 +12,7 @@ import { dragTask } from "../../redux/columns";
 import styles from "./index.module.css";
 import { selectBoardById } from "../../redux/selectors";
 import Confirm from "../common/Modal/Confirm";
+import NoMatch from "../NoMatch";
 
 const BoardTitle = memo(({ title, id }) => {
   const dispatch = useDispatch();
@@ -98,6 +99,10 @@ const Board = () => {
       ),
     });
   }, [dispatch, history, id]);
+
+  if (!board) {
+    return <NoMatch />;
+  }
 
   return (
     <div className={styles.container}>
