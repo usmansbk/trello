@@ -1,4 +1,4 @@
-import { CREATE_COLUMN, CREATE_TASK } from "../actions";
+import { CREATE_COLUMN, CREATE_TASK, DELETE_COLUMN } from "../actions";
 
 const initialData = {
   "col-1": {
@@ -89,6 +89,21 @@ const reducer = (state = initialData, action) => {
           taskIds: [],
         },
       };
+    }
+    case DELETE_COLUMN: {
+      const {
+        payload: { columnId },
+      } = action;
+      return Object.keys(state).reduce((newState, key) => {
+        if (key === columnId) {
+          return newState;
+        }
+
+        return {
+          ...newState,
+          [key]: state[key],
+        };
+      }, {});
     }
     case RENAME_COLUMN: {
       const {

@@ -1,4 +1,4 @@
-import { CREATE_COLUMN } from "../actions";
+import { CREATE_COLUMN, DELETE_COLUMN } from "../actions";
 
 const initialData = {
   "board-1": {
@@ -77,6 +77,20 @@ const reducer = (state = initialData, action) => {
         [boardId]: {
           ...board,
           columnIds: [...board.columnIds, column.id],
+        },
+      };
+    }
+    case DELETE_COLUMN: {
+      const {
+        payload: { boardId, columnId },
+      } = action;
+      const board = state[boardId];
+
+      return {
+        ...state,
+        [boardId]: {
+          ...board,
+          columnIds: board.columnIds.filter((id) => id !== columnId),
         },
       };
     }
