@@ -1,4 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
 import boards from "./boards";
 import columns from "./columns";
@@ -10,6 +12,18 @@ const reducer = combineReducers({
   tasks,
 });
 
-const store = createStore(reducer, applyMiddleware(logger));
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+const init = () => {
+  const store = createStore(persistedReducer, applyMiddleware(logger));
+  const persistor = persistStore(store);
+
+  return { store, persistor };
+};
+
+export default init;

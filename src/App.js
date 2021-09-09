@@ -1,10 +1,13 @@
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import Forgot from "./components/Forgot";
 import Home from "./components/Home";
-import store from "./redux";
+import initStore from "./redux";
+
+const { store, persistor } = initStore();
 
 const routes = [
   {
@@ -28,13 +31,15 @@ const routes = [
 function App() {
   return (
     <Provider store={store}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <Switch>
-          {routes.map(({ path, component }) => (
-            <Route key={path} path={path} component={component} />
-          ))}
-        </Switch>
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router basename={process.env.PUBLIC_URL}>
+          <Switch>
+            {routes.map(({ path, component }) => (
+              <Route key={path} path={path} component={component} />
+            ))}
+          </Switch>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 }
