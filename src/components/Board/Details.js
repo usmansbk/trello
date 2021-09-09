@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
+import IconButton from "../common/Button/IconButton";
 import styles from "./Details.module.css";
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../redux/tasks";
@@ -91,6 +92,9 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
           </div>
           <aside>
             <h3 className={styles.actionsTitle}>ACTIONS</h3>
+            <div className={styles.actions}>
+              <IconButton name="fa-arrow-right" text="Move" />
+            </div>
           </aside>
         </div>
       </div>
