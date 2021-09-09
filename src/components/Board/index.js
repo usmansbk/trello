@@ -19,7 +19,11 @@ const BoardTitle = memo(({ title, id }) => {
     register,
     handleSubmit,
     formState: { isDirty },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title,
+    },
+  });
 
   const onSubmit = handleSubmit((data) => {
     if (isDirty) {
@@ -38,7 +42,6 @@ const BoardTitle = memo(({ title, id }) => {
         {...register("title", {
           required: true,
           maxLength: 512,
-          value: title,
         })}
         onBlur={onSubmit}
         spellCheck={false}
