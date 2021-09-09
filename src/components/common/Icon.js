@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
-const Icon = ({ name, className }) => (
-  <i className={clsx("fas", className, name)}></i>
+const Icon = ({ name, className, color }) => (
+  <i className={clsx("fas", className, name)} style={{ color }}></i>
 );
 
 export default Icon;

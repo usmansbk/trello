@@ -1,9 +1,11 @@
 import { memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
+import { confirmAlert } from "react-confirm-alert";
 import Modal from "../common/Modal";
 import Icon from "../common/Icon";
 import IconButton from "../common/Button/IconButton";
+import Confirm from "../common/Modal/Confirm";
 import styles from "./Details.module.css";
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../redux/tasks";
@@ -20,22 +22,41 @@ const Subtitle = memo(({ title, icon }) => {
 
 const SideBar = memo(({ taskId, columnId, onDismiss }) => {
   const dispatch = useDispatch();
-  const onDelete = () => {
-    onDismiss();
-    dispatch(
-      deleteTask({
-        taskId,
-        columnId,
-      })
-    );
-  };
+
+  const handleDelete = useCallback(() => {
+    confirmAlert({
+      customUI: ({ onClose }) => (
+        <Confirm
+          visible
+          title="Delete this card?"
+          onDismiss={onClose}
+          buttonText="Yes, delete"
+          onConfirm={() => {
+            dispatch(
+              deleteTask({
+                taskId,
+                columnId,
+              })
+            );
+            onClose();
+            onDismiss();
+          }}
+        />
+      ),
+    });
+  }, [columnId, dispatch, onDismiss, taskId]);
 
   return (
     <aside className={styles.sideBar}>
       <h3 className={styles.sidebarTitle}>ACTIONS</h3>
       <div className={styles.actions}>
-        <IconButton name="fa-arrow-right" text="Move" />
-        <IconButton onClick={onDelete} name="fa-trash-alt" text="Delete" />
+        <IconButton
+          onClick={handleDelete}
+          name="fa-trash-alt"
+          text="Delete"
+          color="white"
+          danger
+        />
       </div>
     </aside>
   );

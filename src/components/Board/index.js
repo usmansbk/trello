@@ -4,6 +4,7 @@ import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { confirmAlert } from "react-confirm-alert";
+import ReactToolTip from "react-tooltip";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
@@ -108,7 +109,11 @@ const Board = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <BoardTitle id={id} title={board.title} />
-        <MenuButton name="fa-trash" onClick={handleDelete} />
+        <MenuButton
+          tooltip="Delete board"
+          name="fa-trash"
+          onClick={handleDelete}
+        />
       </header>
       <div className={styles.content}>
         <DragDropContext onDragEnd={onDragEnd}>
@@ -135,6 +140,7 @@ const Board = () => {
           </Droppable>
         </DragDropContext>
       </div>
+      <ReactToolTip />
     </div>
   );
 };
