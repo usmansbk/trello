@@ -21,7 +21,7 @@ import Confirm from "../common/Modal/Confirm";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
 import { deleteColumn } from "../../redux/actions";
-import "@szhsin/react-menu/dist/index.css";
+import "./menu.css";
 
 const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
   const dispatch = useDispatch();
