@@ -4,7 +4,7 @@ const initialData = {
   "col-1": {
     id: "col-1",
     title: "Todo",
-    taskIds: new Array(12)
+    taskIds: new Array(11)
       .fill("task")
       .map((value, index) => value + "-" + (index + 1)),
   },
