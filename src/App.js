@@ -5,9 +5,9 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import Forgot from "./components/Forgot";
 import Home from "./components/Home";
-import initStore from "./redux";
+import configStore from "./redux";
 
-const { store, persistor } = initStore();
+const { store, persistor } = configStore();
 
 const routes = [
   {

@@ -19,11 +19,11 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-const init = () => {
+const configStore = () => {
   const store = createStore(persistedReducer, applyMiddleware(logger));
   const persistor = persistStore(store);
 
   return { store, persistor };
 };
 
-export default init;
+export default configStore;
