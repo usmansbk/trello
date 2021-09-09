@@ -7,6 +7,7 @@ import IconButton from "../common/Button/IconButton";
 import styles from "./Details.module.css";
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../redux/tasks";
+import { deleteTask } from "../../redux/actions";
 
 const Subtitle = memo(({ title, icon }) => {
   return (
@@ -17,13 +18,24 @@ const Subtitle = memo(({ title, icon }) => {
   );
 });
 
-const SideBar = memo(() => {
+const SideBar = memo(({ taskId, columnId, onDismiss }) => {
+  const dispatch = useDispatch();
+  const onDelete = () => {
+    onDismiss();
+    dispatch(
+      deleteTask({
+        taskId,
+        columnId,
+      })
+    );
+  };
+
   return (
     <aside className={styles.sideBar}>
       <h3 className={styles.sidebarTitle}>ACTIONS</h3>
       <div className={styles.actions}>
         <IconButton name="fa-arrow-right" text="Move" />
-        <IconButton name="fa-trash-alt" text="Delete" />
+        <IconButton onClick={onDelete} name="fa-trash-alt" text="Delete" />
       </div>
     </aside>
   );
@@ -102,7 +114,7 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
               />
             </div>
           </div>
-          <SideBar taskId={id} columnId={columnId} />
+          <SideBar taskId={id} columnId={columnId} onDismiss={onDismiss} />
         </div>
       </div>
     </Modal>

@@ -138,7 +138,7 @@ const reducer = (state = initialData, action) => {
       const {
         payload: { columnId, taskId },
       } = action;
-      const column = state.columnId;
+      const column = state[columnId];
 
       return {
         ...state,
