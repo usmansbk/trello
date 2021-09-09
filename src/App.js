@@ -1,6 +1,5 @@
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import ReactToolTip from "react-tooltip";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import Forgot from "./components/Forgot";
@@ -35,7 +34,6 @@ function App() {
             <Route key={path} path={path} component={component} />
           ))}
         </Switch>
-        <ReactToolTip />
       </Router>
     </Provider>
   );

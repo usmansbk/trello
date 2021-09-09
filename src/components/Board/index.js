@@ -4,6 +4,7 @@ import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { confirmAlert } from "react-confirm-alert";
+import ReactToolTip from "react-tooltip";
 import AddColumn from "./AddColumn";
 import Column from "./Column";
 import MenuButton from "../common/Button/MenuButton";
@@ -139,6 +140,7 @@ const Board = () => {
           </Droppable>
         </DragDropContext>
       </div>
+      <ReactToolTip />
     </div>
   );
 };
