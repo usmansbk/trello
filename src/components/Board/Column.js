@@ -12,9 +12,13 @@ import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
 import Confirm from "../common/Modal/Confirm";
-import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
+import {
+  selectColumnById,
+  makeSelectTasksByIds,
+  makeSelectBoardColumns,
+} from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
-import { deleteColumn } from "../../redux/actions";
+import { deleteColumn, moveTask } from "../../redux/actions";
 import "./menu.css";
 
 const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
@@ -122,8 +126,30 @@ const MenuHeader = memo(({ title }) => (
   </div>
 ));
 
-const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
+const Menu = memo(({ id, sourceId }) => {
+  const dispatch = useDispatch();
+  const selectOptions = useCallback(makeSelectBoardColumns, []);
+  const menuOptions = useSelector(selectOptions(id));
+  return (
+    <ContextMenu id={id}>
+      <MenuHeader title="Move to" />
+      {menuOptions.map(({ title, id: destinationId }) => (
+        <MenuItem
+          key={destinationId}
+          onClick={() =>
+            dispatch(moveTask({ taskId: id, sourceId, destinationId }))
+          }
+        >
+          {title}
+        </MenuItem>
+      ))}
+    </ContextMenu>
+  );
+});
+
+const Card = memo(({ title, id, index, onPressItem, columnId }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
+  console.log("render", id);
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -146,18 +172,14 @@ const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
               </div>
             </div>
           </ContextMenuTrigger>
-          <ContextMenu id={id}>
-            <MenuHeader title="Move to" />
-            <MenuItem data={{ foo: "bar" }}>In Progress</MenuItem>
-            <MenuItem data={{ foo: "bar" }}>Done</MenuItem>
-          </ContextMenu>
+          <Menu id={id} sourceId={columnId} />
         </>
       )}
     </Draggable>
   );
 });
 
-const CardList = memo(({ taskIds, columnTitle, boardId }) => {
+const CardList = memo(({ taskIds, columnTitle }) => {
   const selectTaskByIds = useCallback(makeSelectTasksByIds, []);
   const tasks = useSelector(selectTaskByIds(taskIds));
 
@@ -172,9 +194,8 @@ const CardList = memo(({ taskIds, columnTitle, boardId }) => {
         <Card
           key={id}
           id={id}
-          title={title}
-          boardId={boardId}
           columnId={columnId}
+          title={title}
           index={index}
           onPressItem={onPressCard}
         />
@@ -226,13 +247,7 @@ const Column = memo(({ columnId, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {
-                    <CardList
-                      columnTitle={title}
-                      taskIds={taskIds}
-                      boardId={boardId}
-                    />
-                  }
+                  {<CardList columnTitle={title} taskIds={taskIds} />}
                   {provided.placeholder}
                   {showComposer && (
                     <AddCard columnId={columnId} onCancel={toggleComposer} />

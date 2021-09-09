@@ -5,6 +5,7 @@ export const CREATE_TASK = "column/create-task";
 export const DELETE_COLUMN = "column/delete";
 export const DELETE_TASK = "task/delete";
 export const DRAG_TASK = "column/drag-task";
+export const MOVE_TASK = "task/move";
 
 export const dragTask = (payload) => ({
   type: DRAG_TASK,
@@ -28,5 +29,10 @@ export const createTask = (payload) => ({
 
 export const deleteTask = (payload) => ({
   type: DELETE_TASK,
+  payload,
+});
+
+export const moveTask = (payload) => ({
+  type: MOVE_TASK,
   payload,
 });
