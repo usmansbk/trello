@@ -118,14 +118,12 @@ const reducer = (state = initialData, action) => {
       };
     }
     case CREATE_TASK: {
-      const {
-        payload: { columnId, task },
-      } = action;
-      const column = state[columnId];
+      const { payload: task } = action;
+      const column = state[task.columnId];
 
       return {
         ...state,
-        [columnId]: {
+        [column.id]: {
           ...column,
           taskIds: [...column.taskIds, task.id],
         },

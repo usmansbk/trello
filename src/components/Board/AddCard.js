@@ -15,12 +15,9 @@ const AddCard = ({ onCancel, columnId }) => {
   const onSubmit = handleSubmit((data) => {
     dispatch(
       createTask({
-        task: {
-          id: nanoid(),
-          columnId,
-          ...data,
-        },
+        id: nanoid(),
         columnId,
+        ...data,
       })
     );
     reset();

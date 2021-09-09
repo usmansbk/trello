@@ -74,9 +74,7 @@ const reducer = (state = initialData, action) => {
       }, {});
     }
     case CREATE_TASK: {
-      const {
-        payload: { task },
-      } = action;
+      const { payload: task } = action;
 
       return {
         ...state,
