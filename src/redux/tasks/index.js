@@ -1,4 +1,10 @@
-import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK, DRAG_TASK } from "../actions";
+import {
+  CREATE_TASK,
+  DELETE_COLUMN,
+  DELETE_TASK,
+  DRAG_TASK,
+  MOVE_TASK,
+} from "../actions";
 
 const intialState = {
   "tut-1": {
@@ -76,6 +82,19 @@ const reducer = (state = intialState, action) => {
         [draggableId]: {
           ...task,
           columnId: destination.droppableId,
+        },
+      };
+    }
+    case MOVE_TASK: {
+      const { taskId, destinationId } = action.payload;
+
+      const task = state[taskId];
+
+      return {
+        ...state,
+        [taskId]: {
+          ...task,
+          columnId: destinationId,
         },
       };
     }

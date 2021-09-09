@@ -4,6 +4,7 @@ import {
   DELETE_COLUMN,
   DELETE_TASK,
   DRAG_TASK,
+  MOVE_TASK,
 } from "../actions";
 
 const initialData = {
@@ -141,6 +142,19 @@ const reducer = (state = initialData, action) => {
         [columnId]: {
           ...column,
           taskIds: column.taskIds.filter((id) => id !== taskId),
+        },
+      };
+    }
+    case MOVE_TASK: {
+      const { destinationId, taskId } = action.payload;
+
+      const column = state[destinationId];
+
+      return {
+        ...state,
+        [destinationId]: {
+          ...column,
+          taskIds: [...column.taskIds, taskId],
         },
       };
     }

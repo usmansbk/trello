@@ -18,7 +18,7 @@ import {
   makeSelectBoardColumns,
 } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
-import { deleteColumn } from "../../redux/actions";
+import { deleteColumn, moveTask } from "../../redux/actions";
 import "./menu.css";
 
 const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
@@ -127,13 +127,19 @@ const MenuHeader = memo(({ title }) => (
 ));
 
 const Menu = memo(({ id }) => {
+  const dispatch = useDispatch();
   const selectOptions = useCallback(makeSelectBoardColumns, []);
   const menuOptions = useSelector(selectOptions(id));
   return (
     <ContextMenu id={id}>
       <MenuHeader title="Move to" />
-      {menuOptions.map(({ title }) => (
-        <MenuItem>{title}</MenuItem>
+      {menuOptions.map(({ title, id: destinationId }) => (
+        <MenuItem
+          key={destinationId}
+          onClick={() => dispatch(moveTask({ taskId: id, destinationId }))}
+        >
+          {title}
+        </MenuItem>
       ))}
     </ContextMenu>
   );
