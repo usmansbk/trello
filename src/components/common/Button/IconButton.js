@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import ReactToolTip from "react-tooltip";
 import Icon from "../Icon";
 import styles from "./IconButton.module.css";
 
@@ -29,7 +28,6 @@ const IconButton = ({
           {text}
         </span>
       )}
-      <ReactToolTip />
     </button>
   );
 };
