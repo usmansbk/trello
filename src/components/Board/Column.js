@@ -12,7 +12,11 @@ import AddCard from "./AddCard";
 import styles from "./Column.module.css";
 import Details from "./Details";
 import Confirm from "../common/Modal/Confirm";
-import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
+import {
+  selectColumnById,
+  makeSelectTasksByIds,
+  makeSelectBoardColumns,
+} from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
 import { deleteColumn } from "../../redux/actions";
 import "./menu.css";
@@ -122,16 +126,21 @@ const MenuHeader = memo(({ title }) => (
   </div>
 ));
 
-const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
+const Menu = memo(({ id }) => {
+  const selectOptions = useCallback(makeSelectBoardColumns, []);
+  const menuOptions = useSelector(selectOptions(id));
+  return (
+    <ContextMenu id={id}>
+      <MenuHeader title="Move to" />
+      {menuOptions.map(({ title }) => (
+        <MenuItem>{title}</MenuItem>
+      ))}
+    </ContextMenu>
+  );
+});
+
+const Card = memo(({ title, id, index, onPressItem }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
-  const columnIds = useSelector((state) => state.boards[boardId].columnIds);
-  const columnMap = useSelector((state) => state.columns);
-  const menuOptions = columnIds.reduce((cols, id) => {
-    if (id === columnId) {
-      return cols;
-    }
-    return [...cols, columnMap[id]];
-  }, []);
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -154,19 +163,14 @@ const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
               </div>
             </div>
           </ContextMenuTrigger>
-          <ContextMenu id={id}>
-            <MenuHeader title="Move to" />
-            {menuOptions.map(({ title }) => (
-              <MenuItem>{title}</MenuItem>
-            ))}
-          </ContextMenu>
+          <Menu id={id} />
         </>
       )}
     </Draggable>
   );
 });
 
-const CardList = memo(({ taskIds, columnTitle, boardId }) => {
+const CardList = memo(({ taskIds, columnTitle }) => {
   const selectTaskByIds = useCallback(makeSelectTasksByIds, []);
   const tasks = useSelector(selectTaskByIds(taskIds));
 
@@ -177,13 +181,11 @@ const CardList = memo(({ taskIds, columnTitle, boardId }) => {
 
   return (
     <>
-      {tasks.map(({ id, title, columnId }, index) => (
+      {tasks.map(({ id, title }, index) => (
         <Card
           key={id}
           id={id}
           title={title}
-          boardId={boardId}
-          columnId={columnId}
           index={index}
           onPressItem={onPressCard}
         />
@@ -235,13 +237,7 @@ const Column = memo(({ columnId, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {
-                    <CardList
-                      columnTitle={title}
-                      taskIds={taskIds}
-                      boardId={boardId}
-                    />
-                  }
+                  {<CardList columnTitle={title} taskIds={taskIds} />}
                   {provided.placeholder}
                   {showComposer && (
                     <AddCard columnId={columnId} onCancel={toggleComposer} />
