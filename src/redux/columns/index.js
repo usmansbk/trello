@@ -20,8 +20,8 @@ const initialData = {
   },
 };
 
-const DRAG_TASK = "columns/drag-task";
-const RENAME_COLUMN = "columns/rename";
+const DRAG_TASK = "column/drag-task";
+const RENAME_COLUMN = "column/rename";
 
 export const renameColumn = (payload) => ({
   type: RENAME_COLUMN,

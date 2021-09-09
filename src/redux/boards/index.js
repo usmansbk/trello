@@ -9,10 +9,10 @@ const initialData = {
   byIds: ["board-1"],
 };
 
-const CREATE_BOARD = "boards/create";
-const DELETE_BOARD = "boards/delete";
-const RENAME_BOARD = "boards/rename";
-const DRAG_COLUMN = "boards/drag-column";
+const CREATE_BOARD = "board/create";
+const DELETE_BOARD = "board/delete";
+const RENAME_BOARD = "board/rename";
+const DRAG_COLUMN = "board/drag-column";
 
 export const createBoard = (data) => ({
   type: CREATE_BOARD,
