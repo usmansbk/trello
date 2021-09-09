@@ -1,13 +1,6 @@
 import { useState, memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import {
-  useMenuState,
-  ControlledMenu,
-  MenuItem,
-  MenuHeader,
-  MenuDivider,
-} from "@szhsin/react-menu";
 import clsx from "clsx";
 import { confirmAlert } from "react-confirm-alert";
 import TextareaAutosize from "react-textarea-autosize";
@@ -21,7 +14,6 @@ import Confirm from "../common/Modal/Confirm";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
 import { deleteColumn } from "../../redux/actions";
-import "./menu.css";
 
 const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
   const dispatch = useDispatch();
@@ -124,51 +116,24 @@ const FooterButton = memo(({ onClick }) => {
 
 const Card = memo(({ title, id, index, onPressItem }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
-  const { toggleMenu, ...menuProps } = useMenuState();
-  const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
-  const onItemClick = useCallback((e) => {
-    console.log(e.value);
-    e.stopPropagation = true;
-  }, []);
-  const closeMenu = useCallback(() => toggleMenu(false), [toggleMenu]);
-  const onContextMenu = useCallback(
-    (e) => {
-      e.preventDefault();
-      setAnchorPoint({ x: e.clientX, y: e.clientY });
-      toggleMenu(true);
-    },
-    [toggleMenu]
-  );
 
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
-        <div onContextMenu={onContextMenu}>
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          onClick={onPress}
+        >
           <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            onClick={onPress}
+            className={clsx(
+              styles.card,
+              snapshot.isDragging && styles.dragging
+            )}
           >
-            <div
-              className={clsx(
-                styles.card,
-                snapshot.isDragging && styles.dragging
-              )}
-            >
-              <p className={styles.details}>{title}</p>
-            </div>
+            <p className={styles.details}>{title}</p>
           </div>
-          <ControlledMenu
-            {...menuProps}
-            anchorPoint={anchorPoint}
-            onClose={closeMenu}
-            onItemClick={onItemClick}
-          >
-            <MenuHeader>Move to</MenuHeader>
-            <MenuDivider />
-            <MenuItem value="move">Move</MenuItem>
-          </ControlledMenu>
         </div>
       )}
     </Draggable>
