@@ -1,5 +1,28 @@
 import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK } from "../actions";
 
+const intialState = {
+  "tut-1": {
+    id: "tut-1",
+    title: "Create card",
+    columnId: "col-1",
+  },
+  "tut-2": {
+    id: "tut-2",
+    title: "Drag card",
+    columnId: "col-1",
+  },
+  "tut-3": {
+    id: "tut-3",
+    title: "Drag list",
+    columnId: "col-1",
+  },
+  "tut-4": {
+    id: "tut-4",
+    title: "Create list",
+    columnId: "col-1",
+  },
+};
+
 const UPDATE_TASK = "tasks/update";
 
 export const updateTask = (payload) => ({
@@ -7,7 +30,7 @@ export const updateTask = (payload) => ({
   payload,
 });
 
-const reducer = (state = {}, action) => {
+const reducer = (state = intialState, action) => {
   switch (action.type) {
     case DELETE_COLUMN: {
       const {

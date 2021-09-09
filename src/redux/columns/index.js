@@ -9,7 +9,7 @@ const initialData = {
   "col-1": {
     id: "col-1",
     title: "Todo",
-    taskIds: [],
+    taskIds: ["tut-1", "tut-2", "tut-3"],
     boardId: "default",
   },
   "col-2": {
