@@ -6,13 +6,7 @@ import {
   MOVE_TASK,
 } from "../actions";
 
-const intialState = {
-  "tut-1": {
-    id: "tut-1",
-    title: "Create card",
-    columnId: "col-1",
-  },
-};
+const intialState = {};
 
 const UPDATE_TASK = "tasks/update";
 
