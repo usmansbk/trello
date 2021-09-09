@@ -6,13 +6,7 @@ const initialData = {
     title: "MintBean Hackathon",
     columnIds: ["col-1", "col-2", "col-3"],
   },
-  "buggy-1": {
-    id: "buggy-1",
-    title:
-      "A very long title causes a text overflow. I'm trying to fix this now... bug bugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbugbug",
-    columnIds: [],
-  },
-  byIds: ["board-1", "buggy-1"],
+  byIds: ["board-1"],
 };
 
 const CREATE_BOARD = "boards/create";
