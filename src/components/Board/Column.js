@@ -33,7 +33,6 @@ const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
   }, [edit]);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     if (isDirty) {
       dispatch(
         renameColumn({
