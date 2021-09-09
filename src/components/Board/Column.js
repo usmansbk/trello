@@ -141,7 +141,11 @@ const Card = memo(({ title, id, index, onPressItem }) => {
             </div>
           </ContextMenuTrigger>
           <ContextMenu id={id}>
-            <MenuItem data={{ foo: "bar" }}>Context Menu 1</MenuItem>
+            <div className="menu-header">
+              <h3 className="menu-header-title">Move to</h3>
+            </div>
+            <MenuItem data={{ foo: "bar" }}>In Progress</MenuItem>
+            <MenuItem data={{ foo: "bar" }}>Done</MenuItem>
           </ContextMenu>
         </>
       )}

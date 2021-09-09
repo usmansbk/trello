@@ -1,18 +1,15 @@
 .react-contextmenu {
   background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+  overflow: hidden;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
   color: #373a3c;
-  font-size: 16px;
-  margin: 2px 0 0;
-  min-width: 160px;
-  outline: none;
+  width: 304px;
   opacity: 0;
-  padding: 5px 0;
   pointer-events: none;
-  text-align: left;
   transition: opacity 250ms ease !important;
+  padding-bottom: 12px;
 }
 
 .react-contextmenu.react-contextmenu--visible {
@@ -24,21 +21,20 @@
 .react-contextmenu-item {
   background: 0 0;
   border: 0;
-  color: #373a3c;
+  color: #091e42;
   cursor: pointer;
   font-weight: 400;
-  line-height: 1.5;
-  padding: 3px 20px;
+  line-height: 20px;
+  padding: 6px 12px;
   text-align: inherit;
   white-space: nowrap;
 }
 
 .react-contextmenu-item.react-contextmenu-item--active,
 .react-contextmenu-item.react-contextmenu-item--selected {
-  color: #fff;
-  background-color: #20a0ff;
-  border-color: #20a0ff;
+  background-color: #091e420a;
   text-decoration: none;
+  outline: 0;
 }
 
 .react-contextmenu-item.react-contextmenu-item--disabled,
@@ -74,4 +70,22 @@
 .example-multiple-targets::after {
   content: attr(data-count);
   display: block;
+}
+
+.menu-header {
+  height: 40px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.menu-header-title {
+  border-bottom: 1px solid #091e4221;
+  box-sizing: border-box;
+  color: #5e6c84;
+  line-height: 40px;
+  margin: 0 12px;
+  padding: 0 32px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
 }
