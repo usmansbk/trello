@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { confirmAlert } from "react-confirm-alert";
 import TextareaAutosize from "react-textarea-autosize";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import IconButton from "../common/Button/IconButton";
 import Icon from "../common/Icon";
 import AddCard from "./AddCard";
@@ -14,6 +15,7 @@ import Confirm from "../common/Modal/Confirm";
 import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
 import { deleteColumn } from "../../redux/actions";
+import "./menu.css";
 
 const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
   const dispatch = useDispatch();
@@ -114,33 +116,48 @@ const FooterButton = memo(({ onClick }) => {
   );
 });
 
-const Card = memo(({ title, id, index, onPressItem }) => {
+const MenuHeader = memo(({ title }) => (
+  <div className="menu-header">
+    <h3 className="menu-header-title">{title}</h3>
+  </div>
+));
+
+const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
 
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          onClick={onPress}
-        >
-          <div
-            className={clsx(
-              styles.card,
-              snapshot.isDragging && styles.dragging
-            )}
-          >
-            <p className={styles.details}>{title}</p>
-          </div>
-        </div>
+        <>
+          <ContextMenuTrigger id={id}>
+            <div
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              onClick={onPress}
+            >
+              <div
+                className={clsx(
+                  styles.card,
+                  snapshot.isDragging && styles.dragging
+                )}
+              >
+                <p className={styles.details}>{title}</p>
+              </div>
+            </div>
+          </ContextMenuTrigger>
+          <ContextMenu id={id}>
+            <MenuHeader title="Move to" />
+            <MenuItem data={{ foo: "bar" }}>In Progress</MenuItem>
+            <MenuItem data={{ foo: "bar" }}>Done</MenuItem>
+          </ContextMenu>
+        </>
       )}
     </Draggable>
   );
 });
 
-const CardList = memo(({ taskIds, columnTitle }) => {
+const CardList = memo(({ taskIds, columnTitle, boardId }) => {
   const selectTaskByIds = useCallback(makeSelectTasksByIds, []);
   const tasks = useSelector(selectTaskByIds(taskIds));
 
@@ -151,11 +168,13 @@ const CardList = memo(({ taskIds, columnTitle }) => {
 
   return (
     <>
-      {tasks.map(({ id, title }, index) => (
+      {tasks.map(({ id, title, columnId }, index) => (
         <Card
           key={id}
           id={id}
           title={title}
+          boardId={boardId}
+          columnId={columnId}
           index={index}
           onPressItem={onPressCard}
         />
@@ -207,7 +226,13 @@ const Column = memo(({ columnId, index }) => {
                   {...provided.droppableProps}
                   className={styles.list}
                 >
-                  {<CardList columnTitle={title} taskIds={taskIds} />}
+                  {
+                    <CardList
+                      columnTitle={title}
+                      taskIds={taskIds}
+                      boardId={boardId}
+                    />
+                  }
                   {provided.placeholder}
                   {showComposer && (
                     <AddCard columnId={columnId} onCancel={toggleComposer} />

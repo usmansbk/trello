@@ -1601,14 +1601,6 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@szhsin/react-menu@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@szhsin/react-menu/-/react-menu-2.0.1.tgz#0b6cdc5337f7da921d02df6350746138957227b5"
-  integrity sha512-pKwvRe22ByxBXwCjalaU8KI+HdVZc1YTh2oj44p+EfxsPeV7wjfydjmhqBJAEFJFiQqGkdo7ACwJVRmoaUycFw==
-  dependencies:
-    prop-types "^15.7.2"
-    react-transition-state "^0.3.0"
-
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
@@ -3282,6 +3274,11 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.2.5:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
 clean-css@^4.2.3:
   version "4.2.3"
@@ -9113,6 +9110,14 @@ react-confirm-alert@^2.7.0:
   resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-2.7.0.tgz#7cdbf2e052e03554ac6a7d8956c9c227010c8a53"
   integrity sha512-21NWtGK/e85+ZX3TLRpMc3IsU5Kj6Z9ElCOrkTIlwMzV9EancyXNlkqHGbtKP63a2iS6g5hOxROokmJOqKQiXA==
 
+react-contextmenu@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/react-contextmenu/-/react-contextmenu-2.14.0.tgz#d8966f30614b9b780b928be4c8d92bd740d55cdd"
+  integrity sha512-ktqMOuad6sCFNJs/ltEwppN8F0YeXmqoZfwycgtZR/MxOXMYx1xgYC44SzWH259HdGyshk1/7sXGuIRwj9hzbw==
+  dependencies:
+    classnames "^2.2.5"
+    object-assign "^4.1.0"
+
 react-dev-utils@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.4.tgz#a7ccb60257a1ca2e0efe7a83e38e6700d17aa37a"
@@ -9315,11 +9320,6 @@ react-tooltip@^4.2.21:
   dependencies:
     prop-types "^15.7.2"
     uuid "^7.0.3"
-
-react-transition-state@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/react-transition-state/-/react-transition-state-0.3.0.tgz#31dcf3cc95dc6eab4243fbdbdf665de2e4174438"
-  integrity sha512-SwfZCOk9nIPCAz/9wC9t/eS5ut7pkSrQoJGJ+xPPbXLQP52ySLjf5fvBX6ySKk8Al0qXM8MM1NU152CFfpFXaQ==
 
 react@^17.0.2:
   version "17.0.2"

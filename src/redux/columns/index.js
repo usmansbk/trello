@@ -3,13 +3,14 @@ import {
   CREATE_TASK,
   DELETE_COLUMN,
   DELETE_TASK,
+  DRAG_TASK,
 } from "../actions";
 
 const initialData = {
   "col-1": {
     id: "col-1",
     title: "Todo",
-    taskIds: ["tut-1", "tut-2", "tut-3", "tut-4"],
+    taskIds: ["tut-1"],
     boardId: "default",
   },
   "col-2": {
@@ -26,16 +27,10 @@ const initialData = {
   },
 };
 
-const DRAG_TASK = "column/drag-task";
 const RENAME_COLUMN = "column/rename";
 
 export const renameColumn = (payload) => ({
   type: RENAME_COLUMN,
-  payload,
-});
-
-export const dragTask = (payload) => ({
-  type: DRAG_TASK,
   payload,
 });
 

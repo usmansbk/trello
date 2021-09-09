@@ -1,24 +1,9 @@
-import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK } from "../actions";
+import { CREATE_TASK, DELETE_COLUMN, DELETE_TASK, DRAG_TASK } from "../actions";
 
 const intialState = {
   "tut-1": {
     id: "tut-1",
     title: "Create card",
-    columnId: "col-1",
-  },
-  "tut-2": {
-    id: "tut-2",
-    title: "Drag card",
-    columnId: "col-1",
-  },
-  "tut-3": {
-    id: "tut-3",
-    title: "Drag list",
-    columnId: "col-1",
-  },
-  "tut-4": {
-    id: "tut-4",
-    title: "Create list",
     columnId: "col-1",
   },
 };
@@ -80,6 +65,19 @@ const reducer = (state = intialState, action) => {
           [key]: state[key],
         };
       }, {});
+    }
+    case DRAG_TASK: {
+      const {
+        result: { destination, draggableId },
+      } = action.payload;
+      const task = state[draggableId];
+      return {
+        ...state,
+        [draggableId]: {
+          ...task,
+          columnId: destination.droppableId,
+        },
+      };
     }
     default:
       return state;
