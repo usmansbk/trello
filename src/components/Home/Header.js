@@ -6,7 +6,7 @@ import MenuIconButton from "../common/Button/MenuButton";
 import clsx from "clsx";
 
 const Logo = ({ loading }) => (
-  <Link to="/">
+  <Link to="/" className={styles.brandLink}>
     <img src={loading ? loadingLogo : logo} alt="" className={styles.loading} />
   </Link>
 );
