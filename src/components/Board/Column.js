@@ -126,7 +126,7 @@ const MenuHeader = memo(({ title }) => (
   </div>
 ));
 
-const Menu = memo(({ id }) => {
+const Menu = memo(({ id, sourceId }) => {
   const dispatch = useDispatch();
   const selectOptions = useCallback(makeSelectBoardColumns, []);
   const menuOptions = useSelector(selectOptions(id));
@@ -136,7 +136,9 @@ const Menu = memo(({ id }) => {
       {menuOptions.map(({ title, id: destinationId }) => (
         <MenuItem
           key={destinationId}
-          onClick={() => dispatch(moveTask({ taskId: id, destinationId }))}
+          onClick={() =>
+            dispatch(moveTask({ taskId: id, sourceId, destinationId }))
+          }
         >
           {title}
         </MenuItem>
@@ -145,8 +147,9 @@ const Menu = memo(({ id }) => {
   );
 });
 
-const Card = memo(({ title, id, index, onPressItem }) => {
+const Card = memo(({ title, id, index, onPressItem, columnId }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
+  console.log("render", id);
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -169,7 +172,7 @@ const Card = memo(({ title, id, index, onPressItem }) => {
               </div>
             </div>
           </ContextMenuTrigger>
-          <Menu id={id} />
+          <Menu id={id} sourceId={columnId} />
         </>
       )}
     </Draggable>
@@ -187,10 +190,11 @@ const CardList = memo(({ taskIds, columnTitle }) => {
 
   return (
     <>
-      {tasks.map(({ id, title }, index) => (
+      {tasks.map(({ id, title, columnId }, index) => (
         <Card
           key={id}
           id={id}
+          columnId={columnId}
           title={title}
           index={index}
           onPressItem={onPressCard}

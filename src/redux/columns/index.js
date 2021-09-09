@@ -146,15 +146,20 @@ const reducer = (state = initialData, action) => {
       };
     }
     case MOVE_TASK: {
-      const { destinationId, taskId } = action.payload;
+      const { destinationId, taskId, sourceId } = action.payload;
 
-      const column = state[destinationId];
+      const sourceColumn = state[sourceId];
+      const destinationColumn = state[destinationId];
 
       return {
         ...state,
+        [sourceId]: {
+          ...sourceColumn,
+          taskIds: sourceColumn.taskIds.filter((id) => id !== taskId),
+        },
         [destinationId]: {
-          ...column,
-          taskIds: [...column.taskIds, taskId],
+          ...destinationColumn,
+          taskIds: [...destinationColumn.taskIds, taskId],
         },
       };
     }
