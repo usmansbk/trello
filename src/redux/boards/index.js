@@ -1,12 +1,12 @@
 import { CREATE_COLUMN, DELETE_COLUMN } from "../actions";
 
 const initialData = {
-  "board-1": {
-    id: "board-1",
-    title: "MintBean Hackathon",
+  default: {
+    id: "default",
+    title: "Kanban",
     columnIds: ["col-1", "col-2", "col-3"],
   },
-  byIds: ["board-1"],
+  byIds: ["default"],
 };
 
 const CREATE_BOARD = "board/create";

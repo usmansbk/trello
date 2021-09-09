@@ -9,19 +9,20 @@ const initialData = {
   "col-1": {
     id: "col-1",
     title: "Todo",
-    taskIds: new Array(11)
-      .fill("task")
-      .map((value, index) => value + "-" + (index + 1)),
+    taskIds: [],
+    boardId: "default",
   },
   "col-2": {
     id: "col-2",
     title: "In progress",
     taskIds: [],
+    boardId: "default",
   },
   "col-3": {
     id: "col-3",
     title: "Done",
     taskIds: [],
+    boardId: "default",
   },
 };
 
