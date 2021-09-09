@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.content {
+  margin: 75px auto;
+  text-align: center;
+  max-width: 600px;
+  color: #6b778c;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0 0 12px;
+  text-align: center;
+  color: inherit;
+  margin-bottom: 24px;
+}
+
+.message {
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0 0 8px;
+  color: inherit;
+}
