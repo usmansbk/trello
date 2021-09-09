@@ -27,3 +27,15 @@
 .buttonText {
   color: #172b4d;
 }
+
+.danger {
+  background-color: #b04632;
+}
+
+.danger:hover {
+  background-color: #933b27;
+}
+
+.danger:active {
+  background-color: #6e2f1a;
+}
