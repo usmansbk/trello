@@ -132,11 +132,13 @@
 .bodyContent {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 2;
 }
 
 .sideBar {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .sidebarTitle {
@@ -169,6 +171,6 @@
   }
 
   .sideBar {
-    width: calc(100% - 600px);
+    flex-grow: 1;
   }
 }
