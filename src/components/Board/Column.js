@@ -15,7 +15,7 @@ import { selectColumnById, makeSelectTasksByIds } from "../../redux/selectors";
 import { renameColumn } from "../../redux/columns";
 import { deleteColumn } from "../../redux/actions";
 
-const ColumnHeader = memo(({ id, title, ...props }) => {
+const ColumnHeader = memo(({ id, boardId, title, ...props }) => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const {
@@ -59,13 +59,18 @@ const ColumnHeader = memo(({ id, title, ...props }) => {
           onDismiss={onClose}
           buttonText="Yes, delete"
           onConfirm={() => {
-            dispatch(deleteColumn(id));
+            dispatch(
+              deleteColumn({
+                columnId: id,
+                boardId,
+              })
+            );
             onClose();
           }}
         />
       ),
     });
-  }, [dispatch, id]);
+  }, [dispatch, id, boardId]);
 
   return (
     <div className={styles.columnHeader} {...props}>
@@ -164,7 +169,7 @@ const CardList = memo(({ taskIds, columnTitle }) => {
 });
 
 const Column = memo(({ columnId, index }) => {
-  const { title, taskIds } = useSelector(selectColumnById(columnId));
+  const { title, boardId, taskIds } = useSelector(selectColumnById(columnId));
 
   const [showComposer, setComposerVisible] = useState(false);
 
@@ -187,6 +192,7 @@ const Column = memo(({ columnId, index }) => {
           <div className={styles.content}>
             <ColumnHeader
               id={columnId}
+              boardId={boardId}
               title={title}
               {...provided.dragHandleProps}
             />
