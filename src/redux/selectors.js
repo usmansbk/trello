@@ -13,11 +13,13 @@ export const makeSelectTasksByIds = (ids) =>
 
 export const makeSelectBoardColumns = (taskId) =>
   createSelector(
-    selectTasks,
-    selectColumns,
-    selectBoards,
+    [selectTasks, selectColumns, selectBoards],
     (tasks, columns, boards) => {
       const { columnId } = tasks[taskId];
+      const column = columns[columnId];
+      if (!column) {
+        return [];
+      }
       const { boardId } = columns[columnId];
       const board = boards[boardId];
       const columnIds = board.columnIds;
