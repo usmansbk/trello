@@ -149,7 +149,6 @@ const Menu = memo(({ id, sourceId }) => {
 
 const Card = memo(({ title, id, index, onPressItem, columnId }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
-  console.log("render", id);
 
   return (
     <Draggable draggableId={id} index={index}>
