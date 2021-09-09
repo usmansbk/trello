@@ -136,12 +136,12 @@
 .body {
   display: flex;
   gap: 12px;
+  flex-direction: column;
 }
 
 .descriptionWrapper {
   display: flex;
   flex-direction: column;
-  flex-direction: row;
   flex-grow: 1;
 }
 
@@ -154,7 +154,7 @@
     margin-left: 32px;
   }
 
-  .descriptionWrapper {
-    flex-direction: column;
+  .body {
+    flex-direction: row;
   }
 }
