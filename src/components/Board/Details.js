@@ -17,10 +17,22 @@ const Subtitle = memo(({ title, icon }) => {
   );
 });
 
+const SideBar = memo(() => {
+  return (
+    <aside className={styles.sideBar}>
+      <h3 className={styles.sidebarTitle}>ACTIONS</h3>
+      <div className={styles.actions}>
+        <IconButton name="fa-arrow-right" text="Move" />
+        <IconButton name="fa-trash-alt" text="Delete" />
+      </div>
+    </aside>
+  );
+});
+
 const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
   const dispatch = useDispatch();
   const task = useSelector((state) => state.tasks[id]);
-  const { title, description = "" } = task;
+  const { title, description = "", columnId } = task;
   const { register, handleSubmit } = useForm({
     defaultValues: {
       title,
@@ -90,12 +102,7 @@ const Details = memo(({ id, columnTitle, visible, onDismiss }) => {
               />
             </div>
           </div>
-          <aside className={styles.sideBar}>
-            <h3 className={styles.sidebarTitle}>ACTIONS</h3>
-            <div className={styles.actions}>
-              <IconButton name="fa-arrow-right" text="Move" />
-            </div>
-          </aside>
+          <SideBar taskId={id} columnId={columnId} />
         </div>
       </div>
     </Modal>

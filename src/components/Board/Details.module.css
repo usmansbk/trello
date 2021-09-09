@@ -136,8 +136,7 @@
 }
 
 .sideBar {
-  padding: 0 16px 8px 8px;
-  width: calc(100% - 600px);
+  width: 100%;
 }
 
 .sidebarTitle {
@@ -150,7 +149,13 @@
   text-transform: uppercase;
 }
 
-@media screen and (min-width: 768px) {
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media screen and (min-width: 992px) {
   .modal {
     width: 57.5%;
   }
@@ -161,5 +166,9 @@
 
   .body {
     flex-direction: row;
+  }
+
+  .sideBar {
+    width: calc(100% - 600px);
   }
 }
