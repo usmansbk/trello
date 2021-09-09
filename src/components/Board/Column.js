@@ -124,6 +124,14 @@ const MenuHeader = memo(({ title }) => (
 
 const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
   const onPress = useCallback(() => onPressItem(id), [onPressItem, id]);
+  const columnIds = useSelector((state) => state.boards[boardId].columnIds);
+  const columnMap = useSelector((state) => state.columns);
+  const menuOptions = columnIds.reduce((cols, id) => {
+    if (id === columnId) {
+      return cols;
+    }
+    return [...cols, columnMap[id]];
+  }, []);
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -148,8 +156,9 @@ const Card = memo(({ title, id, index, onPressItem, columnId, boardId }) => {
           </ContextMenuTrigger>
           <ContextMenu id={id}>
             <MenuHeader title="Move to" />
-            <MenuItem data={{ foo: "bar" }}>In Progress</MenuItem>
-            <MenuItem data={{ foo: "bar" }}>Done</MenuItem>
+            {menuOptions.map(({ title }) => (
+              <MenuItem>{title}</MenuItem>
+            ))}
           </ContextMenu>
         </>
       )}
